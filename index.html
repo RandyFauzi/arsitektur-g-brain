@@ -24,35 +24,30 @@
             background-size: 28px 28px;
         }
 
-        /* SVG Wire Styles */
+        /* SVG Wire Styles - Clean, no clutter */
         .wire-base {
-            stroke: #1e293b;
+            stroke: rgba(30, 41, 59, 0.6);
             stroke-width: 2.5;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            transition: stroke 0.3s ease;
+            transition: stroke 0.3s ease, opacity 0.3s ease;
         }
 
         .wire-active {
-            stroke: #38bdf8;
+            stroke: #38bdf8 !important;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.8s linear infinite;
             filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+            opacity: 1 !important;
         }
 
-        .wire-loop {
-            stroke: #10b981;
+        .wire-loop-active {
+            stroke: #10b981 !important;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.8s linear infinite;
             filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
-        }
-
-        .wire-kb {
-            stroke: #c084fc;
-            stroke-dasharray: 6, 6;
-            animation: flowMove 0.8s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.8));
+            opacity: 1 !important;
         }
 
         @keyframes flowMove {
@@ -76,8 +71,8 @@
         }
 
         .node-passed {
-            border-color: rgba(56, 189, 248, 0.4);
-            opacity: 0.9;
+            border-color: rgba(56, 189, 248, 0.35);
+            opacity: 0.92;
         }
 
         .node-loop-active {
@@ -86,22 +81,13 @@
             transform: translateY(-2px) scale(1.02);
         }
 
-        /* Shimmer watermark */
-        @keyframes shimmerGlow {
-            0% { transform: translateX(-150%) rotate(45deg); }
-            100% { transform: translateX(250%) rotate(45deg); }
-        }
-        .animate-shimmer {
-            animation: shimmerGlow 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: #060913; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     </style>
 </head>
-<body class="bg-[#060913] text-slate-100 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col select-none relative pb-20 lg:pb-0">
+<body class="bg-[#060913] text-slate-100 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col select-none relative">
 
     <!-- Top Command Header -->
     <header class="h-[62px] bg-[#090e1a]/90 border-b border-slate-800/80 px-4 md:px-8 flex items-center justify-between gap-4 z-40 backdrop-blur-xl shrink-0">
@@ -150,7 +136,7 @@
     <div class="flex-1 flex flex-col relative z-10 circuit-bg overflow-y-auto lg:overflow-hidden">
         
         <!-- Top Half: Interactive Circuit Canvas Board -->
-        <div id="canvasContainer" class="flex-1 relative p-4 md:p-6 flex items-center justify-center min-h-[460px] lg:min-h-[500px]">
+        <div id="canvasContainer" class="flex-1 relative p-4 md:p-8 flex items-center justify-center min-h-[460px] lg:min-h-[500px]">
             
             <!-- SVG Circuit Wires Layer -->
             <svg id="svgWire" class="absolute inset-0 w-full h-full pointer-events-none z-10">
@@ -164,35 +150,33 @@
                     </filter>
                 </defs>
 
-                <!-- ROW 1 PIPELINE WIRES (Steps 1 -> 2 -> 3 -> 4 -> 5) -->
+                <!-- ROW 1 PIPELINE WIRES (Left to Right: 1 -> 2 -> 3 -> 4 -> 5) -->
                 <path id="wire1_2" class="wire-base" d="" />
-                <path id="wire2_kb" class="wire-base" d="" />
-                <path id="wirekb_2" class="wire-base" d="" />
                 <path id="wire2_3" class="wire-base" d="" />
                 <path id="wire3_4" class="wire-base" d="" />
                 <path id="wire4_5" class="wire-base" d="" />
 
-                <!-- BRIDGE WIRE: Step 5 down to Step 6 -->
+                <!-- BRIDGE WIRE: Step 5 curves vertically down into Step 6 on the right edge -->
                 <path id="wire5_6" class="wire-base" d="" />
 
-                <!-- ROW 2 PIPELINE WIRES (Steps 6 -> 7 -> 8 -> 9 -> 10 -> 11) -->
+                <!-- ROW 2 PIPELINE WIRES (Right to Left: 6 -> 7 -> 8 -> 9 -> 10 -> 11) -->
                 <path id="wire6_7" class="wire-base" d="" />
                 <path id="wire7_8" class="wire-base" d="" />
                 <path id="wire8_9" class="wire-base" d="" />
                 <path id="wire9_10" class="wire-base" d="" />
                 <path id="wire10_11" class="wire-base" d="" />
 
-                <!-- THE CLOSED LOOP WIRE: Step 11 curves back to Step 3 (AI Campaign Planner) -->
-                <path id="wire11_loop" class="wire-base" d="" />
+                <!-- THE CLOSED LOOP WIRE: Step 11 swoops smoothly up from the left into Step 3 without crossing any box -->
+                <path id="wire11_loop" class="wire-base opacity-0" d="" />
 
                 <!-- Traveling Data Photon Dot -->
                 <circle id="packetDot" cx="-50" cy="-50" r="6" fill="#38bdf8" class="opacity-0 transition-opacity" filter="url(#glow-cyan)" />
             </svg>
 
-            <!-- NODES GRID: 2-ROW PIPELINE CIRCUIT -->
-            <div class="w-full max-w-6xl flex flex-col gap-10 md:gap-14 relative z-20">
+            <!-- NODES GRID: RACETRACK CLOSED-LOOP CIRCUIT (Zero Overlapping Lines) -->
+            <div class="w-full max-w-6xl flex flex-col gap-12 md:gap-16 relative z-20">
 
-                <!-- ROW 1: PRE-CAMPAIGN & GATEWAY (Steps 1 to 5) -->
+                <!-- ROW 1: PRE-CAMPAIGN & GATEWAY (Steps 1 to 5, Left to Right) -->
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 relative">
 
                     <!-- Node 1: Input Data -->
@@ -222,7 +206,7 @@
                     <!-- Node 3: AI Campaign Planner -->
                     <div id="node-3" onclick="jumpToStep(3)" class="cursor-pointer node-card p-3 md:p-3.5 relative">
                         <div class="flex items-center justify-between mb-1.5">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">03</span>
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">03 Target</span>
                             <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
                         </div>
                         <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
@@ -257,55 +241,19 @@
 
                 </div>
 
-                <!-- ROW 2: CLOSED-LOOP PERFORMANCE MONITORING & OPTIMIZATION (Steps 6 to 11) -->
+                <!-- ROW 2: CLOSED-LOOP PERFORMANCE OPTIMIZATION (Steps 11 to 6 in order to form a natural continuous racetrack!) -->
                 <div class="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3.5 relative">
 
-                    <!-- Node 6: Performance Monitoring -->
-                    <div id="node-6" onclick="jumpToStep(6)" class="cursor-pointer node-card p-3 relative">
+                    <!-- Node 11: Campaign Iteration (The Closed Loop, at Col 1 directly below Node 01) -->
+                    <div id="node-11" onclick="jumpToStep(11)" class="cursor-pointer node-card p-3 relative border-emerald-500/50 bg-emerald-950/20">
                         <div class="flex items-center justify-between mb-1">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">06</span>
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">11 Loop</span>
                             <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
                         </div>
-                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-chart-line text-blue-400 text-xs"></i> KPI Monitor
+                        <div class="text-xs font-bold text-emerald-300 flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-arrows-rotate text-emerald-400 animate-spin" style="animation-duration: 4s;"></i> Iterasi AI
                         </div>
-                        <p class="text-[9.5px] text-slate-400 leading-tight">Ambil data berkala dari Meta.</p>
-                    </div>
-
-                    <!-- Node 7: AI Performance Analysis -->
-                    <div id="node-7" onclick="jumpToStep(7)" class="cursor-pointer node-card p-3 relative">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-bold">07</span>
-                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
-                        </div>
-                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-calculator text-cyan-400 text-xs"></i> AI Analysis
-                        </div>
-                        <p class="text-[9.5px] text-slate-400 leading-tight">Evaluasi CTR, CPC, CPM & Leads.</p>
-                    </div>
-
-                    <!-- Node 8: Optimization Recommendation -->
-                    <div id="node-8" onclick="jumpToStep(8)" class="cursor-pointer node-card p-3 relative">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-bold">08</span>
-                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
-                        </div>
-                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-lightbulb text-amber-400 text-xs"></i> Rekomendasi AI
-                        </div>
-                        <p class="text-[9.5px] text-slate-400 leading-tight">Tingkatkan, ganti materi, atau stop.</p>
-                    </div>
-
-                    <!-- Node 9: Human Feedback -->
-                    <div id="node-9" onclick="jumpToStep(9)" class="cursor-pointer node-card p-3 relative">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">09</span>
-                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
-                        </div>
-                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-comment-check text-emerald-400 text-xs"></i> Feedback
-                        </div>
-                        <p class="text-[9.5px] text-slate-400 leading-tight">Arahan atasan atas saran AI.</p>
+                        <p class="text-[9.5px] text-slate-300 leading-tight">Kembali ke tahap perencana!</p>
                     </div>
 
                     <!-- Node 10: Knowledge Base -->
@@ -320,16 +268,52 @@
                         <p class="text-[9.5px] text-slate-400 leading-tight">Pola winning iklan disimpan.</p>
                     </div>
 
-                    <!-- Node 11: Campaign Iteration (The Closed Loop) -->
-                    <div id="node-11" onclick="jumpToStep(11)" class="cursor-pointer node-card p-3 relative border-emerald-500/50 bg-emerald-950/20">
+                    <!-- Node 9: Human Feedback -->
+                    <div id="node-9" onclick="jumpToStep(9)" class="cursor-pointer node-card p-3 relative">
                         <div class="flex items-center justify-between mb-1">
-                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">11 Loop</span>
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">09</span>
                             <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
                         </div>
-                        <div class="text-xs font-bold text-emerald-300 flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-arrows-rotate text-emerald-400 animate-spin" style="animation-duration: 4s;"></i> Iterasi AI
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-comment-check text-emerald-400 text-xs"></i> Feedback
                         </div>
-                        <p class="text-[9.5px] text-slate-300 leading-tight">Kembali ke tahap perencana!</p>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Arahan atasan atas saran AI.</p>
+                    </div>
+
+                    <!-- Node 8: Optimization Recommendation -->
+                    <div id="node-8" onclick="jumpToStep(8)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-bold">08</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-lightbulb text-amber-400 text-xs"></i> Rekomendasi AI
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Tingkatkan, ganti materi, atau stop.</p>
+                    </div>
+
+                    <!-- Node 7: AI Performance Analysis -->
+                    <div id="node-7" onclick="jumpToStep(7)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-bold">07</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-calculator text-cyan-400 text-xs"></i> AI Analysis
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Evaluasi CTR, CPC, CPM & Leads.</p>
+                    </div>
+
+                    <!-- Node 6: Performance Monitoring (At Col 6 right below Node 05!) -->
+                    <div id="node-6" onclick="jumpToStep(6)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">06</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-chart-line text-blue-400 text-xs"></i> KPI Monitor
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Ambil data berkala dari Meta.</p>
                     </div>
 
                 </div>
@@ -361,7 +345,7 @@
                     </div>
 
                     <!-- Developer Portfolio Button -->
-                    <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-700/80 hover:border-cyan-400 transition shadow-sm">
+                    <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-cyan-400 transition shadow-sm">
                         <div class="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">
                             <i class="fa-solid fa-code"></i>
                         </div>
@@ -377,7 +361,9 @@
             </div>
         </div>
 
-    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & SOLID SVG ENGINE -->
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & CLEAN CIRCUIT ENGINE -->
     <script>
         // -------------------------------------------------------------
         // Web Audio Synthesizer (Clean Sound FX)
@@ -446,11 +432,11 @@
             const icon = document.getElementById('soundIcon');
             if (soundEnabled) {
                 icon.className = "fa-solid fa-volume-high text-xs";
-                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition";
+                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition";
                 playCleanSound('click');
             } else {
                 icon.className = "fa-solid fa-volume-xmark text-xs";
-                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-500 rounded-lg text-xs transition";
+                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-500 rounded-lg text-xs transition";
             }
         }
 
@@ -478,7 +464,7 @@
                 step: 3,
                 wireId: "wire3_4",
                 title: "3. AI Campaign Planner",
-                desc: "AI merumuskan objective iklan (Leads), segmentasi audiens, struktur ad set, naskah copywriting, CTA, dan arahan visual materi iklan.",
+                desc: "AI merumuskan objective iklan (Leads), segmentasi audiens, struktur ad set, naskah copywriting, CTA, dan konsep materi visual iklan.",
                 status: "CAMPAIGN_PLAN_DRAFTED",
                 sound: "click"
             },
@@ -542,14 +528,14 @@
                 step: 11,
                 wireId: "wire11_loop",
                 title: "11. Campaign Iteration (The Closed Loop)",
-                desc: "Kampanye diperbaiki atau di-scale up secara berkelanjutan. Alur sirkuit kembali memutar ke tahap perencanaan (Closed-Loop Autonomous)!",
+                desc: "Kampanye disesuaikan dan di-scale up secara berkelanjutan. Alur sirkuit kembali memutar ke tahap perencanaan (Closed-Loop Autonomous)!",
                 status: "CLOSED_LOOP_ITERATION_ACTIVE",
                 sound: "loop"
             }
         ];
 
         // -------------------------------------------------------------
-        // SVG Circuit Auto-Routing
+        // SVG Circuit Auto-Routing (Clean Racetrack: Zero Box-Crossing!)
         // -------------------------------------------------------------
         function updateWires() {
             function getC(id) {
@@ -575,28 +561,32 @@
             const isMobile = window.innerWidth < 768;
 
             if (!isMobile) {
-                // ROW 1: 1 -> 2 -> 3 -> 4 -> 5
+                // ROW 1 (Left to Right): 1 -> 2 -> 3 -> 4 -> 5
                 document.getElementById('wire1_2').setAttribute('d', `M ${n[1].right} ${n[1].y} L ${n[2].left} ${n[2].y}`);
                 document.getElementById('wire2_3').setAttribute('d', `M ${n[2].right} ${n[2].y} L ${n[3].left} ${n[3].y}`);
                 document.getElementById('wire3_4').setAttribute('d', `M ${n[3].right} ${n[3].y} L ${n[4].left} ${n[4].y}`);
                 document.getElementById('wire4_5').setAttribute('d', `M ${n[4].right} ${n[4].y} L ${n[5].left} ${n[5].y}`);
 
-                // BRIDGE: Step 5 curves down to Step 6
-                document.getElementById('wire5_6').setAttribute('d', `M ${n[5].x} ${n[5].bottom} C ${n[5].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${n[6].top}`);
+                // BRIDGE: Step 5 curves clean and vertically down on the right side into Step 6!
+                document.getElementById('wire5_6').setAttribute('d', 
+                    `M ${n[5].x} ${n[5].bottom} C ${n[5].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${n[6].top}`
+                );
 
-                // ROW 2: 6 -> 7 -> 8 -> 9 -> 10 -> 11
-                document.getElementById('wire6_7').setAttribute('d', `M ${n[6].right} ${n[6].y} L ${n[7].left} ${n[7].y}`);
-                document.getElementById('wire7_8').setAttribute('d', `M ${n[7].right} ${n[7].y} L ${n[8].left} ${n[8].y}`);
-                document.getElementById('wire8_9').setAttribute('d', `M ${n[8].right} ${n[8].y} L ${n[9].left} ${n[9].y}`);
-                document.getElementById('wire9_10').setAttribute('d', `M ${n[9].right} ${n[9].y} L ${n[10].left} ${n[10].y}`);
-                document.getElementById('wire10_11').setAttribute('d', `M ${n[10].right} ${n[10].y} L ${n[11].left} ${n[11].y}`);
+                // ROW 2 (Right to Left): 6 -> 7 -> 8 -> 9 -> 10 -> 11
+                document.getElementById('wire6_7').setAttribute('d', `M ${n[6].left} ${n[6].y} L ${n[7].right} ${n[7].y}`);
+                document.getElementById('wire7_8').setAttribute('d', `M ${n[7].left} ${n[7].y} L ${n[8].right} ${n[8].y}`);
+                document.getElementById('wire8_9').setAttribute('d', `M ${n[8].left} ${n[8].y} L ${n[9].right} ${n[9].y}`);
+                document.getElementById('wire9_10').setAttribute('d', `M ${n[9].left} ${n[9].y} L ${n[10].right} ${n[10].y}`);
+                document.getElementById('wire10_11').setAttribute('d', `M ${n[10].left} ${n[10].y} L ${n[11].right} ${n[11].y}`);
 
-                // CLOSED LOOP WIRE: From Step 11 back to Step 3 (Campaign Planner)
+                // CLEAN CLOSED LOOP WIRE: From Step 11 (at left edge of row 2) swoops smoothly up directly to Step 3's bottom!
+                // Does NOT pass under box 04 or box 05! Travels freely through the open center space!
+                const midY = (n[11].top + n[3].bottom) / 2;
                 document.getElementById('wire11_loop').setAttribute('d', 
-                    `M ${n[11].right} ${n[11].y} C ${n[11].right + 60} ${n[11].y}, ${n[5].right + 60} ${n[3].y - 30}, ${n[3].x} ${n[3].top}`
+                    `M ${n[11].x} ${n[11].top} C ${n[11].x} ${midY}, ${n[3].x} ${midY}, ${n[3].x} ${n[3].bottom}`
                 );
             } else {
-                // Mobile basic connects
+                // Mobile layout connections
                 document.getElementById('wire1_2').setAttribute('d', `M ${n[1].right} ${n[1].y} L ${n[2].left} ${n[2].y}`);
                 document.getElementById('wire2_3').setAttribute('d', `M ${n[2].x} ${n[2].bottom} L ${n[3].x} ${n[3].top}`);
                 document.getElementById('wire3_4').setAttribute('d', `M ${n[3].right} ${n[3].y} L ${n[4].left} ${n[4].y}`);
@@ -639,6 +629,9 @@
             // Reset wires
             document.querySelectorAll('.wire-base').forEach(w => {
                 w.className.baseVal = "wire-base";
+                if (w.id === 'wire11_loop' && idx !== 11) {
+                    w.style.opacity = "0";
+                }
             });
 
             // Highlight active node
@@ -657,8 +650,14 @@
             if (data.wireId) {
                 const w = document.getElementById(data.wireId);
                 if (w) {
-                    w.className.baseVal = idx === 11 ? "wire-base wire-loop" : "wire-base wire-active";
-                    animatePhoton(w, idx === 11 ? '#10b981' : '#38bdf8');
+                    if (idx === 11) {
+                        w.style.opacity = "1";
+                        w.className.baseVal = "wire-base wire-loop-active";
+                        animatePhoton(w, '#10b981');
+                    } else {
+                        w.className.baseVal = "wire-base wire-active";
+                        animatePhoton(w, '#38bdf8');
+                    }
                 }
             }
 
@@ -755,6 +754,7 @@
                 }
             }
             document.querySelectorAll('.wire-base').forEach(w => w.className.baseVal = "wire-base");
+            document.getElementById('wire11_loop').style.opacity = "0";
             document.getElementById('packetDot').classList.add('opacity-0');
             document.getElementById('activeStepTag').innerText = "TAHAP 00 DARI 11";
             document.getElementById('inspectorTitle').innerText = "Standby";
