@@ -231,16 +231,16 @@
                         <p class="text-[10px] text-slate-400 leading-tight">Ad Set, targeting, copy & CTA iklan.</p>
                     </div>
 
-                    <!-- Node 4: Human Approval (WhatsApp) -->
+                    <!-- Node 4: Human Approval (WhatsApp / Web) -->
                     <div id="node-4" onclick="jumpToStep(4)" class="cursor-pointer node-card p-3 md:p-3.5 relative border-amber-500/40">
                         <div class="flex items-center justify-between mb-1.5">
                             <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold">04 Gate</span>
                             <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
                         </div>
                         <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
-                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i> WhatsApp Approval
+                            <i class="fa-solid fa-user-check text-emerald-400 text-xs"></i> Human Approval
                         </div>
-                        <p class="text-[10px] text-slate-400 leading-tight">Atasan klik Approve/Reject via WA.</p>
+                        <p class="text-[10px] text-slate-400 leading-tight">Opsi via WhatsApp / Web Dashboard.</p>
                     </div>
 
                     <!-- Node 5: Campaign Execution -->
@@ -291,9 +291,9 @@
                             <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
                         </div>
                         <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
-                            <i class="fa-solid fa-lightbulb text-amber-400 text-xs"></i> Rekomendasi
+                            <i class="fa-solid fa-lightbulb text-amber-400 text-xs"></i> Rekomendasi AI
                         </div>
-                        <p class="text-[9.5px] text-slate-400 leading-tight">Scale up, ganti materi, atau kill.</p>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Tingkatkan, ganti materi, atau stop.</p>
                     </div>
 
                     <!-- Node 9: Human Feedback -->
@@ -485,9 +485,9 @@
             {
                 step: 4,
                 wireId: "wire4_5",
-                title: "4. Human Approval (WhatsApp Bot)",
-                desc: "Draf kampanye dikirim langsung ke WhatsApp atasan. Cukup balas Approve / Revise / Reject tanpa repot membuka dashboard rumit.",
-                status: "WHATSAPP_APPROVAL_GRANTED",
+                title: "4. Human Approval (WhatsApp / Web Dashboard)",
+                desc: "Draf kampanye dikirim otomatis ke atasan untuk ditinjau. Atasan dapat memberikan persetujuan (Approve / Revise / Reject) fleksibel melalui WhatsApp maupun Web Dashboard.",
+                status: "HUMAN_APPROVAL_GRANTED",
                 sound: "approval"
             },
             {
@@ -518,7 +518,7 @@
                 step: 8,
                 wireId: "wire8_9",
                 title: "8. Optimization Recommendation",
-                desc: "AI memberikan rekomendasi tindakan: Scale Up budget jika iklan winning, refresh materi jika CTR turun, atau matikan ad set boncos.",
+                desc: "AI memberikan rekomendasi tindakan: tingkatkan anggaran (scale up) jika performa bagus, perbarui materi kreatif jika jenuh, atau hentikan ad set yang kurang efektif.",
                 status: "AI_DECISION_RECOMMENDED",
                 sound: "click"
             },
