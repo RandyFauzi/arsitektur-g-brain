@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Arsitektur G-Brain AI - Interactive Circuit</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Cyberpunk dark grid background */
+        .cyber-grid {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(30, 41, 59, 0.35) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.35) 1px, transparent 1px);
+        }
+
+        /* SVG Glow filters */
+        .glow-filter {
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+        }
+
+        /* Animated SVG flow lines */
+        .wire-path {
+            stroke: #1e293b;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            transition: stroke 0.4s ease;
+        }
+
+        .wire-active {
+            stroke: #38bdf8;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.8s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+        }
+
+        .wire-return {
+            stroke: #a855f7;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.8s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.8));
+        }
+
+        .wire-success {
+            stroke: #10b981;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.7s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+        }
+
+        .wire-reject {
+            stroke: #f43f5e;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.7s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8));
+        }
+
+        @keyframes flowMove {
+            to { stroke-dashoffset: -12; }
+        }
+
+        /* High-tech luxury node effects */
+        .node-box {
+            backdrop-filter: blur(12px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .node-active {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.2);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .node-kb-active {
+            border-color: #c084fc !important;
+            box-shadow: 0 0 35px -5px rgba(192, 132, 252, 0.5), inset 0 0 20px rgba(192, 132, 252, 0.2);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .node-success {
+            border-color: #34d399 !important;
+            box-shadow: 0 0 35px -5px rgba(52, 211, 153, 0.5), inset 0 0 20px rgba(52, 211, 153, 0.2);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .node-reject {
+            border-color: #fb7185 !important;
+            box-shadow: 0 0 35px -5px rgba(251, 113, 133, 0.5), inset 0 0 20px rgba(251, 113, 133, 0.2);
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        /* Scanline radar sweep effect */
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 100%;
+            background: linear-gradient(to bottom, transparent 95%, rgba(56, 189, 248, 0.08) 100%);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Sound ripple */
+        .sound-wave {
+            display: inline-flex;
+            gap: 2px;
+            align-items: center;
+            height: 12px;
+        }
+        .sound-bar {
+            width: 2px;
+            background-color: #38bdf8;
+            border-radius: 1px;
+            animation: equalize 0.8s ease-in-out infinite alternate;
+        }
+        .sound-bar:nth-child(2) { animation-delay: 0.2s; height: 10px; }
+        .sound-bar:nth-child(3) { animation-delay: 0.4s; height: 6px; }
+        @keyframes equalize {
+            0% { height: 3px; }
+            100% { height: 12px; }
+        }
+    </style>
+</head>
+<body class="bg-[#050814] text-slate-100 min-h-screen overflow-x-hidden flex flex-col select-none relative">
+
+    <!-- Ambient Background Cyber Particles Canvas -->
+    <canvas id="ambientCanvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></canvas>
+    <div class="scanline z-0"></div>
+
+    <!-- Top Luxury Command Bar -->
+    <header class="bg-slate-900/80 border-b border-slate-800/80 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 z-40 backdrop-blur-xl sticky top-0">
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 text-white font-extrabold text-sm border border-cyan-400/30">
+                <i class="fa-solid fa-microchip-ai text-white"></i>
+            </div>
+            <div>
+                <h1 class="text-sm font-extrabold text-white flex items-center gap-2 tracking-tight">
+                    G-Brain Autonomous Circuit
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
+                        Quantum Flow v2.4
+                    </span>
+                </h1>
+                <p class="text-[11px] text-slate-400">Visualisasi Sirkuit AI Terintegrasi & Gerbang Persetujuan Real-time</p>
+            </div>
+        </div>
+
+        <!-- Central Controller Buttons -->
+        <div class="flex items-center gap-2 bg-slate-950/90 border border-slate-800/90 p-1.5 rounded-2xl shadow-inner">
+            <!-- Play/Pause -->
+            <button id="btnPlay" onclick="togglePlay()" class="px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-blue-500/20 active:scale-95">
+                <i id="playIcon" class="fa-solid fa-play text-[11px]"></i> <span id="playText">Mulai Alur</span>
+            </button>
+            <button onclick="nextStep()" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+                <i class="fa-solid fa-forward-step text-[11px]"></i> Langkah Berikut
+            </button>
+            <button onclick="resetFlow()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+                <i class="fa-solid fa-rotate-right text-[11px]"></i>
+            </button>
+
+            <div class="h-4 w-px bg-slate-800 mx-1"></div>
+
+            <!-- Sound FX Toggle Button -->
+            <button id="btnSound" onclick="toggleSound()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition" title="Aktifkan / Bisukan Efek Suara AI">
+                <i id="soundIcon" class="fa-solid fa-volume-high text-xs"></i>
+                <span class="sound-wave" id="soundWave">
+                    <span class="sound-bar"></span>
+                    <span class="sound-bar"></span>
+                    <span class="sound-bar"></span>
+                </span>
+            </button>
+
+            <div class="h-4 w-px bg-slate-800 mx-1"></div>
+
+            <!-- Scenario Selector -->
+            <div class="flex items-center gap-2 text-xs px-2">
+                <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px] hover:text-white">
+                    <input type="radio" name="scenario" value="approve" checked onchange="changeScenario('approve')" class="accent-emerald-500">
+                    <span class="text-emerald-400 font-bold">Approve</span>
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px] hover:text-white ml-2">
+                    <input type="radio" name="scenario" value="reject" onchange="changeScenario('reject')" class="accent-rose-500">
+                    <span class="text-rose-400 font-bold">Reject</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Telemetry Status Indicator -->
+        <div class="text-xs text-slate-400 hidden xl:flex items-center gap-2 font-mono">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            SYS_STATUS: <strong class="text-cyan-300 font-bold" id="globalState">READY_TO_STREAM</strong>
+        </div>
+    </header>
+
+    <!-- Main Interactive Workspace -->
+    <div class="flex-1 flex flex-col lg:flex-row relative z-10 cyber-grid">
+        
+        <!-- Left: Circuit Visualizer Canvas Board -->
+        <div id="canvasContainer" class="flex-1 relative overflow-hidden min-h-[620px] p-6 flex items-center justify-center">
+            
+            <!-- SVG Circuit Wires Layer -->
+            <svg id="svgWire" class="absolute inset-0 w-full h-full pointer-events-none z-10">
+                <!-- Filters for glow -->
+                <defs>
+                    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                    <!-- Marker for arrows -->
+                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
+                    </marker>
+                    <marker id="arrow-purple" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c084fc" />
+                    </marker>
+                </defs>
+
+                <!-- Wire 1: Marketer -> G-Brain -->
+                <path id="wire1" class="wire-path" d="" />
+                
+                <!-- Wire 2A: G-Brain -> KB (Query RAG) -->
+                <path id="wire2a" class="wire-path" d="" />
+                <!-- Wire 2B: KB -> G-Brain (Return Verified Product Knowledge) -->
+                <path id="wire2b" class="wire-path" d="" />
+
+                <!-- Wire 3: G-Brain -> Approval Gate -->
+                <path id="wire3" class="wire-path" d="" />
+
+                <!-- Wire 4a: Approval -> Meta Ads (Approve) -->
+                <path id="wire4a" class="wire-path" d="" />
+                <!-- Wire 4b: Approval -> Website (Approve) -->
+                <path id="wire4b" class="wire-path" d="" />
+
+                <!-- Wire Reject: Approval -> Marketer (Feedback Loop) -->
+                <path id="wireReject" class="wire-path" d="" />
+
+                <!-- Moving Packet Photons (Dynamic Animated Circles with trail) -->
+                <circle id="packetDot1" cx="-50" cy="-50" r="7" fill="#38bdf8" class="data-packet opacity-0" filter="url(#glow-cyan)" />
+                <circle id="packetDot2" cx="-50" cy="-50" r="4.5" fill="#ffffff" class="data-packet opacity-0" />
+            </svg>
+
+            <!-- ARCHITECTURE NODES GRID -->
+            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-y-16 gap-x-14 relative z-20">
+
+                <!-- NODE 1: MARKETER INPUT -->
+                <div id="node-marketer" onclick="selectNode('marketer')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
+                            Node 01: Client Side
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-lg shadow-inner">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-400 transition">Marketer Input</h3>
+                            <p class="text-[11px] text-slate-400">Naskah Iklan & Artikel Baru</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500 font-mono">Payload REST API</span>
+                        <span class="text-cyan-400 font-mono text-[10px]">{ text, budget }</span>
+                    </div>
+                </div>
+
+                <!-- NODE 2: G-BRAIN AI CORE -->
+                <div id="node-gbrain" onclick="selectNode('gbrain')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
+                            Core AI Middleware
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-600/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-lg shadow-lg shadow-cyan-500/20">
+                            <i class="fa-solid fa-brain animate-pulse"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-300 transition">G-Brain Engine</h3>
+                            <p class="text-[11px] text-slate-400">Evaluator & Scoring AI</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500">LLM Provider</span>
+                        <span class="text-cyan-400 font-mono text-[10px] font-bold">Grok / Gemini Flash</span>
+                    </div>
+                </div>
+
+                <!-- NODE 3: KNOWLEDGE BASE -->
+                <div id="node-kb" onclick="selectNode('kb')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 font-bold uppercase">
+                            Database RAG
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-400/40 flex items-center justify-center text-lg shadow-lg shadow-purple-500/20">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-purple-300 transition">Knowledge Base</h3>
+                            <p class="text-[11px] text-slate-400">sensorgempa & pancaprima</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500">Loop Validasi</span>
+                        <span class="text-purple-400 font-mono text-[10px] font-bold">2-Way Verified</span>
+                    </div>
+                </div>
+
+                <!-- NODE 4: APPROVAL GATE -->
+                <div id="node-approval" onclick="selectNode('approval')" class="cursor-pointer md:col-start-2 bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold uppercase">
+                            Decision Gate
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-amber-600/20 text-amber-300 border border-amber-400/40 flex items-center justify-center text-lg shadow-lg shadow-amber-500/20">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-amber-300 transition">Approval Gate</h3>
+                            <p class="text-[11px] text-slate-400">Review Atasan (Manajemen)</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex gap-2">
+                        <span class="flex-1 text-center py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-extrabold tracking-wide">
+                            <i class="fa-solid fa-check mr-1"></i> APPROVE
+                        </span>
+                        <span class="flex-1 text-center py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-[10px] text-rose-400 font-extrabold tracking-wide">
+                            <i class="fa-solid fa-xmark mr-1"></i> REJECT
+                        </span>
+                    </div>
+                </div>
+
+                <!-- NODE 5A: META ADS INTEGRATION -->
+                <div id="node-meta" onclick="selectNode('meta')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-1 md:row-start-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
+                            Ad Network API
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-blue-600/20 text-blue-300 border border-blue-400/40 flex items-center justify-center text-lg shadow-lg shadow-blue-500/20">
+                            <i class="fa-brands fa-meta"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-blue-300 transition">Meta Ads API</h3>
+                            <p class="text-[11px] text-slate-400">Draf Iklan Instagram & FB</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500">Output</span>
+                        <span class="text-emerald-400 font-mono text-[10px] font-bold">Campaign Draft OK</span>
+                    </div>
+                </div>
+
+                <!-- NODE 5B: WEBSITE PUBLISHER -->
+                <div id="node-web" onclick="selectNode('web')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-3 md:row-start-3">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
+                            CMS Publisher
+                        </span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center text-lg shadow-lg shadow-emerald-500/20">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-white group-hover:text-emerald-300 transition">Web CMS API</h3>
+                            <p class="text-[11px] text-slate-400">sensorgempa / pancaprima</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500">Status</span>
+                        <span class="text-emerald-400 font-mono text-[10px] font-bold">Article Published</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right: Realtime Event Inspector & Technical Drawer -->
+        <aside class="w-full lg:w-[410px] bg-slate-900/90 border-t lg:border-t-0 lg:border-l border-slate-800/80 p-6 flex flex-col justify-between backdrop-blur-xl">
+            <div>
+                <!-- Header Inspector -->
+                <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 mb-5">
+                    <div class="flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-slate-200">
+                        <i class="fa-solid fa-wave-pulse text-cyan-400"></i> Live Telemetry & Inspector
+                    </div>
+                    <span id="stepCounter" class="text-[11px] font-mono bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full border border-cyan-500/30 font-bold">
+                        TAHAP: STANDBY
+                    </span>
+                </div>
+
+                <!-- Explanation Box for Laypeople -->
+                <div class="mb-5">
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 flex items-center justify-between">
+                        <span>Penjelasan Alur (Bahasa Awam)</span>
+                        <i class="fa-solid fa-circle-question text-slate-600"></i>
+                    </label>
+                    <div id="inspectorDesc" class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 text-xs text-slate-200 leading-relaxed min-h-[105px] shadow-inner">
+                        Sistem sedang dalam status diam <em>(Standby)</em>. Klik tombol <strong>"Mulai Alur"</strong> untuk mengaktifkan aliran sirkuit AI dan mendengar efek audionya.
+                    </div>
+                </div>
+
+                <!-- Live Technical Packet Details -->
+                <div>
+                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 flex items-center justify-between">
+                        <span>Payload Data JSON & Log API</span>
+                        <span class="text-[10px] font-mono text-cyan-400">TLS 1.3 / Encrypted</span>
+                    </label>
+                    <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 font-mono text-[11px] text-slate-300 overflow-x-auto min-h-[150px] shadow-inner" id="inspectorPayload">
+<pre class="text-slate-500">// Menunggu transmisi data...
+{
+  "system_mode": "interactive_simulation",
+  "audio_fx": "WebAudio_Synthesizer_Active",
+  "flow_ready": true
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Interactive Guide -->
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400 space-y-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400"></span>
+                    <span><strong>Query RAG:</strong> G-Brain meminta verifikasi data ke Knowledge Base.</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-400 shadow-sm shadow-purple-400"></span>
+                    <span><strong>Data Return:</strong> Knowledge Base mengembalikan data valid kembali ke G-Brain.</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400"></span>
+                    <span><strong>Approval Gate:</strong> Eksekusi API Meta Ads & Web jika Approve.</span>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO SYNTHESIZER & ANIMATION ENGINE -->
+    <script>
+        // -------------------------------------------------------------
+        // 1. WEB AUDIO API SYNTHESIZER (Pure JS, No external MP3 files!)
+        // -------------------------------------------------------------
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSciFiSound(type) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                const now = audioCtx.currentTime;
+
+                if (type === 'transmit') {
+                    // Futuristic data stream laser chirp
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(650, now);
+                    osc.frequency.exponentialRampToValueAtTime(1400, now + 0.12);
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.13);
+                } 
+                else if (type === 'kb_query') {
+                    // Futuristic holographic sonar ping
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(987.77, now);
+                    osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.15);
+                    gain.gain.setValueAtTime(0.07, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+                else if (type === 'kb_return') {
+                    // Futuristic confirmation harmonic beep
+                    [880, 1174.66].forEach((f, i) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(f, now + i * 0.05);
+                        gain.gain.setValueAtTime(0.06, now + i * 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + i * 0.05);
+                        osc.stop(now + 0.35);
+                    });
+                }
+                else if (type === 'ai_compute') {
+                    // Subtle AI cyber computing pulse
+                    [440, 554, 659, 880].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.04);
+                        gain.gain.setValueAtTime(0.04, now + idx * 0.04);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 0.08);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + idx * 0.04);
+                        osc.stop(now + idx * 0.04 + 0.09);
+                    });
+                }
+                else if (type === 'approve') {
+                    // Luxurious futuristic success chord (Cyber Major Chime)
+                    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.06);
+                        gain.gain.setValueAtTime(0.06, now + i * 0.06);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + i * 0.06);
+                        osc.stop(now + 0.95);
+                    });
+                } 
+                else if (type === 'reject') {
+                    // Futuristic warning buzzer (Cyber Alarm)
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(280, now);
+                    osc.frequency.exponentialRampToValueAtTime(140, now + 0.28);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.32);
+                }
+            } catch (e) {
+                console.log("Audio FX error", e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('btnSound');
+            const icon = document.getElementById('soundIcon');
+            const wave = document.getElementById('soundWave');
+
+            if (soundEnabled) {
+                icon.className = "fa-solid fa-volume-high text-xs";
+                wave.style.display = "inline-flex";
+                btn.className = "px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition";
+                playSciFiSound('transmit');
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-xs";
+                wave.style.display = "none";
+                btn.className = "px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-500 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition";
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 2. AMBIENT PARTICLES CANVAS (Subtle Cyber Dust)
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('ambientCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 40; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                radius: Math.random() * 1.5 + 0.5,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                alpha: Math.random() * 0.5 + 0.2
+            });
+        }
+
+        function renderAmbient() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(renderAmbient);
+        }
+        renderAmbient();
+
+        // -------------------------------------------------------------
+        // 3. STEP DEFINITIONS (With 2-Way Knowledge Base Loop)
+        // -------------------------------------------------------------
+        let currentStep = 0;
+        let isPlaying = false;
+        let playInterval = null;
+        let scenario = 'approve'; // 'approve' | 'reject'
+
+        const stepsApprove = [
+            {
+                stepNum: 1,
+                name: "Marketer Mengirim Draf Iklan",
+                activeNode: "node-marketer",
+                activeWire: "wire1",
+                soundType: "transmit",
+                desc: "Marketer menginput naskah draf iklan & artikel ke dalam sistem. Data dikemas menjadi payload aman lalu dikirimkan langsung ke engine perantara G-Brain.",
+                statusText: "TRANSMITTING_PAYLOAD",
+                payload: {
+                    event: "DRAFT_INITIATED",
+                    channel: "REST_API_POST",
+                    source: "Marketer Workspace",
+                    draft_text: "Sistem pendeteksi gempa real-time & pest control industri...",
+                    security: "TLS_1.3_VERIFIED"
+                }
+            },
+            {
+                stepNum: 2,
+                name: "G-Brain Query ke Knowledge Base (RAG)",
+                activeNode: ["node-gbrain", "node-kb"],
+                activeWire: "wire2a",
+                soundType: "kb_query",
+                desc: "G-Brain AI tidak mengarang bebas! Sistem terlebih dahulu mengirimkan kueri pencarian <em>(Retrieval)</em> ke database resmi sensorgempa.com & pancaprimawijaya.id.",
+                statusText: "QUERYING_KNOWLEDGE_BASE",
+                payload: {
+                    event: "KNOWLEDGE_BASE_LOOKUP",
+                    target_db: ["sensorgempa.com", "pancaprimawijaya.id"],
+                    similarity_search: "Cosine Distance < 0.15",
+                    direction: "G-Brain -> Knowledge Base"
+                }
+            },
+            {
+                stepNum: 3,
+                name: "Knowledge Base Mengembalikan Data Valid (Return Loop)",
+                activeNode: ["node-kb", "node-gbrain"],
+                activeWire: "wire2b",
+                soundType: "kb_return",
+                desc: "<strong>Jalur Balik Terverifikasi:</strong> Basis data mengembalikan spesifikasi teknis resmi, sertifikasi alat, dan standar copywriting perusahaan kembali ke otak G-Brain.",
+                statusText: "DATA_VERIFIED_RETURNED",
+                payload: {
+                    event: "KNOWLEDGE_RETURNED",
+                    direction: "Knowledge Base -> G-Brain",
+                    verified_specs: "Sertifikasi BMKG & Standar Hama Industri",
+                    factual_accuracy: "99.2%",
+                    ai_scoring: "READY_FOR_SUPERVISOR"
+                }
+            },
+            {
+                stepNum: 4,
+                name: "Evaluasi Finansial & Approval Gate",
+                activeNode: "node-approval",
+                activeWire: "wire3",
+                soundType: "ai_compute",
+                desc: "AI selesai menghitung skor kelayakan (94/100). Materi kini ditahan di 'Approval Gate'. Pimpinan meninjau hasil AI lalu mengklik <strong>'APPROVE'</strong>.",
+                statusText: "SUPERVISOR_APPROVAL_GRANTED",
+                payload: {
+                    event: "APPROVAL_GATE_APPROVED",
+                    feasibility_score: "94/100 (Optimal)",
+                    estimated_cost_per_lead: "Low (Efektif)",
+                    decision: "APPROVED_BY_EXECUTIVE",
+                    gate_status: "UNLOCKED"
+                }
+            },
+            {
+                stepNum: 5,
+                name: "Otomatisasi Publikasi Serentak",
+                activeNode: ["node-meta", "node-web"],
+                activeWire: ["wire4a", "wire4b"],
+                soundType: "approve",
+                desc: "<strong>Selesai!</strong> G-Brain langsung menyiarkan payload serentak ke Meta Marketing API (draf iklan Instagram & Facebook) dan mempublikasikan artikel di Website!",
+                statusText: "SIMULTANEOUS_AUTO_PUBLISH_SUCCESS",
+                payload: {
+                    event: "PAYLOAD_BROADCAST_SUCCESS",
+                    meta_ads: "Campaign Draft Created on Ads Manager",
+                    website_cms: "Article Published (sensorgempa.com)",
+                    execution_time: "0.84 seconds",
+                    status: "200_OK"
+                }
+            }
+        ];
+
+        const stepsReject = [
+            {
+                stepNum: 1,
+                name: "Marketer Mengirim Draf Iklan",
+                activeNode: "node-marketer",
+                activeWire: "wire1",
+                soundType: "transmit",
+                desc: "Marketer mengirim draf materi promosi untuk diverifikasi oleh sistem G-Brain.",
+                statusText: "TRANSMITTING_PAYLOAD",
+                payload: {
+                    event: "DRAFT_INITIATED",
+                    source: "Marketer Workspace"
+                }
+            },
+            {
+                stepNum: 2,
+                name: "G-Brain Query ke Knowledge Base",
+                activeNode: ["node-gbrain", "node-kb"],
+                activeWire: "wire2a",
+                soundType: "kb_query",
+                desc: "G-Brain AI mencocokkan naskah dengan database spesifikasi produk resmi.",
+                statusText: "QUERYING_KNOWLEDGE_BASE",
+                payload: {
+                    event: "KNOWLEDGE_BASE_LOOKUP",
+                    target_db: ["sensorgempa.com", "pancaprimawijaya.id"]
+                }
+            },
+            {
+                stepNum: 3,
+                name: "Knowledge Base Mendeteksi Ketidaksesuaian",
+                activeNode: ["node-kb", "node-gbrain"],
+                activeWire: "wire2b",
+                soundType: "kb_return",
+                desc: "Basis data mendeteksi bahwa klaim garansi pada naskah tidak cocok dengan data resmi produk sensor/hama.",
+                statusText: "DATA_MISMATCH_DETECTED",
+                payload: {
+                    event: "KNOWLEDGE_RETURNED",
+                    flagged: "Klaim garansi belum sesuai katalog",
+                    feasibility_score: "62/100 (Beresiko Boncos)"
+                }
+            },
+            {
+                stepNum: 4,
+                name: "Atasan Menolak Draf (Reject)",
+                activeNode: "node-approval",
+                activeWire: "wire3",
+                soundType: "reject",
+                desc: "Pimpinan melihat peringatan AI dan menekan tombol <strong>'REJECT'</strong> agar materi diperbaiki dan anggaran iklan perusahaan tidak terbuang sia-sia.",
+                statusText: "SUPERVISOR_REJECTED",
+                payload: {
+                    event: "APPROVAL_GATE_REJECTED",
+                    decision: "REJECT_FOR_REVISION",
+                    reason: "Sesuaikan klaim garansi dengan katalog terbaru",
+                    auto_post_blocked: true
+                }
+            },
+            {
+                stepNum: 5,
+                name: "Feedback Dikembalikan ke Marketer",
+                activeNode: "node-marketer",
+                activeWire: "wireReject",
+                soundType: "reject",
+                desc: "<strong>Aman!</strong> Sistem mengembalikan naskah ke Marketer beserta catatan revisi. Iklan tidak tayang dan budget perusahaan tetap Rp 0 (tidak boncos).",
+                statusText: "RETURNED_TO_MARKETER",
+                payload: {
+                    event: "REVISION_LOOP_COMPLETED",
+                    destination: "Marketer Workspace",
+                    wasted_budget: "Rp 0 (Protected)"
+                }
+            }
+        ];
+
+        function getActiveSteps() {
+            return scenario === 'approve' ? stepsApprove : stepsReject;
+        }
+
+        // -------------------------------------------------------------
+        // 4. DYNAMIC SVG WIRING (Connecting Nodes Responsively)
+        // -------------------------------------------------------------
+        function updateWires() {
+            function getCenter(elId) {
+                const el = document.getElementById(elId);
+                const rect = el.getBoundingClientRect();
+                const container = document.getElementById('canvasContainer').getBoundingClientRect();
+                return {
+                    x: rect.left - container.left + rect.width / 2,
+                    y: rect.top - container.top + rect.height / 2,
+                    top: rect.top - container.top,
+                    bottom: rect.bottom - container.top,
+                    left: rect.left - container.left,
+                    right: rect.right - container.left
+                };
+            }
+
+            const marketer = getCenter('node-marketer');
+            const gbrain = getCenter('node-gbrain');
+            const kb = getCenter('node-kb');
+            const approval = getCenter('node-approval');
+            const meta = getCenter('node-meta');
+            const web = getCenter('node-web');
+
+            // Wire 1: Marketer right -> G-Brain left
+            document.getElementById('wire1').setAttribute('d', `M ${marketer.right} ${marketer.y} C ${(marketer.right + gbrain.left)/2} ${marketer.y}, ${(marketer.right + gbrain.left)/2} ${gbrain.y}, ${gbrain.left} ${gbrain.y}`);
+
+            // Wire 2A (Top Arc): G-Brain right -> Knowledge Base left
+            const midX_gb_kb = (gbrain.right + kb.left) / 2;
+            document.getElementById('wire2a').setAttribute('d', `M ${gbrain.right} ${gbrain.y - 12} C ${midX_gb_kb} ${gbrain.y - 28}, ${midX_gb_kb} ${kb.y - 28}, ${kb.left} ${kb.y - 12}`);
+
+            // Wire 2B (Bottom Arc - RETURN WIRE): Knowledge Base left -> G-Brain right
+            document.getElementById('wire2b').setAttribute('d', `M ${kb.left} ${kb.y + 12} C ${midX_gb_kb} ${kb.y + 28}, ${midX_gb_kb} ${gbrain.y + 28}, ${gbrain.right} ${gbrain.y + 12}`);
+
+            // Wire 3: G-Brain bottom -> Approval top
+            document.getElementById('wire3').setAttribute('d', `M ${gbrain.x} ${gbrain.bottom} C ${gbrain.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${approval.top}`);
+
+            // Wire 4a: Approval left -> Meta Ads right
+            document.getElementById('wire4a').setAttribute('d', `M ${approval.left} ${approval.bottom - 15} C ${approval.left - 50} ${approval.bottom}, ${meta.right + 50} ${meta.top}, ${meta.right} ${meta.top + 20}`);
+
+            // Wire 4b: Approval right -> Web left
+            document.getElementById('wire4b').setAttribute('d', `M ${approval.right} ${approval.bottom - 15} C ${approval.right + 50} ${approval.bottom}, ${web.left - 50} ${web.top}, ${web.left} ${web.top + 20}`);
+
+            // Wire Reject: Approval left curving back up to Marketer bottom
+            document.getElementById('wireReject').setAttribute('d', `M ${approval.left} ${approval.y} C ${marketer.x} ${approval.y + 45}, ${marketer.x} ${approval.y}, ${marketer.x} ${marketer.bottom}`);
+        }
+
+        window.addEventListener('resize', updateWires);
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(updateWires, 120);
+        });
+
+        // -------------------------------------------------------------
+        // 5. ANIMATION & STATE ENGINE
+        // -------------------------------------------------------------
+        function renderStep(stepIdx) {
+            const steps = getActiveSteps();
+            const step = steps[stepIdx - 1];
+
+            // Reset all styles
+            document.querySelectorAll('.wire-path').forEach(w => {
+                w.className.baseVal = "wire-path";
+            });
+            document.querySelectorAll('[id^="node-"]').forEach(n => {
+                n.classList.remove('node-active', 'node-kb-active', 'node-success', 'node-reject');
+                n.querySelector('.status-indicator').className = "w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator";
+            });
+
+            if (!step) {
+                document.getElementById('globalState').innerText = "READY_TO_STREAM";
+                document.getElementById('stepCounter').innerText = "TAHAP: STANDBY";
+                document.getElementById('packetDot1').classList.add('opacity-0');
+                document.getElementById('packetDot2').classList.add('opacity-0');
+                return;
+            }
+
+            // Play Futuristic Sound FX
+            if (step.soundType) {
+                playSciFiSound(step.soundType);
+            }
+
+            // Update Inspector Information
+            document.getElementById('globalState').innerText = step.statusText;
+            document.getElementById('stepCounter').innerText = `TAHAP ${step.stepNum} DARI ${steps.length}`;
+            document.getElementById('inspectorDesc').innerHTML = `<strong class="text-cyan-400 font-extrabold">${step.name}:</strong><br>${step.desc}`;
+            document.getElementById('inspectorPayload').innerHTML = `<pre class="text-emerald-400">${JSON.stringify(step.payload, null, 2)}</pre>`;
+
+            // Highlight wire styling
+            const isRejectStep = scenario === 'reject' && (step.stepNum === 4 || step.stepNum === 5);
+            const isSuccessStep = scenario === 'approve' && step.stepNum === 5;
+            const isReturnStep = step.activeWire === 'wire2b';
+
+            if (Array.isArray(step.activeWire)) {
+                step.activeWire.forEach(wId => {
+                    const w = document.getElementById(wId);
+                    w.className.baseVal = `wire-path ${isSuccessStep ? 'wire-success' : 'wire-active'}`;
+                });
+            } else if (step.activeWire) {
+                const w = document.getElementById(step.activeWire);
+                let wireClass = 'wire-active';
+                if (isRejectStep) wireClass = 'wire-reject';
+                else if (isSuccessStep) wireClass = 'wire-success';
+                else if (isReturnStep) wireClass = 'wire-return';
+
+                w.className.baseVal = `wire-path ${wireClass}`;
+            }
+
+            // Highlight node styling
+            if (Array.isArray(step.activeNode)) {
+                step.activeNode.forEach(nId => {
+                    const node = document.getElementById(nId);
+                    let nodeStyle = isSuccessStep ? 'node-success' : (nId === 'node-kb' ? 'node-kb-active' : 'node-active');
+                    node.classList.add(nodeStyle);
+                    const dotColor = isSuccessStep ? 'bg-emerald-400' : (nId === 'node-kb' ? 'bg-purple-400' : 'bg-cyan-400');
+                    node.querySelector('.status-indicator').className = `w-2.5 h-2.5 rounded-full ${dotColor} animate-ping status-indicator`;
+                });
+            } else if (step.activeNode) {
+                const node = document.getElementById(step.activeNode);
+                let nodeStyle = isRejectStep ? 'node-reject' : (isSuccessStep ? 'node-success' : 'node-active');
+                node.classList.add(nodeStyle);
+                const dotColor = isRejectStep ? 'bg-rose-400' : (isSuccessStep ? 'bg-emerald-400' : 'bg-cyan-400');
+                node.querySelector('.status-indicator').className = `w-2.5 h-2.5 rounded-full ${dotColor} animate-ping status-indicator`;
+            }
+
+            // Animate travelling particle photon
+            animatePacket(step.activeWire, isRejectStep, isSuccessStep, isReturnStep);
+        }
+
+        function animatePacket(wireTarget, isReject, isSuccess, isReturn) {
+            const dot1 = document.getElementById('packetDot1');
+            const dot2 = document.getElementById('packetDot2');
+            
+            let color = '#38bdf8';
+            if (isReject) color = '#fb7185';
+            else if (isSuccess) color = '#34d399';
+            else if (isReturn) color = '#c084fc';
+
+            dot1.setAttribute('fill', color);
+            dot1.classList.remove('opacity-0');
+            dot2.classList.remove('opacity-0');
+
+            const wireId = Array.isArray(wireTarget) ? wireTarget[0] : wireTarget;
+            const wire = document.getElementById(wireId);
+            if (!wire) return;
+
+            const length = wire.getTotalLength();
+            let start = null;
+            const duration = 1100;
+
+            function stepAnim(timestamp) {
+                if (!start) start = timestamp;
+                const progress = (timestamp - start) / duration;
+
+                if (progress < 1) {
+                    const point = wire.getPointAtLength(progress * length);
+                    dot1.setAttribute('cx', point.x);
+                    dot1.setAttribute('cy', point.y);
+                    dot2.setAttribute('cx', point.x);
+                    dot2.setAttribute('cy', point.y);
+                    requestAnimationFrame(stepAnim);
+                } else {
+                    const endPoint = wire.getPointAtLength(length);
+                    dot1.setAttribute('cx', endPoint.x);
+                    dot1.setAttribute('cy', endPoint.y);
+                    dot2.setAttribute('cx', endPoint.x);
+                    dot2.setAttribute('cy', endPoint.y);
+                }
+            }
+            requestAnimationFrame(stepAnim);
+        }
+
+        function nextStep() {
+            initAudio();
+            const steps = getActiveSteps();
+            currentStep++;
+            if (currentStep > steps.length) {
+                currentStep = 1;
+            }
+            renderStep(currentStep);
+        }
+
+        function togglePlay() {
+            initAudio();
+            const btn = document.getElementById('btnPlay');
+            const icon = document.getElementById('playIcon');
+            const text = document.getElementById('playText');
+
+            if (isPlaying) {
+                clearInterval(playInterval);
+                isPlaying = false;
+                icon.className = "fa-solid fa-play text-[11px]";
+                text.innerText = "Lanjut Putar";
+                btn.className = "px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-blue-500/20";
+            } else {
+                isPlaying = true;
+                icon.className = "fa-solid fa-pause text-[11px]";
+                text.innerText = "Jeda";
+                btn.className = "px-4 py-1.5 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-orange-500/20";
+
+                if (currentStep === 0 || currentStep >= getActiveSteps().length) {
+                    currentStep = 1;
+                }
+                renderStep(currentStep);
+
+                playInterval = setInterval(() => {
+                    currentStep++;
+                    if (currentStep > getActiveSteps().length) {
+                        currentStep = 1;
+                    }
+                    renderStep(currentStep);
+                }, 3200);
+            }
+        }
+
+        function resetFlow() {
+            if (isPlaying) togglePlay();
+            currentStep = 0;
+            renderStep(0);
+            document.getElementById('inspectorDesc').innerHTML = `Sistem sedang dalam status diam <em>(Standby)</em>. Klik tombol <strong>"Mulai Alur"</strong> untuk mengaktifkan aliran sirkuit AI dan efek audionya.`;
+            document.getElementById('inspectorPayload').innerHTML = `<pre class="text-slate-500">// Menunggu transmisi data...\n{\n  "system_mode": "interactive_simulation",\n  "audio_fx": "WebAudio_Synthesizer_Active",\n  "flow_ready": true\n}</pre>`;
+        }
+
+        function changeScenario(val) {
+            scenario = val;
+            resetFlow();
+        }
+
+        // Node click inspector specs
+        function selectNode(type) {
+            initAudio();
+            playSciFiSound('ai_compute');
+            const nodeSpecs = {
+                marketer: {
+                    title: "Node 01: Marketer Workspace",
+                    desc: "Titik awal di mana tim promosi memasukkan draf teks iklan atau artikel. Pengguna hanya perlu mengetik tanpa harus mengerti kode pemrograman.",
+                    tech: "REST API Endpoint POST /api/drafts, Request Payload Sanitization, Rate Limiter."
+                },
+                gbrain: {
+                    title: "Core AI Middleware: G-Brain Engine",
+                    desc: "Pusat kecerdasan buatan yang menghubungkan input marketer dengan database pengetahuan produk, melakukan evaluasi kelayakan copywriting, dan estimasi ROI.",
+                    tech: "Grok / Gemini 1.5 API Integration, Semantic Embedding Generator, Temperature: 0.2."
+                },
+                kb: {
+                    title: "RAG Database: Corporate Knowledge Base",
+                    desc: "Katalog spesifikasi resmi sensorgempa.com dan pancaprimawijaya.id. Memastikan informasi produk, standar garansi, dan teknis yang dikeluarkan selalu 100% akurat.",
+                    tech: "2-Way Verification Loop, Vector Retrieval DB, Zero-Hallucination Guardrails."
+                },
+                approval: {
+                    title: "Decision Gate: Gerbang Persetujuan Pimpinan",
+                    desc: "Filter pengendali. Tidak ada konten yang tayang ke publik sebelum atasan meninjau ringkasan skor kelayakan dari AI dan menekan tombol Approve.",
+                    tech: "Secure Manager Token, Instant Webhook Notification, One-Click Decision Gate."
+                },
+                meta: {
+                    title: "Channel 01: Meta Marketing API",
+                    desc: "Setelah disetujui, sistem otomatis membentuk draf kampanye resmi di Meta Ads Manager (Instagram & Facebook) dengan target dan materi yang sudah siap tayang.",
+                    tech: "Meta Graph API v19.0, Endpoints: /act_ID/campaigns & /adcreatives, Auto AdSet Payload."
+                },
+                web: {
+                    title: "Channel 02: Web CMS Article Publisher",
+                    desc: "Secara serentak menerbitkan artikel SEO ke website perusahaan (sensorgempa.com / pancaprimawijaya.id) lengkap dengan kategori dan metadata.",
+                    tech: "WordPress / RESTful CMS Webhook POST /wp-json/wp/v2/posts, Auto SEO Tagging."
+                }
+            };
+
+            const data = nodeSpecs[type];
+            if (data) {
+                document.getElementById('inspectorDesc').innerHTML = `<strong class="text-cyan-400">${data.title}</strong><br>${data.desc}`;
+                document.getElementById('inspectorPayload').innerHTML = `<pre class="text-cyan-300">Spesifikasi & Cara Kerja:\n${data.tech}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>
