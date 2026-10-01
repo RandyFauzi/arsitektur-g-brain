@@ -14,17 +14,12 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Cyberpunk dark grid background */
+        /* Cyber dark grid background */
         .cyber-grid {
-            background-size: 36px 36px;
+            background-size: 32px 32px;
             background-image: 
-                linear-gradient(to right, rgba(30, 41, 59, 0.35) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 41, 59, 0.35) 1px, transparent 1px);
-        }
-
-        /* SVG Glow filters */
-        .glow-filter {
-            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+                linear-gradient(to right, rgba(30, 41, 59, 0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 1px, transparent 1px);
         }
 
         /* Animated SVG flow lines */
@@ -40,28 +35,28 @@
             stroke: #38bdf8;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.8s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
         }
 
         .wire-return {
             stroke: #a855f7;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.8s linear infinite;
-            filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.8));
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.9));
         }
 
         .wire-success {
             stroke: #10b981;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.7s linear infinite;
-            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.9));
         }
 
         .wire-reject {
             stroke: #f43f5e;
             stroke-dasharray: 6, 6;
             animation: flowMove 0.7s linear infinite;
-            filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8));
+            filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.9));
         }
 
         @keyframes flowMove {
@@ -70,40 +65,40 @@
 
         /* High-tech luxury node effects */
         .node-box {
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .node-active {
             border-color: #38bdf8 !important;
-            box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.2);
-            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.6), inset 0 0 20px rgba(56, 189, 248, 0.25);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .node-kb-active {
             border-color: #c084fc !important;
-            box-shadow: 0 0 35px -5px rgba(192, 132, 252, 0.5), inset 0 0 20px rgba(192, 132, 252, 0.2);
-            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 35px -5px rgba(192, 132, 252, 0.6), inset 0 0 20px rgba(192, 132, 252, 0.25);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .node-success {
             border-color: #34d399 !important;
-            box-shadow: 0 0 35px -5px rgba(52, 211, 153, 0.5), inset 0 0 20px rgba(52, 211, 153, 0.2);
-            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 35px -5px rgba(52, 211, 153, 0.6), inset 0 0 20px rgba(52, 211, 153, 0.25);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .node-reject {
             border-color: #fb7185 !important;
-            box-shadow: 0 0 35px -5px rgba(251, 113, 133, 0.5), inset 0 0 20px rgba(251, 113, 133, 0.2);
-            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 35px -5px rgba(251, 113, 133, 0.6), inset 0 0 20px rgba(251, 113, 133, 0.25);
+            transform: translateY(-3px) scale(1.02);
         }
 
         /* Scanline radar sweep effect */
         .scanline {
             position: absolute;
             top: 0; left: 0; right: 0; height: 100%;
-            background: linear-gradient(to bottom, transparent 95%, rgba(56, 189, 248, 0.08) 100%);
-            animation: scan 4s linear infinite;
+            background: linear-gradient(to bottom, transparent 95%, rgba(56, 189, 248, 0.07) 100%);
+            animation: scan 5s linear infinite;
             pointer-events: none;
         }
         @keyframes scan {
@@ -111,7 +106,7 @@
             100% { transform: translateY(100%); }
         }
 
-        /* Sound ripple */
+        /* Sound equalizer animation */
         .sound-wave {
             display: inline-flex;
             gap: 2px;
@@ -130,66 +125,75 @@
             0% { height: 3px; }
             100% { height: 12px; }
         }
+
+        /* Luxurious Watermark Shimmer */
+        @keyframes shimmerGlow {
+            0% { transform: translateX(-150%) rotate(45deg); }
+            100% { transform: translateX(250%) rotate(45deg); }
+        }
+        .animate-shimmer {
+            animation: shimmerGlow 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
     </style>
 </head>
-<body class="bg-[#050814] text-slate-100 min-h-screen overflow-x-hidden flex flex-col select-none relative">
+<body class="bg-[#050814] text-slate-100 min-h-screen overflow-x-hidden flex flex-col select-none relative pb-20 md:pb-6">
 
     <!-- Ambient Background Cyber Particles Canvas -->
     <canvas id="ambientCanvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></canvas>
     <div class="scanline z-0"></div>
 
     <!-- Top Luxury Command Bar -->
-    <header class="bg-slate-900/80 border-b border-slate-800/80 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 z-40 backdrop-blur-xl sticky top-0">
+    <header class="bg-slate-900/85 border-b border-slate-800/80 px-4 md:px-6 py-3 flex flex-wrap items-center justify-between gap-3 z-40 backdrop-blur-xl sticky top-0">
         <!-- Logo & Title -->
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 text-white font-extrabold text-sm border border-cyan-400/30">
-                <i class="fa-solid fa-microchip-ai text-white"></i>
+            <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 text-white font-extrabold text-sm border border-cyan-400/30">
+                <i class="fa-solid fa-microchip-ai text-white text-xs md:text-sm"></i>
             </div>
             <div>
-                <h1 class="text-sm font-extrabold text-white flex items-center gap-2 tracking-tight">
+                <h1 class="text-xs md:text-sm font-extrabold text-white flex items-center gap-2 tracking-tight">
                     G-Brain Autonomous Circuit
-                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
-                        Quantum Flow v2.4
+                    <span class="text-[9px] md:text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
+                        Quantum Flow v2.5
                     </span>
                 </h1>
-                <p class="text-[11px] text-slate-400">Visualisasi Sirkuit AI Terintegrasi & Gerbang Persetujuan Real-time</p>
+                <p class="text-[10px] md:text-[11px] text-slate-400">Sirkuit AI Terintegrasi & Gerbang Persetujuan</p>
             </div>
         </div>
 
         <!-- Central Controller Buttons -->
-        <div class="flex items-center gap-2 bg-slate-950/90 border border-slate-800/90 p-1.5 rounded-2xl shadow-inner">
+        <div class="flex items-center gap-1.5 md:gap-2 bg-slate-950/90 border border-slate-800/90 p-1 md:p-1.5 rounded-2xl shadow-inner max-w-full overflow-x-auto">
             <!-- Play/Pause -->
-            <button id="btnPlay" onclick="togglePlay()" class="px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-blue-500/20 active:scale-95">
-                <i id="playIcon" class="fa-solid fa-play text-[11px]"></i> <span id="playText">Mulai Alur</span>
+            <button id="btnPlay" onclick="togglePlay()" class="px-3 md:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 md:gap-2 transition shadow-md shadow-blue-500/20 active:scale-95 whitespace-nowrap">
+                <i id="playIcon" class="fa-solid fa-play text-[10px]"></i> <span id="playText">Mulai Alur</span>
             </button>
-            <button onclick="nextStep()" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
-                <i class="fa-solid fa-forward-step text-[11px]"></i> Langkah Berikut
+            <button onclick="nextStep()" class="px-2.5 md:px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95 whitespace-nowrap">
+                <i class="fa-solid fa-forward-step text-[10px]"></i> <span class="hidden sm:inline">Langkah Berikut</span>
             </button>
-            <button onclick="resetFlow()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
-                <i class="fa-solid fa-rotate-right text-[11px]"></i>
+            <button onclick="resetFlow()" class="px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+                <i class="fa-solid fa-rotate-right text-[10px]"></i>
             </button>
 
-            <div class="h-4 w-px bg-slate-800 mx-1"></div>
+            <div class="h-4 w-px bg-slate-800 mx-0.5 md:mx-1"></div>
 
             <!-- Sound FX Toggle Button -->
-            <button id="btnSound" onclick="toggleSound()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition" title="Aktifkan / Bisukan Efek Suara AI">
+            <button id="btnSound" onclick="toggleSound()" class="px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 md:gap-2 transition" title="Aktifkan / Bisukan Suara AI">
                 <i id="soundIcon" class="fa-solid fa-volume-high text-xs"></i>
-                <span class="sound-wave" id="soundWave">
+                <span class="sound-wave hidden sm:inline-flex" id="soundWave">
                     <span class="sound-bar"></span>
                     <span class="sound-bar"></span>
                     <span class="sound-bar"></span>
                 </span>
             </button>
 
-            <div class="h-4 w-px bg-slate-800 mx-1"></div>
+            <div class="h-4 w-px bg-slate-800 mx-0.5 md:mx-1"></div>
 
             <!-- Scenario Selector -->
-            <div class="flex items-center gap-2 text-xs px-2">
-                <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px] hover:text-white">
+            <div class="flex items-center gap-1.5 text-xs px-1 md:px-2">
+                <label class="flex items-center gap-1 cursor-pointer text-slate-300 text-[10px] md:text-[11px] hover:text-white">
                     <input type="radio" name="scenario" value="approve" checked onchange="changeScenario('approve')" class="accent-emerald-500">
                     <span class="text-emerald-400 font-bold">Approve</span>
                 </label>
-                <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 text-[11px] hover:text-white ml-2">
+                <label class="flex items-center gap-1 cursor-pointer text-slate-300 text-[10px] md:text-[11px] hover:text-white ml-1 md:ml-2">
                     <input type="radio" name="scenario" value="reject" onchange="changeScenario('reject')" class="accent-rose-500">
                     <span class="text-rose-400 font-bold">Reject</span>
                 </label>
@@ -207,33 +211,25 @@
     <div class="flex-1 flex flex-col lg:flex-row relative z-10 cyber-grid">
         
         <!-- Left: Circuit Visualizer Canvas Board -->
-        <div id="canvasContainer" class="flex-1 relative overflow-hidden min-h-[620px] p-6 flex items-center justify-center">
+        <div id="canvasContainer" class="flex-1 relative min-h-[580px] md:min-h-[640px] p-4 md:p-8 flex items-center justify-center overflow-hidden">
             
             <!-- SVG Circuit Wires Layer -->
             <svg id="svgWire" class="absolute inset-0 w-full h-full pointer-events-none z-10">
-                <!-- Filters for glow -->
                 <defs>
                     <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
                         <feMerge>
                             <feMergeNode in="blur" />
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
                     <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feGaussianBlur stdDeviation="3.5" result="blur" />
                         <feMerge>
                             <feMergeNode in="blur" />
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
-                    <!-- Marker for arrows -->
-                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8" />
-                    </marker>
-                    <marker id="arrow-purple" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c084fc" />
-                    </marker>
                 </defs>
 
                 <!-- Wire 1: Marketer -> G-Brain -->
@@ -260,34 +256,34 @@
                 <circle id="packetDot2" cx="-50" cy="-50" r="4.5" fill="#ffffff" class="data-packet opacity-0" />
             </svg>
 
-            <!-- ARCHITECTURE NODES GRID -->
-            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-y-16 gap-x-14 relative z-20">
+            <!-- ARCHITECTURE NODES GRID (Fully Responsive) -->
+            <div class="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-10 md:gap-y-16 gap-x-8 md:gap-x-14 relative z-20">
 
                 <!-- NODE 1: MARKETER INPUT -->
-                <div id="node-marketer" onclick="selectNode('marketer')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                <div id="node-marketer" onclick="selectNode('marketer')" class="cursor-pointer bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
-                            Node 01: Client Side
+                            Node 01: Client
                         </span>
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-lg shadow-inner">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-base md:text-lg shadow-inner">
                             <i class="fa-solid fa-pen-nib"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-400 transition">Marketer Input</h3>
-                            <p class="text-[11px] text-slate-400">Naskah Iklan & Artikel Baru</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-cyan-400 transition">Marketer Input</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">Naskah Iklan & Artikel</p>
                         </div>
                     </div>
-                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-[10px] text-slate-500 font-mono">Payload REST API</span>
+                    <div class="mt-3 text-[10px] md:text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500 font-mono">Payload REST</span>
                         <span class="text-cyan-400 font-mono text-[10px]">{ text, budget }</span>
                     </div>
                 </div>
 
                 <!-- NODE 2: G-BRAIN AI CORE -->
-                <div id="node-gbrain" onclick="selectNode('gbrain')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                <div id="node-gbrain" onclick="selectNode('gbrain')" class="cursor-pointer bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
                             Core AI Middleware
@@ -295,22 +291,22 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-cyan-600/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-lg shadow-lg shadow-cyan-500/20">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-cyan-600/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-base md:text-lg shadow-lg shadow-cyan-500/20">
                             <i class="fa-solid fa-brain animate-pulse"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-cyan-300 transition">G-Brain Engine</h3>
-                            <p class="text-[11px] text-slate-400">Evaluator & Scoring AI</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-cyan-300 transition">G-Brain Engine</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">Evaluator & Scoring AI</p>
                         </div>
                     </div>
-                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-[10px] text-slate-500">LLM Provider</span>
+                    <div class="mt-3 text-[10px] md:text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[10px] text-slate-500">LLM Engine</span>
                         <span class="text-cyan-400 font-mono text-[10px] font-bold">Grok / Gemini Flash</span>
                     </div>
                 </div>
 
                 <!-- NODE 3: KNOWLEDGE BASE -->
-                <div id="node-kb" onclick="selectNode('kb')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                <div id="node-kb" onclick="selectNode('kb')" class="cursor-pointer bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl sm:col-span-2 md:col-span-1">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 font-bold uppercase">
                             Database RAG
@@ -318,22 +314,22 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-400/40 flex items-center justify-center text-lg shadow-lg shadow-purple-500/20">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-400/40 flex items-center justify-center text-base md:text-lg shadow-lg shadow-purple-500/20">
                             <i class="fa-solid fa-database"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-purple-300 transition">Knowledge Base</h3>
-                            <p class="text-[11px] text-slate-400">sensorgempa & pancaprima</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-purple-300 transition">Knowledge Base</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">sensorgempa & pancaprima</p>
                         </div>
                     </div>
-                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                    <div class="mt-3 text-[10px] md:text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
                         <span class="text-[10px] text-slate-500">Loop Validasi</span>
                         <span class="text-purple-400 font-mono text-[10px] font-bold">2-Way Verified</span>
                     </div>
                 </div>
 
                 <!-- NODE 4: APPROVAL GATE -->
-                <div id="node-approval" onclick="selectNode('approval')" class="cursor-pointer md:col-start-2 bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
+                <div id="node-approval" onclick="selectNode('approval')" class="cursor-pointer sm:col-span-2 md:col-start-2 bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold uppercase">
                             Decision Gate
@@ -341,26 +337,26 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-amber-600/20 text-amber-300 border border-amber-400/40 flex items-center justify-center text-lg shadow-lg shadow-amber-500/20">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-amber-600/20 text-amber-300 border border-amber-400/40 flex items-center justify-center text-base md:text-lg shadow-lg shadow-amber-500/20">
                             <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-amber-300 transition">Approval Gate</h3>
-                            <p class="text-[11px] text-slate-400">Review Atasan (Manajemen)</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-amber-300 transition">Approval Gate</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">Review Atasan (Manajemen)</p>
                         </div>
                     </div>
                     <div class="mt-3 flex gap-2">
-                        <span class="flex-1 text-center py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-extrabold tracking-wide">
+                        <span class="flex-1 text-center py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[9px] md:text-[10px] text-emerald-400 font-extrabold tracking-wide">
                             <i class="fa-solid fa-check mr-1"></i> APPROVE
                         </span>
-                        <span class="flex-1 text-center py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-[10px] text-rose-400 font-extrabold tracking-wide">
+                        <span class="flex-1 text-center py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-[9px] md:text-[10px] text-rose-400 font-extrabold tracking-wide">
                             <i class="fa-solid fa-xmark mr-1"></i> REJECT
                         </span>
                     </div>
                 </div>
 
                 <!-- NODE 5A: META ADS INTEGRATION -->
-                <div id="node-meta" onclick="selectNode('meta')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-1 md:row-start-3">
+                <div id="node-meta" onclick="selectNode('meta')" class="cursor-pointer bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-1 md:row-start-3">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
                             Ad Network API
@@ -368,22 +364,22 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-blue-600/20 text-blue-300 border border-blue-400/40 flex items-center justify-center text-lg shadow-lg shadow-blue-500/20">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-blue-600/20 text-blue-300 border border-blue-400/40 flex items-center justify-center text-base md:text-lg shadow-lg shadow-blue-500/20">
                             <i class="fa-brands fa-meta"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-blue-300 transition">Meta Ads API</h3>
-                            <p class="text-[11px] text-slate-400">Draf Iklan Instagram & FB</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-blue-300 transition">Meta Ads API</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">Draf Iklan IG & FB</p>
                         </div>
                     </div>
-                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                    <div class="mt-3 text-[10px] md:text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
                         <span class="text-[10px] text-slate-500">Output</span>
                         <span class="text-emerald-400 font-mono text-[10px] font-bold">Campaign Draft OK</span>
                     </div>
                 </div>
 
                 <!-- NODE 5B: WEBSITE PUBLISHER -->
-                <div id="node-web" onclick="selectNode('web')" class="cursor-pointer bg-slate-900/80 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-3 md:row-start-3">
+                <div id="node-web" onclick="selectNode('web')" class="cursor-pointer bg-slate-900/85 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl md:col-start-3 md:row-start-3">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
                             CMS Publisher
@@ -391,15 +387,15 @@
                         <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center text-lg shadow-lg shadow-emerald-500/20">
+                        <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center text-base md:text-lg shadow-lg shadow-emerald-500/20">
                             <i class="fa-solid fa-globe"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-extrabold text-white group-hover:text-emerald-300 transition">Web CMS API</h3>
-                            <p class="text-[11px] text-slate-400">sensorgempa / pancaprima</p>
+                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-emerald-300 transition">Web CMS API</h3>
+                            <p class="text-[10px] md:text-[11px] text-slate-400">sensorgempa / pancaprima</p>
                         </div>
                     </div>
-                    <div class="mt-3 text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
+                    <div class="mt-3 text-[10px] md:text-[11px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
                         <span class="text-[10px] text-slate-500">Status</span>
                         <span class="text-emerald-400 font-mono text-[10px] font-bold">Article Published</span>
                     </div>
@@ -410,25 +406,25 @@
         </div>
 
         <!-- Right: Realtime Event Inspector & Technical Drawer -->
-        <aside class="w-full lg:w-[410px] bg-slate-900/90 border-t lg:border-t-0 lg:border-l border-slate-800/80 p-6 flex flex-col justify-between backdrop-blur-xl">
+        <aside class="w-full lg:w-[410px] bg-slate-900/90 border-t lg:border-t-0 lg:border-l border-slate-800/80 p-5 md:p-6 flex flex-col justify-between backdrop-blur-xl">
             <div>
                 <!-- Header Inspector -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 mb-5">
-                    <div class="flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider text-slate-200">
+                <div class="flex items-center justify-between pb-3.5 border-b border-slate-800 mb-4 md:mb-5">
+                    <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
                         <i class="fa-solid fa-wave-pulse text-cyan-400"></i> Live Telemetry & Inspector
                     </div>
-                    <span id="stepCounter" class="text-[11px] font-mono bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full border border-cyan-500/30 font-bold">
+                    <span id="stepCounter" class="text-[10px] md:text-[11px] font-mono bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full border border-cyan-500/30 font-bold">
                         TAHAP: STANDBY
                     </span>
                 </div>
 
                 <!-- Explanation Box for Laypeople -->
-                <div class="mb-5">
+                <div class="mb-4 md:mb-5">
                     <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 flex items-center justify-between">
                         <span>Penjelasan Alur (Bahasa Awam)</span>
                         <i class="fa-solid fa-circle-question text-slate-600"></i>
                     </label>
-                    <div id="inspectorDesc" class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 text-xs text-slate-200 leading-relaxed min-h-[105px] shadow-inner">
+                    <div id="inspectorDesc" class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 text-xs text-slate-200 leading-relaxed min-h-[95px] md:min-h-[105px] shadow-inner">
                         Sistem sedang dalam status diam <em>(Standby)</em>. Klik tombol <strong>"Mulai Alur"</strong> untuk mengaktifkan aliran sirkuit AI dan mendengar efek audionya.
                     </div>
                 </div>
@@ -439,7 +435,7 @@
                         <span>Payload Data JSON & Log API</span>
                         <span class="text-[10px] font-mono text-cyan-400">TLS 1.3 / Encrypted</span>
                     </label>
-                    <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 font-mono text-[11px] text-slate-300 overflow-x-auto min-h-[150px] shadow-inner" id="inspectorPayload">
+                    <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-4 font-mono text-[10px] md:text-[11px] text-slate-300 overflow-x-auto min-h-[130px] md:min-h-[150px] shadow-inner" id="inspectorPayload">
 <pre class="text-slate-500">// Menunggu transmisi data...
 {
   "system_mode": "interactive_simulation",
@@ -451,14 +447,14 @@
             </div>
 
             <!-- Bottom Interactive Guide -->
-            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400 space-y-2">
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[10px] md:text-[11px] text-slate-400 space-y-2">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400"></span>
                     <span><strong>Query RAG:</strong> G-Brain meminta verifikasi data ke Knowledge Base.</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-purple-400 shadow-sm shadow-purple-400"></span>
-                    <span><strong>Data Return:</strong> Knowledge Base mengembalikan data valid kembali ke G-Brain.</span>
+                    <span><strong>Data Return:</strong> Knowledge Base mengembalikan data valid ke G-Brain.</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400"></span>
@@ -469,7 +465,37 @@
 
     </div>
 
-    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO SYNTHESIZER & ANIMATION ENGINE -->
+    <!-- FLOATING LUXURY WATERMARK BADGE (Klik ke Portofolio) -->
+    <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[94vw]">
+        <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-3 px-4 py-2.5 rounded-full bg-slate-900/95 hover:bg-slate-950 border border-cyan-500/40 hover:border-cyan-400 backdrop-blur-2xl shadow-2xl shadow-cyan-500/25 transition-all duration-300 hover:scale-105 hover:shadow-cyan-400/40">
+            <!-- Shimmer Light Sweep Layer -->
+            <span class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+                <span class="absolute -inset-[100%] bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent rotate-45 animate-shimmer"></span>
+            </span>
+
+            <!-- Glowing Icon Badge -->
+            <div class="relative w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-black shadow-md shadow-cyan-500/40 ring-2 ring-cyan-400/40 group-hover:ring-cyan-300 transition">
+                <i class="fa-solid fa-code text-xs"></i>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="flex flex-col text-left">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-extrabold text-white group-hover:text-cyan-300 transition tracking-tight">
+                        Achmad Randy Al Mugni Fauzi
+                    </span>
+                    <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                        Portfolio ↗
+                    </span>
+                </div>
+                <span class="text-[10px] text-slate-400 flex items-center gap-1">
+                    Full-Stack Web & AI Integration Developer
+                </span>
+            </div>
+        </a>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & ADAPTIVE WIRE ENGINE -->
     <script>
         // -------------------------------------------------------------
         // 1. WEB AUDIO API SYNTHESIZER (Pure JS, No external MP3 files!)
@@ -592,18 +618,18 @@
 
             if (soundEnabled) {
                 icon.className = "fa-solid fa-volume-high text-xs";
-                wave.style.display = "inline-flex";
-                btn.className = "px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition";
+                if (wave) wave.style.display = "inline-flex";
+                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 md:gap-2 transition";
                 playSciFiSound('transmit');
             } else {
                 icon.className = "fa-solid fa-volume-xmark text-xs";
-                wave.style.display = "none";
-                btn.className = "px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-500 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-2 transition";
+                if (wave) wave.style.display = "none";
+                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-500 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 md:gap-2 transition";
             }
         }
 
         // -------------------------------------------------------------
-        // 2. AMBIENT PARTICLES CANVAS (Subtle Cyber Dust)
+        // 2. AMBIENT PARTICLES CANVAS
         // -------------------------------------------------------------
         const canvas = document.getElementById('ambientCanvas');
         const ctx = canvas.getContext('2d');
@@ -652,7 +678,7 @@
         let currentStep = 0;
         let isPlaying = false;
         let playInterval = null;
-        let scenario = 'approve'; // 'approve' | 'reject'
+        let scenario = 'approve';
 
         const stepsApprove = [
             {
@@ -661,7 +687,7 @@
                 activeNode: "node-marketer",
                 activeWire: "wire1",
                 soundType: "transmit",
-                desc: "Marketer menginput naskah draf iklan & artikel ke dalam sistem. Data dikemas menjadi payload aman lalu dikirimkan langsung ke engine perantara G-Brain.",
+                desc: "Marketer menginput naskah draf promosi. Sistem mengemasnya menjadi payload terenkripsi lalu mengirimkannya ke perantara G-Brain.",
                 statusText: "TRANSMITTING_PAYLOAD",
                 payload: {
                     event: "DRAFT_INITIATED",
@@ -677,7 +703,7 @@
                 activeNode: ["node-gbrain", "node-kb"],
                 activeWire: "wire2a",
                 soundType: "kb_query",
-                desc: "G-Brain AI tidak mengarang bebas! Sistem terlebih dahulu mengirimkan kueri pencarian <em>(Retrieval)</em> ke database resmi sensorgempa.com & pancaprimawijaya.id.",
+                desc: "G-Brain AI mengirimkan kueri pencarian <em>(Retrieval)</em> ke database resmi sensorgempa.com & pancaprimawijaya.id.",
                 statusText: "QUERYING_KNOWLEDGE_BASE",
                 payload: {
                     event: "KNOWLEDGE_BASE_LOOKUP",
@@ -692,7 +718,7 @@
                 activeNode: ["node-kb", "node-gbrain"],
                 activeWire: "wire2b",
                 soundType: "kb_return",
-                desc: "<strong>Jalur Balik Terverifikasi:</strong> Basis data mengembalikan spesifikasi teknis resmi, sertifikasi alat, dan standar copywriting perusahaan kembali ke otak G-Brain.",
+                desc: "<strong>Jalur Balik Terverifikasi:</strong> Basis data mengembalikan spesifikasi teknis resmi dan sertifikasi alat kembali ke G-Brain.",
                 statusText: "DATA_VERIFIED_RETURNED",
                 payload: {
                     event: "KNOWLEDGE_RETURNED",
@@ -708,7 +734,7 @@
                 activeNode: "node-approval",
                 activeWire: "wire3",
                 soundType: "ai_compute",
-                desc: "AI selesai menghitung skor kelayakan (94/100). Materi kini ditahan di 'Approval Gate'. Pimpinan meninjau hasil AI lalu mengklik <strong>'APPROVE'</strong>.",
+                desc: "AI selesai menghitung skor kelayakan (94/100). Materi ditahan di 'Approval Gate'. Pimpinan meninjau lalu mengklik <strong>'APPROVE'</strong>.",
                 statusText: "SUPERVISOR_APPROVAL_GRANTED",
                 payload: {
                     event: "APPROVAL_GATE_APPROVED",
@@ -724,7 +750,7 @@
                 activeNode: ["node-meta", "node-web"],
                 activeWire: ["wire4a", "wire4b"],
                 soundType: "approve",
-                desc: "<strong>Selesai!</strong> G-Brain langsung menyiarkan payload serentak ke Meta Marketing API (draf iklan Instagram & Facebook) dan mempublikasikan artikel di Website!",
+                desc: "<strong>Selesai!</strong> G-Brain langsung menyiarkan draf kampanye ke Meta Ads Manager dan mempublikasikan artikel di Website!",
                 statusText: "SIMULTANEOUS_AUTO_PUBLISH_SUCCESS",
                 payload: {
                     event: "PAYLOAD_BROADCAST_SUCCESS",
@@ -783,7 +809,7 @@
                 activeNode: "node-approval",
                 activeWire: "wire3",
                 soundType: "reject",
-                desc: "Pimpinan melihat peringatan AI dan menekan tombol <strong>'REJECT'</strong> agar materi diperbaiki dan anggaran iklan perusahaan tidak terbuang sia-sia.",
+                desc: "Pimpinan melihat peringatan AI dan menekan tombol <strong>'REJECT'</strong> agar anggaran iklan tidak terbuang sia-sia.",
                 statusText: "SUPERVISOR_REJECTED",
                 payload: {
                     event: "APPROVAL_GATE_REJECTED",
@@ -798,7 +824,7 @@
                 activeNode: "node-marketer",
                 activeWire: "wireReject",
                 soundType: "reject",
-                desc: "<strong>Aman!</strong> Sistem mengembalikan naskah ke Marketer beserta catatan revisi. Iklan tidak tayang dan budget perusahaan tetap Rp 0 (tidak boncos).",
+                desc: "<strong>Aman!</strong> Sistem mengembalikan naskah ke Marketer beserta catatan revisi. Iklan tidak tayang dan budget perusahaan tetap Rp 0.",
                 statusText: "RETURNED_TO_MARKETER",
                 payload: {
                     event: "REVISION_LOOP_COMPLETED",
@@ -813,11 +839,12 @@
         }
 
         // -------------------------------------------------------------
-        // 4. DYNAMIC SVG WIRING (Connecting Nodes Responsively)
+        // 4. ADAPTIVE SVG ROUTING (Desktop, Tablet, Mobile)
         // -------------------------------------------------------------
         function updateWires() {
             function getCenter(elId) {
                 const el = document.getElementById(elId);
+                if (!el) return { x: 0, y: 0, top: 0, bottom: 0, left: 0, right: 0 };
                 const rect = el.getBoundingClientRect();
                 const container = document.getElementById('canvasContainer').getBoundingClientRect();
                 return {
@@ -826,7 +853,9 @@
                     top: rect.top - container.top,
                     bottom: rect.bottom - container.top,
                     left: rect.left - container.left,
-                    right: rect.right - container.left
+                    right: rect.right - container.left,
+                    width: rect.width,
+                    height: rect.height
                 };
             }
 
@@ -837,30 +866,54 @@
             const meta = getCenter('node-meta');
             const web = getCenter('node-web');
 
-            // Wire 1: Marketer right -> G-Brain left
-            document.getElementById('wire1').setAttribute('d', `M ${marketer.right} ${marketer.y} C ${(marketer.right + gbrain.left)/2} ${marketer.y}, ${(marketer.right + gbrain.left)/2} ${gbrain.y}, ${gbrain.left} ${gbrain.y}`);
+            const isMobile = window.innerWidth < 768;
 
-            // Wire 2A (Top Arc): G-Brain right -> Knowledge Base left
-            const midX_gb_kb = (gbrain.right + kb.left) / 2;
-            document.getElementById('wire2a').setAttribute('d', `M ${gbrain.right} ${gbrain.y - 12} C ${midX_gb_kb} ${gbrain.y - 28}, ${midX_gb_kb} ${kb.y - 28}, ${kb.left} ${kb.y - 12}`);
+            if (!isMobile) {
+                // DESKTOP / TABLET ROUTING
+                // Wire 1: Marketer right -> G-Brain left
+                document.getElementById('wire1').setAttribute('d', `M ${marketer.right} ${marketer.y} C ${(marketer.right + gbrain.left)/2} ${marketer.y}, ${(marketer.right + gbrain.left)/2} ${gbrain.y}, ${gbrain.left} ${gbrain.y}`);
 
-            // Wire 2B (Bottom Arc - RETURN WIRE): Knowledge Base left -> G-Brain right
-            document.getElementById('wire2b').setAttribute('d', `M ${kb.left} ${kb.y + 12} C ${midX_gb_kb} ${kb.y + 28}, ${midX_gb_kb} ${gbrain.y + 28}, ${gbrain.right} ${gbrain.y + 12}`);
+                // Wire 2A (Top Arc): G-Brain right -> Knowledge Base left
+                const midX_gb_kb = (gbrain.right + kb.left) / 2;
+                document.getElementById('wire2a').setAttribute('d', `M ${gbrain.right} ${gbrain.y - 12} C ${midX_gb_kb} ${gbrain.y - 28}, ${midX_gb_kb} ${kb.y - 28}, ${kb.left} ${kb.y - 12}`);
 
-            // Wire 3: G-Brain bottom -> Approval top
-            document.getElementById('wire3').setAttribute('d', `M ${gbrain.x} ${gbrain.bottom} C ${gbrain.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${approval.top}`);
+                // Wire 2B (Bottom Arc - RETURN WIRE): Knowledge Base left -> G-Brain right
+                document.getElementById('wire2b').setAttribute('d', `M ${kb.left} ${kb.y + 12} C ${midX_gb_kb} ${kb.y + 28}, ${midX_gb_kb} ${gbrain.y + 28}, ${gbrain.right} ${gbrain.y + 12}`);
 
-            // Wire 4a: Approval left -> Meta Ads right
-            document.getElementById('wire4a').setAttribute('d', `M ${approval.left} ${approval.bottom - 15} C ${approval.left - 50} ${approval.bottom}, ${meta.right + 50} ${meta.top}, ${meta.right} ${meta.top + 20}`);
+                // Wire 3: G-Brain bottom -> Approval top
+                document.getElementById('wire3').setAttribute('d', `M ${gbrain.x} ${gbrain.bottom} C ${gbrain.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${(gbrain.bottom + approval.top)/2}, ${approval.x} ${approval.top}`);
 
-            // Wire 4b: Approval right -> Web left
-            document.getElementById('wire4b').setAttribute('d', `M ${approval.right} ${approval.bottom - 15} C ${approval.right + 50} ${approval.bottom}, ${web.left - 50} ${web.top}, ${web.left} ${web.top + 20}`);
+                // Wire 4a: Approval left -> Meta Ads right
+                document.getElementById('wire4a').setAttribute('d', `M ${approval.left} ${approval.bottom - 15} C ${approval.left - 50} ${approval.bottom}, ${meta.right + 50} ${meta.top}, ${meta.right} ${meta.top + 20}`);
 
-            // Wire Reject: Approval left curving back up to Marketer bottom
-            document.getElementById('wireReject').setAttribute('d', `M ${approval.left} ${approval.y} C ${marketer.x} ${approval.y + 45}, ${marketer.x} ${approval.y}, ${marketer.x} ${marketer.bottom}`);
+                // Wire 4b: Approval right -> Web left
+                document.getElementById('wire4b').setAttribute('d', `M ${approval.right} ${approval.bottom - 15} C ${approval.right + 50} ${approval.bottom}, ${web.left - 50} ${web.top}, ${web.left} ${web.top + 20}`);
+
+                // Wire Reject: Approval left curving back up to Marketer bottom
+                document.getElementById('wireReject').setAttribute('d', `M ${approval.left} ${approval.y} C ${marketer.x} ${approval.y + 45}, ${marketer.x} ${approval.y}, ${marketer.x} ${marketer.bottom}`);
+            } else {
+                // MOBILE ADAPTIVE ROUTING (Top-to-Bottom Flow)
+                // Wire 1: Marketer bottom -> G-Brain top
+                document.getElementById('wire1').setAttribute('d', `M ${marketer.x} ${marketer.bottom} C ${marketer.x} ${(marketer.bottom + gbrain.top)/2}, ${gbrain.x} ${(marketer.bottom + gbrain.top)/2}, ${gbrain.x} ${gbrain.top}`);
+
+                // Wire 2A & 2B: G-Brain <-> KB (Parallel Vertical Arcs)
+                document.getElementById('wire2a').setAttribute('d', `M ${gbrain.x - 20} ${gbrain.bottom} C ${gbrain.x - 40} ${(gbrain.bottom + kb.top)/2}, ${kb.x - 40} ${(gbrain.bottom + kb.top)/2}, ${kb.x - 20} ${kb.top}`);
+                document.getElementById('wire2b').setAttribute('d', `M ${kb.x + 20} ${kb.top} C ${kb.x + 40} ${(gbrain.bottom + kb.top)/2}, ${gbrain.x + 40} ${(gbrain.bottom + kb.top)/2}, ${gbrain.x + 20} ${gbrain.bottom}`);
+
+                // Wire 3: KB bottom -> Approval top
+                document.getElementById('wire3').setAttribute('d', `M ${kb.x} ${kb.bottom} C ${kb.x} ${(kb.bottom + approval.top)/2}, ${approval.x} ${(kb.bottom + approval.top)/2}, ${approval.x} ${approval.top}`);
+
+                // Wire 4a & 4b: Approval bottom -> Meta & Web
+                document.getElementById('wire4a').setAttribute('d', `M ${approval.x - 30} ${approval.bottom} C ${approval.x - 30} ${(approval.bottom + meta.top)/2}, ${meta.x} ${(approval.bottom + meta.top)/2}, ${meta.x} ${meta.top}`);
+                document.getElementById('wire4b').setAttribute('d', `M ${approval.x + 30} ${approval.bottom} C ${approval.x + 30} ${(approval.bottom + web.top)/2}, ${web.x} ${(approval.bottom + web.top)/2}, ${web.x} ${web.top}`);
+
+                // Wire Reject: Approval left curving back up to Marketer left
+                document.getElementById('wireReject').setAttribute('d', `M ${approval.left} ${approval.y} C ${approval.left - 60} ${approval.y}, ${marketer.left - 60} ${marketer.y}, ${marketer.left} ${marketer.y}`);
+            }
         }
 
         window.addEventListener('resize', updateWires);
+        window.addEventListener('orientationchange', () => setTimeout(updateWires, 200));
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(updateWires, 120);
         });
@@ -1003,14 +1056,14 @@
             if (isPlaying) {
                 clearInterval(playInterval);
                 isPlaying = false;
-                icon.className = "fa-solid fa-play text-[11px]";
+                icon.className = "fa-solid fa-play text-[10px]";
                 text.innerText = "Lanjut Putar";
-                btn.className = "px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-blue-500/20";
+                btn.className = "px-3 md:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 md:gap-2 transition shadow-md shadow-blue-500/20";
             } else {
                 isPlaying = true;
-                icon.className = "fa-solid fa-pause text-[11px]";
+                icon.className = "fa-solid fa-pause text-[10px]";
                 text.innerText = "Jeda";
-                btn.className = "px-4 py-1.5 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-md shadow-orange-500/20";
+                btn.className = "px-3 md:px-4 py-1.5 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 md:gap-2 transition shadow-md shadow-orange-500/20";
 
                 if (currentStep === 0 || currentStep >= getActiveSteps().length) {
                     currentStep = 1;
