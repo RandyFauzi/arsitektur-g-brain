@@ -3,41 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Employee - Automated Meta Ads Optimization Architecture</title>
+    <title>AI Employee - Automated Meta Ads Optimization Circuit</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Clean minimalist canvas grid */
-        .dot-grid {
-            background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
-            background-size: 24px 24px;
+        /* Clean minimalist circuit grid */
+        .circuit-bg {
+            background-color: #060913;
+            background-image: 
+                radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+                linear-gradient(to right, rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
+            background-size: 28px 28px;
         }
 
-        /* Clean modern transitions */
-        .step-card {
+        /* SVG Wire Styles */
+        .wire-base {
+            stroke: #1e293b;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s ease;
+        }
+
+        .wire-active {
+            stroke: #38bdf8;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.8s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+        }
+
+        .wire-loop {
+            stroke: #10b981;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.8s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
+        }
+
+        .wire-kb {
+            stroke: #c084fc;
+            stroke-dasharray: 6, 6;
+            animation: flowMove 0.8s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.8));
+        }
+
+        @keyframes flowMove {
+            to { stroke-dashoffset: -12; }
+        }
+
+        /* Clean Node Box */
+        .node-card {
+            background: rgba(13, 19, 34, 0.85);
+            border: 1.5px solid #1e293b;
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .step-active {
-            border-color: #3b82f6 !important;
-            background-color: rgba(30, 58, 138, 0.25) !important;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            transform: scale(1.02);
+        .node-active {
+            border-color: #38bdf8 !important;
+            background: rgba(14, 30, 60, 0.95) !important;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4), inset 0 0 15px rgba(56, 189, 248, 0.15);
+            transform: translateY(-2px) scale(1.02);
         }
 
-        .step-passed {
-            border-color: rgba(59, 130, 246, 0.4);
+        .node-passed {
+            border-color: rgba(56, 189, 248, 0.4);
             opacity: 0.9;
         }
 
-        /* Shimmer effect for portfolio watermark */
+        .node-loop-active {
+            border-color: #34d399 !important;
+            box-shadow: 0 0 25px rgba(52, 211, 153, 0.4), inset 0 0 15px rgba(52, 211, 153, 0.15);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Shimmer watermark */
         @keyframes shimmerGlow {
             0% { transform: translateX(-150%) rotate(45deg); }
             100% { transform: translateX(250%) rotate(45deg); }
@@ -46,268 +95,274 @@
             animation: shimmerGlow 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
-        /* Custom minimal scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #090d16; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #060913; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col select-none relative pb-20">
+<body class="bg-[#060913] text-slate-100 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col select-none relative pb-20 lg:pb-0">
 
-    <!-- Top Minimalist Clean Header -->
-    <header class="bg-[#0d1322]/90 border-b border-slate-800/80 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40 backdrop-blur-md">
+    <!-- Top Command Header -->
+    <header class="h-[62px] bg-[#090e1a]/90 border-b border-slate-800/80 px-4 md:px-8 flex items-center justify-between gap-4 z-40 backdrop-blur-xl shrink-0">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm shadow-md shadow-blue-500/20">
                 AI
             </div>
             <div>
-                <h1 class="text-sm font-bold text-white flex items-center gap-2">
-                    AI Employee: Meta Ads Optimization Workflow
-                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Closed-Loop System</span>
+                <h1 class="text-xs md:text-sm font-bold text-white flex items-center gap-2">
+                    Workflow AI Employee – Automated Meta Ads Optimization
+                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
+                        Closed-Loop Lifecycle
+                    </span>
                 </h1>
-                <p class="text-xs text-slate-400">Arsitektur Otomasi Iklan & Pemantauan Performa Mandiri (11 Tahap)</p>
+                <p class="text-[10px] md:text-[11px] text-slate-400">Arsitektur Alur Kerja Lengkap 11 Tahap (Perencanaan ➡️ Eksekusi ➡️ Optimasi Mandiri)</p>
             </div>
         </div>
 
         <!-- Controls -->
-        <div class="flex items-center gap-2 bg-[#090d16] border border-slate-800 p-1.5 rounded-xl shadow-inner">
-            <button id="btnPlay" onclick="togglePlay()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition active:scale-95 shadow-sm">
+        <div class="flex items-center gap-1.5 md:gap-2 bg-[#060913] border border-slate-800 p-1 md:p-1.5 rounded-xl shadow-inner">
+            <button id="btnPlay" onclick="togglePlay()" class="px-3.5 md:px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold flex items-center gap-2 transition active:scale-95 shadow-md shadow-blue-600/25 whitespace-nowrap">
                 <i id="playIcon" class="fa-solid fa-play text-[10px]"></i> <span id="playText">Mulai Alur</span>
             </button>
-            <button onclick="nextStep()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
-                <i class="fa-solid fa-forward-step text-[10px]"></i> Langkah Berikut
+            <button onclick="nextStep()" class="px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition active:scale-95 whitespace-nowrap">
+                <i class="fa-solid fa-forward-step text-[10px]"></i> <span class="hidden sm:inline">Langkah Berikut</span>
             </button>
-            <button onclick="resetFlow()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition active:scale-95" title="Reset">
+            <button onclick="resetFlow()" class="px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition active:scale-95" title="Reset">
                 <i class="fa-solid fa-rotate-right text-[10px]"></i>
             </button>
 
-            <div class="h-4 w-px bg-slate-800 mx-1"></div>
+            <div class="h-4 w-px bg-slate-800 mx-0.5"></div>
 
-            <!-- Sound Toggle -->
-            <button id="btnSound" onclick="toggleSound()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition" title="Efek Suara">
+            <!-- Sound FX -->
+            <button id="btnSound" onclick="toggleSound()" class="px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition" title="Sound FX">
                 <i id="soundIcon" class="fa-solid fa-volume-high text-xs"></i>
             </button>
         </div>
+
+        <div class="text-xs text-slate-400 hidden xl:flex items-center gap-2 font-mono">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            SYS_FLOW: <strong class="text-emerald-400 font-bold" id="headerStatus">READY_TO_STREAM</strong>
+        </div>
     </header>
 
-    <!-- Main Content Container: 3 Phases Visual Board -->
-    <main class="flex-1 max-w-7xl mx-auto w-full p-4 md:p-8 dot-grid flex flex-col gap-8">
+    <!-- Main Workspace (Canvas Circuit + Bottom Inspector) -->
+    <div class="flex-1 flex flex-col relative z-10 circuit-bg overflow-y-auto lg:overflow-hidden">
         
-        <!-- Live Status Bar -->
-        <div class="bg-[#0d1322] border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
-            <div class="flex items-center gap-3">
-                <div class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></div>
-                <div>
-                    <div class="text-xs text-slate-400 font-medium">Status Alur Berjalan:</div>
-                    <div id="statusTitle" class="text-sm font-bold text-white">Standby (Klik "Mulai Alur" atau pilih salah satu tahap)</div>
+        <!-- Top Half: Interactive Circuit Canvas Board -->
+        <div id="canvasContainer" class="flex-1 relative p-4 md:p-6 flex items-center justify-center min-h-[460px] lg:min-h-[500px]">
+            
+            <!-- SVG Circuit Wires Layer -->
+            <svg id="svgWire" class="absolute inset-0 w-full h-full pointer-events-none z-10">
+                <defs>
+                    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- ROW 1 PIPELINE WIRES (Steps 1 -> 2 -> 3 -> 4 -> 5) -->
+                <path id="wire1_2" class="wire-base" d="" />
+                <path id="wire2_kb" class="wire-base" d="" />
+                <path id="wirekb_2" class="wire-base" d="" />
+                <path id="wire2_3" class="wire-base" d="" />
+                <path id="wire3_4" class="wire-base" d="" />
+                <path id="wire4_5" class="wire-base" d="" />
+
+                <!-- BRIDGE WIRE: Step 5 down to Step 6 -->
+                <path id="wire5_6" class="wire-base" d="" />
+
+                <!-- ROW 2 PIPELINE WIRES (Steps 6 -> 7 -> 8 -> 9 -> 10 -> 11) -->
+                <path id="wire6_7" class="wire-base" d="" />
+                <path id="wire7_8" class="wire-base" d="" />
+                <path id="wire8_9" class="wire-base" d="" />
+                <path id="wire9_10" class="wire-base" d="" />
+                <path id="wire10_11" class="wire-base" d="" />
+
+                <!-- THE CLOSED LOOP WIRE: Step 11 curves back to Step 3 (AI Campaign Planner) -->
+                <path id="wire11_loop" class="wire-base" d="" />
+
+                <!-- Traveling Data Photon Dot -->
+                <circle id="packetDot" cx="-50" cy="-50" r="6" fill="#38bdf8" class="opacity-0 transition-opacity" filter="url(#glow-cyan)" />
+            </svg>
+
+            <!-- NODES GRID: 2-ROW PIPELINE CIRCUIT -->
+            <div class="w-full max-w-6xl flex flex-col gap-10 md:gap-14 relative z-20">
+
+                <!-- ROW 1: PRE-CAMPAIGN & GATEWAY (Steps 1 to 5) -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 relative">
+
+                    <!-- Node 1: Input Data -->
+                    <div id="node-1" onclick="jumpToStep(1)" class="cursor-pointer node-card p-3 md:p-3.5 relative">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 font-bold">01</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-file-pen text-blue-400 text-xs"></i> Input Data
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">Produk, USP, budget & media kreatif.</p>
+                    </div>
+
+                    <!-- Node 2: AI Market Analysis -->
+                    <div id="node-2" onclick="jumpToStep(2)" class="cursor-pointer node-card p-3 md:p-3.5 relative">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-bold">02</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-xs"></i> AI Market Analysis
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">Riset pain point & customer angle.</p>
+                    </div>
+
+                    <!-- Node 3: AI Campaign Planner -->
+                    <div id="node-3" onclick="jumpToStep(3)" class="cursor-pointer node-card p-3 md:p-3.5 relative">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">03</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-xs"></i> Campaign Planner
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">Ad Set, targeting, copy & CTA iklan.</p>
+                    </div>
+
+                    <!-- Node 4: Human Approval (WhatsApp) -->
+                    <div id="node-4" onclick="jumpToStep(4)" class="cursor-pointer node-card p-3 md:p-3.5 relative border-amber-500/40">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold">04 Gate</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xs"></i> WhatsApp Approval
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">Atasan klik Approve/Reject via WA.</p>
+                    </div>
+
+                    <!-- Node 5: Campaign Execution -->
+                    <div id="node-5" onclick="jumpToStep(5)" class="cursor-pointer node-card p-3 md:p-3.5 relative col-span-2 md:col-span-1">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 font-bold">05 Live</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1.5 mb-1">
+                            <i class="fa-brands fa-meta text-blue-400 text-xs"></i> Meta Ads Publish
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">Otomatis tayang via Meta API.</p>
+                    </div>
+
                 </div>
+
+                <!-- ROW 2: CLOSED-LOOP PERFORMANCE MONITORING & OPTIMIZATION (Steps 6 to 11) -->
+                <div class="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3.5 relative">
+
+                    <!-- Node 6: Performance Monitoring -->
+                    <div id="node-6" onclick="jumpToStep(6)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">06</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-chart-line text-blue-400 text-xs"></i> KPI Monitor
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Ambil data berkala dari Meta.</p>
+                    </div>
+
+                    <!-- Node 7: AI Performance Analysis -->
+                    <div id="node-7" onclick="jumpToStep(7)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-bold">07</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-calculator text-cyan-400 text-xs"></i> AI Analysis
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Evaluasi CTR, CPC, CPM & Leads.</p>
+                    </div>
+
+                    <!-- Node 8: Optimization Recommendation -->
+                    <div id="node-8" onclick="jumpToStep(8)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 font-bold">08</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-lightbulb text-amber-400 text-xs"></i> Rekomendasi
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Scale up, ganti materi, atau kill.</p>
+                    </div>
+
+                    <!-- Node 9: Human Feedback -->
+                    <div id="node-9" onclick="jumpToStep(9)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-bold">09</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-comment-check text-emerald-400 text-xs"></i> Feedback
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Arahan atasan atas saran AI.</p>
+                    </div>
+
+                    <!-- Node 10: Knowledge Base -->
+                    <div id="node-10" onclick="jumpToStep(10)" class="cursor-pointer node-card p-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 font-bold">10</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-white flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-database text-purple-400 text-xs"></i> Memory KB
+                        </div>
+                        <p class="text-[9.5px] text-slate-400 leading-tight">Pola winning iklan disimpan.</p>
+                    </div>
+
+                    <!-- Node 11: Campaign Iteration (The Closed Loop) -->
+                    <div id="node-11" onclick="jumpToStep(11)" class="cursor-pointer node-card p-3 relative border-emerald-500/50 bg-emerald-950/20">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">11 Loop</span>
+                            <span class="w-2 h-2 rounded-full bg-slate-600 status-dot"></span>
+                        </div>
+                        <div class="text-xs font-bold text-emerald-300 flex items-center gap-1 mb-1">
+                            <i class="fa-solid fa-arrows-rotate text-emerald-400 animate-spin" style="animation-duration: 4s;"></i> Iterasi AI
+                        </div>
+                        <p class="text-[9.5px] text-slate-300 leading-tight">Kembali ke tahap perencana!</p>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="flex items-center gap-3 text-xs">
-                <span id="currentPhaseBadge" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-medium">
-                    Fase: Siap
-                </span>
-                <span id="stepCounter" class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold">
-                    Tahap: 0 / 11
-                </span>
+
+        </div>
+
+        <!-- Bottom Half: Clean Inspector Card (Fixed height, no layout jump) -->
+        <div class="bg-[#090e1a]/95 border-t border-slate-800/80 p-4 md:px-8 md:py-3.5 z-30 shrink-0">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span id="activeStepTag" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 uppercase">
+                            TAHAP 01 DARI 11
+                        </span>
+                        <h3 id="inspectorTitle" class="text-xs md:text-sm font-bold text-white">Input Data Awal</h3>
+                    </div>
+                    <p id="inspectorExplanation" class="text-xs text-slate-400 leading-relaxed max-w-3xl">
+                        Marketer memasukkan data produk sensor/hama, harga, deskripsi USP, foto/video kreatif, target pasar, serta plafon anggaran kampanye.
+                    </p>
+                </div>
+
+                <div class="w-full md:w-auto flex md:flex-col items-center md:items-end justify-between gap-1 text-[11px] font-mono text-slate-400 bg-[#060913] md:bg-transparent p-2 md:p-0 rounded-lg border md:border-0 border-slate-800">
+                    <span class="text-slate-500">Payload Status:</span>
+                    <span id="inspectorPayloadStatus" class="text-emerald-400 font-bold">READY_TO_STREAM</span>
+                </div>
             </div>
         </div>
 
-        <!-- THE 3 PHASES GRID (Clean, Clear, Structured) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    </div>
 
-            <!-- FASE 1: PERENCANAAN & ANALISIS AI -->
-            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                    <div class="flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center font-bold text-xs">1</span>
-                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Perencanaan & Riset</h2>
-                    </div>
-                    <span class="text-[10px] text-slate-500 font-mono">Tahap 01 - 03</span>
-                </div>
-
-                <!-- Step 1 -->
-                <div id="step-1" onclick="jumpToStep(1)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-database text-blue-400"></i> 1. Input Data Awal
-                        </span>
-                        <span class="text-[10px] font-mono text-slate-500">Human</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Input produk, harga, deskripsi, target market, foto/video, USP, budget & riwayat kampanye.
-                    </p>
-                </div>
-
-                <!-- Step 2 -->
-                <div id="step-2" onclick="jumpToStep(2)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-magnifying-glass-chart text-cyan-400"></i> 2. AI Product & Market Analysis
-                        </span>
-                        <span class="text-[10px] font-mono text-cyan-400">AI Engine</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        AI menganalisis produk, profil pelanggan, *pain point*, sudut pandang USP, dan konsep kampanye.
-                    </p>
-                </div>
-
-                <!-- Step 3 -->
-                <div id="step-3" onclick="jumpToStep(3)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> 3. AI Campaign Planner
-                        </span>
-                        <span class="text-[10px] font-mono text-purple-400">AI Planner</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        AI merumuskan objective, audience, ad set, copywriting naskah, CTA, dan konsep materi iklan kreatif.
-                    </p>
-                </div>
-            </div>
-
-            <!-- FASE 2: PERSETUJUAN & EKSEKUSI META ADS -->
-            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                    <div class="flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center font-bold text-xs">2</span>
-                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Eksekusi & Gate</h2>
-                    </div>
-                    <span class="text-[10px] text-slate-500 font-mono">Tahap 04 - 05</span>
-                </div>
-
-                <!-- Step 4 -->
-                <div id="step-4" onclick="jumpToStep(4)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> 4. Human Approval (WhatsApp)
-                        </span>
-                        <span class="text-[10px] font-mono text-amber-400 font-bold">Control Gate</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Draf dikirim ke atasan via WhatsApp. Atasan cukup klik <strong>Approve / Revise / Reject</strong> tanpa perlu membuka dashboard rumit.
-                    </p>
-                </div>
-
-                <!-- Step 5 -->
-                <div id="step-5" onclick="jumpToStep(5)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1.5">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-brands fa-meta text-blue-400"></i> 5. Campaign Execution
-                        </span>
-                        <span class="text-[10px] font-mono text-blue-400">Meta API</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Kampanye secara otomatis dijalankan dan dipublikasikan langsung melalui integrasi resmi API Meta Ads.
-                    </p>
-                </div>
-
-                <!-- Visual WhatsApp Mockup Card -->
-                <div class="mt-auto bg-[#070b12] border border-slate-800/80 rounded-xl p-3 text-[11px] text-slate-400">
-                    <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-[11px] mb-1">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Bot Notifier
-                    </div>
-                    <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] text-slate-300">
-                        "Halo Pak, naskah iklan baru siap tayang dengan skor 94/100. Balas: <strong>1 (Approve)</strong>, <strong>2 (Revisi)</strong>."
-                    </div>
-                </div>
-            </div>
-
-            <!-- FASE 3: CLOSED-LOOP MONITORING & ITERASI AI -->
-            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                    <div class="flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center font-bold text-xs">3</span>
-                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Monitoring & Siklus Belajar</h2>
-                    </div>
-                    <span class="text-[10px] text-slate-500 font-mono">Tahap 06 - 11</span>
-                </div>
-
-                <!-- Step 6 & 7 (Grouped cleanly) -->
-                <div id="step-6" onclick="jumpToStep(6)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line text-blue-400"></i> 6-7. Performance Monitoring & Analysis
-                        </span>
-                        <span class="text-[10px] font-mono text-cyan-400">KPI Meta</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Menarik data real-time: CTR, CPC, CPM, leads, dan konversi untuk dianalisis oleh AI.
-                    </p>
-                </div>
-
-                <!-- Step 8 -->
-                <div id="step-8" onclick="jumpToStep(8)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-lightbulb text-amber-400"></i> 8. Optimization Recommendation
-                        </span>
-                        <span class="text-[10px] font-mono text-amber-400">AI Decision</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        AI merekomendasikan: ganti kreatif, ubah audiens, revisi copy, atau naik/turunkan budget iklan.
-                    </p>
-                </div>
-
-                <!-- Step 9 & 10 -->
-                <div id="step-9" onclick="jumpToStep(9)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-xs font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-brain text-purple-400"></i> 9-10. Human Feedback & Knowledge Base
-                        </span>
-                        <span class="text-[10px] font-mono text-purple-400">Memory Loop</span>
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Feedback atasan disimpan ke basis pengetahuan agar AI semakin pintar mengenali iklan yang berhasil.
-                    </p>
-                </div>
-
-                <!-- Step 11: The Loop Back -->
-                <div id="step-11" onclick="jumpToStep(11)" class="cursor-pointer p-3.5 rounded-xl border-2 border-emerald-500/40 bg-emerald-950/20 step-card hover:border-emerald-400">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="text-xs font-bold text-emerald-300 flex items-center gap-2">
-                            <i class="fa-solid fa-arrows-rotate text-emerald-400 animate-spin" style="animation-duration: 4s;"></i> 11. Campaign Iteration (Siklus Berputar)
-                        </span>
-                        <span class="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">Closed-Loop</span>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Iklan diperbaiki atau di-*scale up* secara berkesinambungan. Siklus kembali otomatis ke perencanaan!
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Live Step Detail Inspector (Drawer Bottom/Card) -->
-        <div class="bg-[#0d1322] border border-slate-800 rounded-2xl p-5 shadow-xl">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-3 border-b border-slate-800 gap-3">
-                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
-                    <i class="fa-solid fa-circle-info text-blue-400"></i> Detail Teknis Tahap Aktif
-                </div>
-                <div id="inspectorTechTag" class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
-                    Sistem Standby
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Penjelasan Operasional:</span>
-                    <p id="inspectorExplanation" class="text-xs text-slate-300 leading-relaxed">
-                        Pilih tombol "Mulai Alur" di atas atau klik salah satu kartu tahap di atas untuk melihat detail operasional dan alur datanya.
-                    </p>
-                </div>
-                <div>
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Contoh Data / Output:</span>
-                    <div class="bg-[#090d16] border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 min-h-[75px] max-h-[140px] overflow-y-auto" id="inspectorOutput">
-// Menunggu interaksi alur...
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FLOATING LUXURY WATERMARK BADGE (Klik ke Portofolio) -->
+    <!-- FLOATING LUXURY WATERMARK (Portfolio Link) -->
     <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[94vw]">
         <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/95 hover:bg-slate-950 border border-blue-500/40 hover:border-cyan-400 backdrop-blur-2xl shadow-2xl shadow-blue-500/20 transition-all duration-300 hover:scale-105">
             <span class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
@@ -320,7 +375,7 @@
 
             <div class="flex flex-col text-left">
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-white group-hover:text-cyan-300 transition tracking-tight">
+                    <span class="text-xs font-extrabold text-white group-hover:text-cyan-300 transition tracking-tight">
                         Achmad Randy Al Mugni Fauzi
                     </span>
                     <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30">
@@ -334,10 +389,10 @@
         </a>
     </div>
 
-    <!-- JAVASCRIPT CONTROLLER & WEB AUDIO SYNTHESIZER -->
+    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & SOLID SVG ENGINE -->
     <script>
         // -------------------------------------------------------------
-        // Web Audio Synthesizer (Pure JS, Clean Subtle UI Sound FX)
+        // Web Audio Synthesizer (Clean Sound FX)
         // -------------------------------------------------------------
         let audioCtx = null;
         let soundEnabled = true;
@@ -366,32 +421,30 @@
                     osc.start(now);
                     osc.stop(now + 0.09);
                 } else if (type === 'approval') {
-                    // WhatsApp message / approve chime
                     [523.25, 659.25, 783.99].forEach((f, i) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
                         osc.type = 'sine';
                         osc.frequency.setValueAtTime(f, now + i * 0.05);
                         gain.gain.setValueAtTime(0.05, now + i * 0.05);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
                         osc.start(now + i * 0.05);
-                        osc.stop(now + 0.45);
+                        osc.stop(now + 0.4);
                     });
-                } else if (type === 'iteration') {
-                    // Cycle loop chime
+                } else if (type === 'loop') {
                     [440, 554, 659, 880].forEach((f, i) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
                         osc.type = 'sine';
                         osc.frequency.setValueAtTime(f, now + i * 0.06);
                         gain.gain.setValueAtTime(0.04, now + i * 0.06);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
                         osc.start(now + i * 0.06);
-                        osc.stop(now + 0.55);
+                        osc.stop(now + 0.5);
                     });
                 }
             } catch (e) {
@@ -405,159 +458,260 @@
             const icon = document.getElementById('soundIcon');
             if (soundEnabled) {
                 icon.className = "fa-solid fa-volume-high text-xs";
-                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition";
+                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition";
                 playCleanSound('click');
             } else {
                 icon.className = "fa-solid fa-volume-xmark text-xs";
-                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-500 rounded-lg text-xs transition";
+                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-500 rounded-lg text-xs transition";
             }
         }
 
         // -------------------------------------------------------------
         // 11 Workflow Steps Data Model
         // -------------------------------------------------------------
-        const workflowSteps = [
+        const stepsData = [
             {
                 step: 1,
-                phase: "Fase 1: Riset & Perencanaan",
+                wireId: "wire1_2",
                 title: "1. Input Data Produk & Kampanye",
-                techTag: "REST API / Frontend Input Form",
-                explanation: "Marketer memasukkan data dasar: detail produk sensor/hama, harga, deskripsi USP, foto/video kreatif, target audiens yang dituju, dan plafon anggaran iklan harian.",
-                output: '{\n  "produk": "Pendeteksi Gempa EW-300",\n  "usp": "Sensor presisi tinggi + alarm otomatis",\n  "budget_harian": 250000,\n  "target": "Manajemen Gedung, Pabrik, Industri"\n}',
-                sound: 'click'
+                desc: "Marketer memasukkan data produk sensor/hama, harga, deskripsi USP, foto/video kreatif, target pasar, serta plafon anggaran kampanye.",
+                status: "DATA_INPUT_COMPLETED",
+                sound: "click"
             },
             {
                 step: 2,
-                phase: "Fase 1: Riset & Perencanaan",
+                wireId: "wire2_3",
                 title: "2. AI Product & Market Analysis",
-                techTag: "G-Brain AI Engine (Grok / Gemini)",
-                explanation: "AI menganalisis profil psikografis pelanggan, titik masalah (pain points), sudut penawaran terbaik (angles), dan posisi kompetitif produk di pasar.",
-                output: '{\n  "pain_points": ["Kekhawatiran keselamatan aset saat gempa"],\n  "core_angle": "Ketenangan pikiran & kepatuhan regulasi keselamatan",\n  "target_persona": "Safety Officers & Facility Managers"\n}',
-                sound: 'click'
+                desc: "AI menganalisis fitur produk, customer persona, pain point di lapangan, dan sudut pandang USP untuk merumuskan konsep iklan yang kuat.",
+                status: "MARKET_ANALYSIS_PASSED",
+                sound: "click"
             },
             {
                 step: 3,
-                phase: "Fase 1: Riset & Perencanaan",
+                wireId: "wire3_4",
                 title: "3. AI Campaign Planner",
-                techTag: "Automated Copywriter & Creative Strategist",
-                explanation: "AI menyusun arsitektur kampanye: menentukan Objective iklan (Leads/Sales), Ad Set targeting, naskah copywriting (Primary Text, Headline), tombol CTA, dan konsep visual materi iklan.",
-                output: '{\n  "campaign_objective": "OUTCOME_LEADS",\n  "headline": "Amankan Gedung Anda dari Resiko Gempa dalam 3 Detik",\n  "cta": "Dapatkan Konsultasi Gratis",\n  "adset_interest": ["Industrial Safety", "Building Automation"]\n}',
-                sound: 'click'
+                desc: "AI merumuskan objective iklan (Leads), segmentasi audiens, struktur ad set, naskah copywriting, CTA, dan arahan visual materi iklan.",
+                status: "CAMPAIGN_PLAN_DRAFTED",
+                sound: "click"
             },
             {
                 step: 4,
-                phase: "Fase 2: Eksekusi & Gate",
-                title: "4. Human Approval (WhatsApp Bot Integration)",
-                techTag: "WhatsApp Cloud API / Webhook Decision Gate",
-                explanation: "Draf kampanye dikirim otomatis ke nomor WhatsApp atasan/manajemen. Atasan cukup membalas pesan WhatsApp dengan 'Approve', 'Revisi', atau 'Reject'.",
-                output: '{\n  "whatsapp_recipient": "+6281234567890 (Manajer)",\n  "status": "APPROVED",\n  "notes": "Lanjutkan, materi sudah sesuai standar perusahaan",\n  "gate_cleared": true\n}',
-                sound: 'approval'
+                wireId: "wire4_5",
+                title: "4. Human Approval (WhatsApp Bot)",
+                desc: "Draf kampanye dikirim langsung ke WhatsApp atasan. Cukup balas Approve / Revise / Reject tanpa repot membuka dashboard rumit.",
+                status: "WHATSAPP_APPROVAL_GRANTED",
+                sound: "approval"
             },
             {
                 step: 5,
-                phase: "Fase 2: Eksekusi & Gate",
-                title: "5. Campaign Execution (Meta Ads Publish)",
-                techTag: "Meta Graph API v19.0 Client",
-                explanation: "Setelah disetujui via WhatsApp, sistem otomatis membuat dan meluncurkan Ad Campaign, Ad Set, dan Ad Creative di Meta Ads Manager tanpa perlu login manual.",
-                output: '{\n  "meta_campaign_id": "1203300004928172",\n  "status": "ACTIVE / IN_REVIEW",\n  "adsets_created": 2,\n  "ads_published": 4,\n  "budget_assigned": "Rp 250.000 / day"\n}',
-                sound: 'click'
+                wireId: "wire5_6",
+                title: "5. Campaign Execution (Meta Ads API)",
+                desc: "Setelah disetujui, kampanye iklan diluncurkan secara otomatis ke Meta Ads Manager dan mulai ditayangkan ke target audiens.",
+                status: "META_ADS_LIVE_PUBLISHED",
+                sound: "click"
             },
             {
                 step: 6,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
+                wireId: "wire6_7",
                 title: "6. Performance Monitoring",
-                techTag: "Automated Cron / Meta Webhook Ingestion",
-                explanation: "Sistem memantau KPI secara berkala setiap 6-12 jam, membaca performa langsung dari Meta Ads Manager untuk melacak interaksi audiens.",
-                output: '{\n  "monitoring_window": "First 24 Hours",\n  "impressions": 8420,\n  "clicks": 312,\n  "leads_generated": 14\n}',
-                sound: 'click'
+                desc: "Sistem secara berkala mengambil data KPI kampanye yang sedang aktif berjalan di Meta Ads untuk dipantau secara real-time.",
+                status: "KPI_INGESTION_ACTIVE",
+                sound: "click"
             },
             {
                 step: 7,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
+                wireId: "wire7_8",
                 title: "7. AI Performance Analysis",
-                techTag: "Metric Evaluator & Threshold Checker",
-                explanation: "AI menghitung efisiensi iklan: CTR (Click-Through Rate), CPC (Cost Per Click), CPM, Biaya per Lead, dan rasio konversi untuk menentukan apakah iklan ini sehat atau boncos.",
-                output: '{\n  "ctr": "3.7% (Sangat Baik / High Intent)",\n  "cpc": "Rp 1.450 (Murah)",\n  "cost_per_lead": "Rp 17.800 (Di bawah batas maksimal Rp 30.000)",\n  "health_score": "92/100 (WINNING)"\n}',
-                sound: 'click'
+                desc: "AI menganalisis metrik efisiensi: CTR, CPC, CPM, leads, dan rasio konversi untuk mengukur kesehatan kampanye iklan.",
+                status: "METRIC_HEALTH_EVALUATED",
+                sound: "click"
             },
             {
                 step: 8,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
+                wireId: "wire8_9",
                 title: "8. Optimization Recommendation",
-                techTag: "Prescriptive AI Decision Engine",
-                explanation: "Berdasarkan metrik nyata, AI merumuskan saran konkret: (A) Tingkatkan budget jika performa bagus, (B) Ganti materi kreatif jika CTR turun, atau (C) Matikan ad set yang boncos.",
-                output: '{\n  "recommendation_type": "SCALE_UP",\n  "action": "Tingkatkan budget adset #1 sebesar 20%",\n  "secondary_action": "Buat variasi visual baru untuk audiens B"\n}',
-                sound: 'click'
+                desc: "AI memberikan rekomendasi tindakan: Scale Up budget jika iklan winning, refresh materi jika CTR turun, atau matikan ad set boncos.",
+                status: "AI_DECISION_RECOMMENDED",
+                sound: "click"
             },
             {
                 step: 9,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
+                wireId: "wire9_10",
                 title: "9. Human Feedback",
-                techTag: "User Review & Executive Confirmation",
-                explanation: "Atasan memberikan persetujuan atau arahan tambahan atas saran AI (misal: 'Setuju naikkan budget, tapi pertahankan target di pulau Jawa saja').",
-                output: '{\n  "executive_feedback": "Approved scaling, pertahankan fokus di area industri Jawa Barat",\n  "applied_timestamp": "2026-10-01T20:15:00Z"\n}',
-                sound: 'click'
+                desc: "Atasan memberikan feedback atau konfirmasi atas rekomendasi AI (misal: 'Setuju scale up 20% untuk target industri').",
+                status: "EXECUTIVE_FEEDBACK_LOGGED",
+                sound: "click"
             },
             {
                 step: 10,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
+                wireId: "wire10_11",
                 title: "10. Knowledge Base Integration",
-                techTag: "Vector Memory & RAG Fine-tuning",
-                explanation: "Hasil performa dan feedback atasan disimpan ke memori Knowledge Base. AI mencatat bahwa headline dan sudut penawaran ini terbukti berhasil (winning pattern).",
-                output: '{\n  "memory_logged": "Angle: Ketenangan pikiran & kepatuhan regulasi terbukti WINNING",\n  "knowledge_base_updated": true,\n  "ai_learning_status": "ENRICHED"\n}',
-                sound: 'click'
+                desc: "Hasil performa dan feedback atasan disimpan ke basis memori AI. AI semakin cerdas mengenali formula iklan yang menghasilkan penjualan.",
+                status: "KNOWLEDGE_MEMORY_UPDATED",
+                sound: "click"
             },
             {
                 step: 11,
-                phase: "Fase 3: Monitoring & Siklus Belajar",
-                title: "11. Campaign Iteration (Closed Loop)",
-                techTag: "Continuous Autonomous Loop",
-                explanation: "Kampanye disesuaikan, ditingkatkan, dan siklus kembali berputar ke Tahap 2 & 3 untuk menghasilkan variasi baru yang lebih tajam tanpa harus mulai dari nol lagi!",
-                output: '{\n  "loop_cycle": "Cycle #2 Initiated",\n  "continuous_mode": true,\n  "system_state": "SELF_OPTIMIZING_LOOP_ACTIVE"\n}',
-                sound: 'iteration'
+                wireId: "wire11_loop",
+                title: "11. Campaign Iteration (The Closed Loop)",
+                desc: "Kampanye diperbaiki atau di-scale up secara berkelanjutan. Alur sirkuit kembali memutar ke tahap perencanaan (Closed-Loop Autonomous)!",
+                status: "CLOSED_LOOP_ITERATION_ACTIVE",
+                sound: "loop"
             }
         ];
 
+        // -------------------------------------------------------------
+        // SVG Circuit Auto-Routing
+        // -------------------------------------------------------------
+        function updateWires() {
+            function getC(id) {
+                const el = document.getElementById(id);
+                if (!el) return { x: 0, y: 0, top: 0, bottom: 0, left: 0, right: 0 };
+                const rect = el.getBoundingClientRect();
+                const container = document.getElementById('canvasContainer').getBoundingClientRect();
+                return {
+                    x: rect.left - container.left + rect.width / 2,
+                    y: rect.top - container.top + rect.height / 2,
+                    top: rect.top - container.top,
+                    bottom: rect.bottom - container.top,
+                    left: rect.left - container.left,
+                    right: rect.right - container.left
+                };
+            }
+
+            const n = [];
+            for (let i = 1; i <= 11; i++) {
+                n[i] = getC(`node-${i}`);
+            }
+
+            const isMobile = window.innerWidth < 768;
+
+            if (!isMobile) {
+                // ROW 1: 1 -> 2 -> 3 -> 4 -> 5
+                document.getElementById('wire1_2').setAttribute('d', `M ${n[1].right} ${n[1].y} L ${n[2].left} ${n[2].y}`);
+                document.getElementById('wire2_3').setAttribute('d', `M ${n[2].right} ${n[2].y} L ${n[3].left} ${n[3].y}`);
+                document.getElementById('wire3_4').setAttribute('d', `M ${n[3].right} ${n[3].y} L ${n[4].left} ${n[4].y}`);
+                document.getElementById('wire4_5').setAttribute('d', `M ${n[4].right} ${n[4].y} L ${n[5].left} ${n[5].y}`);
+
+                // BRIDGE: Step 5 curves down to Step 6
+                document.getElementById('wire5_6').setAttribute('d', `M ${n[5].x} ${n[5].bottom} C ${n[5].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${(n[5].bottom + n[6].top)/2}, ${n[6].x} ${n[6].top}`);
+
+                // ROW 2: 6 -> 7 -> 8 -> 9 -> 10 -> 11
+                document.getElementById('wire6_7').setAttribute('d', `M ${n[6].right} ${n[6].y} L ${n[7].left} ${n[7].y}`);
+                document.getElementById('wire7_8').setAttribute('d', `M ${n[7].right} ${n[7].y} L ${n[8].left} ${n[8].y}`);
+                document.getElementById('wire8_9').setAttribute('d', `M ${n[8].right} ${n[8].y} L ${n[9].left} ${n[9].y}`);
+                document.getElementById('wire9_10').setAttribute('d', `M ${n[9].right} ${n[9].y} L ${n[10].left} ${n[10].y}`);
+                document.getElementById('wire10_11').setAttribute('d', `M ${n[10].right} ${n[10].y} L ${n[11].left} ${n[11].y}`);
+
+                // CLOSED LOOP WIRE: From Step 11 back to Step 3 (Campaign Planner)
+                document.getElementById('wire11_loop').setAttribute('d', 
+                    `M ${n[11].right} ${n[11].y} C ${n[11].right + 60} ${n[11].y}, ${n[5].right + 60} ${n[3].y - 30}, ${n[3].x} ${n[3].top}`
+                );
+            } else {
+                // Mobile basic connects
+                document.getElementById('wire1_2').setAttribute('d', `M ${n[1].right} ${n[1].y} L ${n[2].left} ${n[2].y}`);
+                document.getElementById('wire2_3').setAttribute('d', `M ${n[2].x} ${n[2].bottom} L ${n[3].x} ${n[3].top}`);
+                document.getElementById('wire3_4').setAttribute('d', `M ${n[3].right} ${n[3].y} L ${n[4].left} ${n[4].y}`);
+                document.getElementById('wire4_5').setAttribute('d', `M ${n[4].x} ${n[4].bottom} L ${n[5].x} ${n[5].top}`);
+                document.getElementById('wire5_6').setAttribute('d', "");
+                document.getElementById('wire6_7').setAttribute('d', "");
+                document.getElementById('wire7_8').setAttribute('d', "");
+                document.getElementById('wire8_9').setAttribute('d', "");
+                document.getElementById('wire9_10').setAttribute('d', "");
+                document.getElementById('wire10_11').setAttribute('d', "");
+                document.getElementById('wire11_loop').setAttribute('d', "");
+            }
+        }
+
+        window.addEventListener('resize', updateWires);
+        window.addEventListener('DOMContentLoaded', () => setTimeout(updateWires, 120));
+
+        // -------------------------------------------------------------
+        // Step Runner & State Machine
+        // -------------------------------------------------------------
         let currentStep = 0;
         let isPlaying = false;
         let playInterval = null;
 
         function setStep(idx) {
             currentStep = idx;
-            const data = workflowSteps[idx - 1];
+            const data = stepsData[idx - 1];
 
-            // Reset all cards
+            // Reset nodes
             for (let i = 1; i <= 11; i++) {
-                const el = document.getElementById(`step-${i}`);
+                const el = document.getElementById(`node-${i}`);
                 if (el) {
-                    el.classList.remove('step-active');
-                    if (i < idx) {
-                        el.classList.add('step-passed');
-                    } else {
-                        el.classList.remove('step-passed');
-                    }
+                    el.classList.remove('node-active', 'node-loop-active');
+                    if (i < idx) el.classList.add('node-passed');
+                    else el.classList.remove('node-passed');
+                    el.querySelector('.status-dot').className = "w-2 h-2 rounded-full bg-slate-600 status-dot";
                 }
             }
 
-            // Highlight active card
-            const activeCard = document.getElementById(`step-${idx}`);
-            if (activeCard) {
-                activeCard.classList.add('step-active');
-                activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Reset wires
+            document.querySelectorAll('.wire-base').forEach(w => {
+                w.className.baseVal = "wire-base";
+            });
+
+            // Highlight active node
+            const activeNode = document.getElementById(`node-${idx}`);
+            if (activeNode) {
+                if (idx === 11) {
+                    activeNode.classList.add('node-loop-active');
+                    activeNode.querySelector('.status-dot').className = "w-2 h-2 rounded-full bg-emerald-400 animate-ping status-dot";
+                } else {
+                    activeNode.classList.add('node-active');
+                    activeNode.querySelector('.status-dot').className = "w-2 h-2 rounded-full bg-cyan-400 animate-ping status-dot";
+                }
             }
 
-            // Update Header & Live Status
-            document.getElementById('statusTitle').innerText = data.title;
-            document.getElementById('currentPhaseBadge').innerText = data.phase;
-            document.getElementById('stepCounter').innerText = `Tahap: ${data.step} / 11`;
+            // Highlight active wire
+            if (data.wireId) {
+                const w = document.getElementById(data.wireId);
+                if (w) {
+                    w.className.baseVal = idx === 11 ? "wire-base wire-loop" : "wire-base wire-active";
+                    animatePhoton(w, idx === 11 ? '#10b981' : '#38bdf8');
+                }
+            }
 
-            // Update Inspector Details
-            document.getElementById('inspectorTechTag').innerText = data.techTag;
-            document.getElementById('inspectorExplanation').innerText = data.explanation;
-            document.getElementById('inspectorOutput').innerText = data.output;
+            // Update Inspector Info
+            document.getElementById('activeStepTag').innerText = `TAHAP ${data.step.toString().padStart(2, '0')} DARI 11`;
+            document.getElementById('inspectorTitle').innerText = data.title;
+            document.getElementById('inspectorExplanation').innerText = data.desc;
+            document.getElementById('inspectorPayloadStatus').innerText = data.status;
+            document.getElementById('headerStatus').innerText = data.status;
 
             // Audio FX
             if (data.sound) playCleanSound(data.sound);
+        }
+
+        function animatePhoton(wire, color) {
+            const dot = document.getElementById('packetDot');
+            dot.setAttribute('fill', color);
+            dot.classList.remove('opacity-0');
+
+            const length = wire.getTotalLength();
+            if (length === 0) return;
+
+            let start = null;
+            const duration = 900;
+
+            function stepAnim(timestamp) {
+                if (!start) start = timestamp;
+                const progress = (timestamp - start) / duration;
+
+                if (progress < 1) {
+                    const point = wire.getPointAtLength(progress * length);
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    requestAnimationFrame(stepAnim);
+                } else {
+                    const endPoint = wire.getPointAtLength(length);
+                    dot.setAttribute('cx', endPoint.x);
+                    dot.setAttribute('cy', endPoint.y);
+                }
+            }
+            requestAnimationFrame(stepAnim);
         }
 
         function nextStep() {
@@ -584,12 +738,12 @@
                 isPlaying = false;
                 icon.className = "fa-solid fa-play text-[10px]";
                 text.innerText = "Lanjut Putar";
-                btn.className = "px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition";
+                btn.className = "px-3.5 md:px-4 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold flex items-center gap-2 transition";
             } else {
                 isPlaying = true;
                 icon.className = "fa-solid fa-pause text-[10px]";
                 text.innerText = "Jeda";
-                btn.className = "px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition";
+                btn.className = "px-3.5 md:px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold flex items-center gap-2 transition";
 
                 if (currentStep === 0 || currentStep >= 11) currentStep = 1;
                 setStep(currentStep);
@@ -598,7 +752,7 @@
                     currentStep++;
                     if (currentStep > 11) currentStep = 1;
                     setStep(currentStep);
-                }, 3000);
+                }, 2800);
             }
         }
 
@@ -606,15 +760,19 @@
             if (isPlaying) togglePlay();
             currentStep = 0;
             for (let i = 1; i <= 11; i++) {
-                const el = document.getElementById(`step-${i}`);
-                if (el) el.classList.remove('step-active', 'step-passed');
+                const el = document.getElementById(`node-${i}`);
+                if (el) {
+                    el.classList.remove('node-active', 'node-passed', 'node-loop-active');
+                    el.querySelector('.status-dot').className = "w-2 h-2 rounded-full bg-slate-600 status-dot";
+                }
             }
-            document.getElementById('statusTitle').innerText = 'Standby (Klik "Mulai Alur" atau pilih salah satu tahap)';
-            document.getElementById('currentPhaseBadge').innerText = 'Fase: Siap';
-            document.getElementById('stepCounter').innerText = 'Tahap: 0 / 11';
-            document.getElementById('inspectorTechTag').innerText = 'Sistem Standby';
-            document.getElementById('inspectorExplanation').innerText = 'Pilih tombol "Mulai Alur" di atas atau klik salah satu kartu tahap di atas untuk melihat detail operasional dan alur datanya.';
-            document.getElementById('inspectorOutput').innerText = '// Menunggu interaksi alur...';
+            document.querySelectorAll('.wire-base').forEach(w => w.className.baseVal = "wire-base");
+            document.getElementById('packetDot').classList.add('opacity-0');
+            document.getElementById('activeStepTag').innerText = "TAHAP 00 DARI 11";
+            document.getElementById('inspectorTitle').innerText = "Standby";
+            document.getElementById('inspectorExplanation').innerText = "Klik tombol 'Mulai Alur' atau klik salah satu kotak tahap di atas untuk menjalankan sirkuit alur kerja 11 tahap.";
+            document.getElementById('inspectorPayloadStatus').innerText = "READY_TO_STREAM";
+            document.getElementById('headerStatus').innerText = "READY_TO_STREAM";
         }
     </script>
 </body>
