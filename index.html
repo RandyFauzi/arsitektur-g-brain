@@ -3,117 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualisasi Arsitektur G-Brain AI - Interactive Circuit</title>
+    <title>AI Employee - Automated Meta Ads Optimization Architecture</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Dark cyber tech grid background */
-        .cyber-grid {
-            background-size: 32px 32px;
-            background-image: 
-                linear-gradient(to right, rgba(30, 41, 59, 0.45) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(30, 41, 59, 0.45) 1px, transparent 1px);
+        /* Clean minimalist canvas grid */
+        .dot-grid {
+            background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
-        /* Animated SVG flow lines */
-        .wire-path {
-            stroke: #1e293b;
-            stroke-width: 2.5;
-            fill: none;
-            stroke-linecap: round;
-            transition: stroke 0.3s ease, opacity 0.3s ease;
+        /* Clean modern transitions */
+        .step-card {
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .wire-active {
-            stroke: #38bdf8;
-            stroke-dasharray: 6, 6;
-            animation: flowMove 0.8s linear infinite;
-            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.9));
+        .step-active {
+            border-color: #3b82f6 !important;
+            background-color: rgba(30, 58, 138, 0.25) !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            transform: scale(1.02);
         }
 
-        .wire-return {
-            stroke: #a855f7;
-            stroke-dasharray: 6, 6;
-            animation: flowMove 0.8s linear infinite;
-            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.9));
+        .step-passed {
+            border-color: rgba(59, 130, 246, 0.4);
+            opacity: 0.9;
         }
 
-        .wire-success {
-            stroke: #10b981;
-            stroke-dasharray: 6, 6;
-            animation: flowMove 0.7s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.9));
-        }
-
-        .wire-reject {
-            stroke: #f43f5e;
-            stroke-dasharray: 6, 6;
-            animation: flowMove 0.7s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.9));
-        }
-
-        @keyframes flowMove {
-            to { stroke-dashoffset: -12; }
-        }
-
-        /* High-tech luxury node effects */
-        .node-box {
-            backdrop-filter: blur(14px);
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .node-active {
-            border-color: #38bdf8 !important;
-            box-shadow: 0 0 30px -5px rgba(56, 189, 248, 0.6), inset 0 0 15px rgba(56, 189, 248, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .node-kb-active {
-            border-color: #c084fc !important;
-            box-shadow: 0 0 30px -5px rgba(192, 132, 252, 0.6), inset 0 0 15px rgba(192, 132, 252, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .node-success {
-            border-color: #34d399 !important;
-            box-shadow: 0 0 30px -5px rgba(52, 211, 153, 0.6), inset 0 0 15px rgba(52, 211, 153, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .node-reject {
-            border-color: #fb7185 !important;
-            box-shadow: 0 0 30px -5px rgba(251, 113, 133, 0.6), inset 0 0 15px rgba(251, 113, 133, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Sound equalizer animation */
-        .sound-wave {
-            display: inline-flex;
-            gap: 2px;
-            align-items: center;
-            height: 12px;
-        }
-        .sound-bar {
-            width: 2px;
-            background-color: #38bdf8;
-            border-radius: 1px;
-            animation: equalize 0.8s ease-in-out infinite alternate;
-        }
-        .sound-bar:nth-child(2) { animation-delay: 0.2s; height: 10px; }
-        .sound-bar:nth-child(3) { animation-delay: 0.4s; height: 6px; }
-        @keyframes equalize {
-            0% { height: 3px; }
-            100% { height: 12px; }
-        }
-
-        /* Luxurious Watermark Shimmer */
+        /* Shimmer effect for portfolio watermark */
         @keyframes shimmerGlow {
             0% { transform: translateX(-150%) rotate(45deg); }
             100% { transform: translateX(250%) rotate(45deg); }
@@ -122,364 +46,284 @@
             animation: shimmerGlow 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
-        /* Custom Scrollbar for Inspector */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0b1120;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
+        /* Custom minimal scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
 </head>
-<body class="bg-[#050814] text-slate-100 min-h-screen lg:h-screen lg:overflow-hidden flex flex-col select-none relative">
+<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col select-none relative pb-20">
 
-    <!-- Ambient Canvas Background -->
-    <canvas id="ambientCanvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></canvas>
-
-    <!-- Top Luxury Command Bar (Fixed Height 60px) -->
-    <header class="h-[60px] bg-slate-900/90 border-b border-slate-800/80 px-4 md:px-6 flex items-center justify-between gap-3 z-40 backdrop-blur-xl shrink-0">
-        <!-- Logo & Title -->
+    <!-- Top Minimalist Clean Header -->
+    <header class="bg-[#0d1322]/90 border-b border-slate-800/80 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40 backdrop-blur-md">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 text-white font-extrabold text-sm border border-cyan-400/30">
-                <i class="fa-solid fa-microchip-ai text-white text-xs md:text-sm"></i>
+            <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                AI
             </div>
             <div>
-                <h1 class="text-xs md:text-sm font-extrabold text-white flex items-center gap-2 tracking-tight">
-                    G-Brain Autonomous Circuit
-                    <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
-                        v2.6 Stable
-                    </span>
+                <h1 class="text-sm font-bold text-white flex items-center gap-2">
+                    AI Employee: Meta Ads Optimization Workflow
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Closed-Loop System</span>
                 </h1>
-                <p class="text-[10px] text-slate-400">Sirkuit AI Terintegrasi & Gerbang Persetujuan</p>
+                <p class="text-xs text-slate-400">Arsitektur Otomasi Iklan & Pemantauan Performa Mandiri (11 Tahap)</p>
             </div>
         </div>
 
-        <!-- Central Controller Buttons -->
-        <div class="flex items-center gap-1.5 md:gap-2 bg-slate-950/90 border border-slate-800/90 p-1 md:p-1.5 rounded-2xl shadow-inner">
-            <!-- Play/Pause -->
-            <button id="btnPlay" onclick="togglePlay()" class="px-3 md:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-md shadow-blue-500/20 active:scale-95 whitespace-nowrap">
+        <!-- Controls -->
+        <div class="flex items-center gap-2 bg-[#090d16] border border-slate-800 p-1.5 rounded-xl shadow-inner">
+            <button id="btnPlay" onclick="togglePlay()" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition active:scale-95 shadow-sm">
                 <i id="playIcon" class="fa-solid fa-play text-[10px]"></i> <span id="playText">Mulai Alur</span>
             </button>
-            <button onclick="nextStep()" class="px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95 whitespace-nowrap">
-                <i class="fa-solid fa-forward-step text-[10px]"></i> <span class="hidden sm:inline">Langkah Berikut</span>
+            <button onclick="nextStep()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+                <i class="fa-solid fa-forward-step text-[10px]"></i> Langkah Berikut
             </button>
-            <button onclick="resetFlow()" class="px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition active:scale-95">
+            <button onclick="resetFlow()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition active:scale-95" title="Reset">
                 <i class="fa-solid fa-rotate-right text-[10px]"></i>
             </button>
 
-            <div class="h-4 w-px bg-slate-800 mx-0.5"></div>
+            <div class="h-4 w-px bg-slate-800 mx-1"></div>
 
-            <!-- Sound FX Toggle Button -->
-            <button id="btnSound" onclick="toggleSound()" class="px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition" title="Aktifkan / Bisukan Suara AI">
+            <!-- Sound Toggle -->
+            <button id="btnSound" onclick="toggleSound()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition" title="Efek Suara">
                 <i id="soundIcon" class="fa-solid fa-volume-high text-xs"></i>
-                <span class="sound-wave hidden sm:inline-flex" id="soundWave">
-                    <span class="sound-bar"></span>
-                    <span class="sound-bar"></span>
-                    <span class="sound-bar"></span>
-                </span>
             </button>
-
-            <div class="h-4 w-px bg-slate-800 mx-0.5"></div>
-
-            <!-- Scenario Selector -->
-            <div class="flex items-center gap-1.5 text-xs px-1 md:px-2">
-                <label class="flex items-center gap-1 cursor-pointer text-slate-300 text-[10px] md:text-[11px] hover:text-white">
-                    <input type="radio" name="scenario" value="approve" checked onchange="changeScenario('approve')" class="accent-emerald-500">
-                    <span class="text-emerald-400 font-bold">Approve</span>
-                </label>
-                <label class="flex items-center gap-1 cursor-pointer text-slate-300 text-[10px] md:text-[11px] hover:text-white ml-1">
-                    <input type="radio" name="scenario" value="reject" onchange="changeScenario('reject')" class="accent-rose-500">
-                    <span class="text-rose-400 font-bold">Reject</span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Telemetry Status Indicator -->
-        <div class="text-xs text-slate-400 hidden xl:flex items-center gap-2 font-mono">
-            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-            SYS_STATUS: <strong class="text-cyan-300 font-bold" id="globalState">READY_TO_STREAM</strong>
         </div>
     </header>
 
-    <!-- Main Workspace (Desktop: Fixed Screen Height, Mobile: Natural Scroll) -->
-    <div class="flex-1 flex flex-col lg:flex-row relative z-10 cyber-grid overflow-hidden">
+    <!-- Main Content Container: 3 Phases Visual Board -->
+    <main class="flex-1 max-w-7xl mx-auto w-full p-4 md:p-8 dot-grid flex flex-col gap-8">
         
-        <!-- Left: Interactive Circuit Board -->
-        <div id="canvasContainer" class="flex-1 relative p-4 md:p-8 flex items-center justify-center overflow-hidden min-h-[560px]">
-            
-            <!-- SVG Circuit Wires Layer -->
-            <svg id="svgWire" class="absolute inset-0 w-full h-full pointer-events-none z-10">
-                <defs>
-                    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3.5" result="blur" />
-                        <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                </defs>
+        <!-- Live Status Bar -->
+        <div class="bg-[#0d1322] border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></div>
+                <div>
+                    <div class="text-xs text-slate-400 font-medium">Status Alur Berjalan:</div>
+                    <div id="statusTitle" class="text-sm font-bold text-white">Standby (Klik "Mulai Alur" atau pilih salah satu tahap)</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 text-xs">
+                <span id="currentPhaseBadge" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-medium">
+                    Fase: Siap
+                </span>
+                <span id="stepCounter" class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono font-bold">
+                    Tahap: 0 / 11
+                </span>
+            </div>
+        </div>
 
-                <!-- Wire 1: Marketer -> G-Brain -->
-                <path id="wire1" class="wire-path" d="" />
-                
-                <!-- Wire 2A: G-Brain -> KB (Query RAG) -->
-                <path id="wire2a" class="wire-path" d="" />
-                <!-- Wire 2B: KB -> G-Brain (Return Data Loop) -->
-                <path id="wire2b" class="wire-path" d="" />
+        <!-- THE 3 PHASES GRID (Clean, Clear, Structured) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                <!-- Wire 3: G-Brain -> Approval Gate -->
-                <path id="wire3" class="wire-path" d="" />
-
-                <!-- Wire 4a: Approval -> Meta Ads (Approve) -->
-                <path id="wire4a" class="wire-path" d="" />
-                <!-- Wire 4b: Approval -> Website (Approve) -->
-                <path id="wire4b" class="wire-path" d="" />
-
-                <!-- Wire Reject: Approval -> Marketer (Feedback Loop) -->
-                <path id="wireReject" class="wire-path opacity-0" d="" />
-
-                <!-- Moving Data Photon -->
-                <circle id="packetDot1" cx="-50" cy="-50" r="6.5" fill="#38bdf8" class="data-packet opacity-0" filter="url(#glow-cyan)" />
-                <circle id="packetDot2" cx="-50" cy="-50" r="4" fill="#ffffff" class="data-packet opacity-0" />
-            </svg>
-
-            <!-- ARCHITECTURE NODES GRID (Perfect 3-Column Symmetrical Layout) -->
-            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-y-12 md:gap-y-14 gap-x-10 md:gap-x-12 relative z-20">
-
-                <!-- ROW 1, COL 1: MARKETER INPUT -->
-                <div id="node-marketer" onclick="selectNode('marketer')" class="md:col-start-1 md:row-start-1 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
-                            Node 01: Client
-                        </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+            <!-- FASE 1: PERENCANAAN & ANALISIS AI -->
+            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center font-bold text-xs">1</span>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Perencanaan & Riset</h2>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-base shadow-inner">
-                            <i class="fa-solid fa-pen-nib"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-cyan-400 transition">Marketer Input</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">Naskah Iklan & Artikel</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-[10px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-slate-500 font-mono">Payload REST</span>
-                        <span class="text-cyan-400 font-mono">{ text, budget }</span>
-                    </div>
+                    <span class="text-[10px] text-slate-500 font-mono">Tahap 01 - 03</span>
                 </div>
 
-                <!-- ROW 1, COL 2: G-BRAIN AI CORE -->
-                <div id="node-gbrain" onclick="selectNode('gbrain')" class="md:col-start-2 md:row-start-1 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold uppercase">
-                            Core Middleware
+                <!-- Step 1 -->
+                <div id="step-1" onclick="jumpToStep(1)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-database text-blue-400"></i> 1. Input Data Awal
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                        <span class="text-[10px] font-mono text-slate-500">Human</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-600/20 text-cyan-300 border border-cyan-400/40 flex items-center justify-center text-base shadow-lg shadow-cyan-500/20">
-                            <i class="fa-solid fa-brain animate-pulse"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-cyan-300 transition">G-Brain Engine</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">Evaluator & Scoring AI</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-[10px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-slate-500">LLM Provider</span>
-                        <span class="text-cyan-400 font-mono font-bold">Grok / Gemini Flash</span>
-                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Input produk, harga, deskripsi, target market, foto/video, USP, budget & riwayat kampanye.
+                    </p>
                 </div>
 
-                <!-- ROW 1, COL 3: KNOWLEDGE BASE -->
-                <div id="node-kb" onclick="selectNode('kb')" class="md:col-start-3 md:row-start-1 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 font-bold uppercase">
-                            Database RAG
+                <!-- Step 2 -->
+                <div id="step-2" onclick="jumpToStep(2)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass-chart text-cyan-400"></i> 2. AI Product & Market Analysis
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                        <span class="text-[10px] font-mono text-cyan-400">AI Engine</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-400/40 flex items-center justify-center text-base shadow-lg shadow-purple-500/20">
-                            <i class="fa-solid fa-database"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-purple-300 transition">Knowledge Base</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">sensorgempa & pancaprima</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-[10px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-slate-500">Loop Validasi</span>
-                        <span class="text-purple-400 font-mono font-bold">2-Way Verified</span>
-                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        AI menganalisis produk, profil pelanggan, *pain point*, sudut pandang USP, dan konsep kampanye.
+                    </p>
                 </div>
 
-                <!-- ROW 2, COL 2: APPROVAL GATE (Centered directly below G-Brain) -->
-                <div id="node-approval" onclick="selectNode('approval')" class="md:col-start-2 md:row-start-2 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold uppercase">
-                            Decision Gate
+                <!-- Step 3 -->
+                <div id="step-3" onclick="jumpToStep(3)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> 3. AI Campaign Planner
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                        <span class="text-[10px] font-mono text-purple-400">AI Planner</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-600/20 text-amber-300 border border-amber-400/40 flex items-center justify-center text-base shadow-lg shadow-amber-500/20">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-amber-300 transition">Approval Gate</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">Review Atasan (Manajemen)</p>
-                        </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        AI merumuskan objective, audience, ad set, copywriting naskah, CTA, konsep kreatif & landing page.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FASE 2: PERSETUJUAN & EKSEKUSI META ADS -->
+            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center font-bold text-xs">2</span>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Eksekusi & Gate</h2>
                     </div>
-                    <div class="mt-3 flex gap-2">
-                        <span class="flex-1 text-center py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[9px] md:text-[10px] text-emerald-400 font-extrabold tracking-wide">
-                            <i class="fa-solid fa-check mr-1"></i> APPROVE
-                        </span>
-                        <span class="flex-1 text-center py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-[9px] md:text-[10px] text-rose-400 font-extrabold tracking-wide">
-                            <i class="fa-solid fa-xmark mr-1"></i> REJECT
-                        </span>
-                    </div>
+                    <span class="text-[10px] text-slate-500 font-mono">Tahap 04 - 05</span>
                 </div>
 
-                <!-- ROW 3, COL 1: META ADS INTEGRATION -->
-                <div id="node-meta" onclick="selectNode('meta')" class="md:col-start-1 md:row-start-3 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-bold uppercase">
-                            Ad Network API
+                <!-- Step 4 -->
+                <div id="step-4" onclick="jumpToStep(4)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> 4. Human Approval (WhatsApp)
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                        <span class="text-[10px] font-mono text-amber-400 font-bold">Control Gate</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-300 border border-blue-400/40 flex items-center justify-center text-base shadow-lg shadow-blue-500/20">
-                            <i class="fa-brands fa-meta"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-blue-300 transition">Meta Ads API</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">Draf Iklan IG & FB</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-[10px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-slate-500">Output</span>
-                        <span class="text-emerald-400 font-mono font-bold">Campaign Draft OK</span>
-                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Draf dikirim ke atasan via WhatsApp. Atasan cukup klik <strong>Approve / Revise / Reject</strong> tanpa perlu membuka dashboard rumit.
+                    </p>
                 </div>
 
-                <!-- ROW 3, COL 3: WEBSITE PUBLISHER -->
-                <div id="node-web" onclick="selectNode('web')" class="md:col-start-3 md:row-start-3 cursor-pointer bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-4 node-box relative group hover:border-slate-600 shadow-2xl">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold uppercase">
-                            CMS Publisher
+                <!-- Step 5 -->
+                <div id="step-5" onclick="jumpToStep(5)" class="cursor-pointer p-4 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-brands fa-meta text-blue-400"></i> 5. Campaign Execution
                         </span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator"></span>
+                        <span class="text-[10px] font-mono text-blue-400">Meta API</span>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-400/40 flex items-center justify-center text-base shadow-lg shadow-emerald-500/20">
-                            <i class="fa-solid fa-globe"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xs md:text-sm font-extrabold text-white group-hover:text-emerald-300 transition">Web CMS API</h3>
-                            <p class="text-[10px] md:text-[11px] text-slate-400">sensorgempa / pancaprima</p>
-                        </div>
-                    </div>
-                    <div class="mt-3 text-[10px] text-slate-400 bg-slate-950/80 p-2 rounded-xl border border-slate-800/80 flex items-center justify-between">
-                        <span class="text-slate-500">Status</span>
-                        <span class="text-emerald-400 font-mono font-bold">Article Published</span>
-                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Kampanye secara otomatis dijalankan dan dipublikasikan langsung melalui integrasi resmi API Meta Ads.
+                    </p>
                 </div>
 
+                <!-- Visual WhatsApp Mockup Card -->
+                <div class="mt-auto bg-[#070b12] border border-slate-800/80 rounded-xl p-3 text-[11px] text-slate-400">
+                    <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-[11px] mb-1">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Bot Notifier
+                    </div>
+                    <div class="bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] text-slate-300">
+                        "Halo Pak, naskah iklan baru siap tayang dengan skor 94/100. Balas: <strong>1 (Approve)</strong>, <strong>2 (Revisi)</strong>."
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 3: CLOSED-LOOP MONITORING & ITERASI AI -->
+            <div class="bg-[#0d1322]/80 border border-slate-800 rounded-2xl p-5 flex flex-col gap-4">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center font-bold text-xs">3</span>
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-200">Fase Monitoring & Siklus Belajar</h2>
+                    </div>
+                    <span class="text-[10px] text-slate-500 font-mono">Tahap 06 - 11</span>
+                </div>
+
+                <!-- Step 6 & 7 (Grouped cleanly) -->
+                <div id="step-6" onclick="jumpToStep(6)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-blue-400"></i> 6-7. Performance Monitoring & Analysis
+                        </span>
+                        <span class="text-[10px] font-mono text-cyan-400">KPI Meta</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Menarik data real-time: CTR, CPC, CPM, leads, dan konversi untuk dianalisis oleh AI.
+                    </p>
+                </div>
+
+                <!-- Step 8 -->
+                <div id="step-8" onclick="jumpToStep(8)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-400"></i> 8. Optimization Recommendation
+                        </span>
+                        <span class="text-[10px] font-mono text-amber-400">AI Decision</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        AI merekomendasikan: ganti kreatif, ubah audiens, revisi copy, atau naik/turunkan budget iklan.
+                    </p>
+                </div>
+
+                <!-- Step 9 & 10 -->
+                <div id="step-9" onclick="jumpToStep(9)" class="cursor-pointer p-3.5 rounded-xl border border-slate-800 bg-[#090d16] step-card hover:border-slate-700">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-purple-400"></i> 9-10. Human Feedback & Knowledge Base
+                        </span>
+                        <span class="text-[10px] font-mono text-purple-400">Memory Loop</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Feedback atasan disimpan ke basis pengetahuan agar AI semakin pintar mengenali iklan yang berhasil.
+                    </p>
+                </div>
+
+                <!-- Step 11: The Loop Back -->
+                <div id="step-11" onclick="jumpToStep(11)" class="cursor-pointer p-3.5 rounded-xl border-2 border-emerald-500/40 bg-emerald-950/20 step-card hover:border-emerald-400">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold text-emerald-300 flex items-center gap-2">
+                            <i class="fa-solid fa-arrows-rotate text-emerald-400 animate-spin" style="animation-duration: 4s;"></i> 11. Campaign Iteration (Siklus Berputar)
+                        </span>
+                        <span class="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-bold">Closed-Loop</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Iklan diperbaiki atau di-*scale up* secara berkesinambungan. Siklus kembali otomatis ke perencanaan!
+                    </p>
+                </div>
             </div>
 
         </div>
 
-        <!-- Right: Realtime Event Inspector & Technical Drawer (Clean Fixed Layout) -->
-        <aside class="w-full lg:w-[400px] bg-slate-900/95 border-t lg:border-t-0 lg:border-l border-slate-800/90 p-5 flex flex-col justify-between backdrop-blur-xl shrink-0 overflow-y-auto">
-            <div>
-                <!-- Header Inspector -->
-                <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-                    <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-200">
-                        <i class="fa-solid fa-wave-pulse text-cyan-400"></i> Live Telemetry & Inspector
-                    </div>
-                    <span id="stepCounter" class="text-[10px] font-mono bg-cyan-500/10 text-cyan-400 px-2.5 py-0.5 rounded-full border border-cyan-500/30 font-bold">
-                        TAHAP: STANDBY
-                    </span>
+        <!-- Live Step Detail Inspector (Drawer Bottom/Card) -->
+        <div class="bg-[#0d1322] border border-slate-800 rounded-2xl p-5 shadow-xl">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-3 border-b border-slate-800 gap-3">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
+                    <i class="fa-solid fa-circle-info text-blue-400"></i> Detail Teknis Tahap Aktif
                 </div>
-
-                <!-- Explanation Box for Laypeople -->
-                <div class="mb-4">
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5 flex items-center justify-between">
-                        <span>Penjelasan Alur (Bahasa Awam)</span>
-                        <i class="fa-solid fa-circle-question text-slate-600"></i>
-                    </label>
-                    <div id="inspectorDesc" class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-3.5 text-xs text-slate-200 leading-relaxed min-h-[90px] shadow-inner">
-                        Sistem sedang dalam status diam <em>(Standby)</em>. Klik tombol <strong>"Mulai Alur"</strong> untuk menjalankan aliran sirkuit AI dan mendengar efek audionya.
-                    </div>
+                <div id="inspectorTechTag" class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+                    Sistem Standby
                 </div>
+            </div>
 
-                <!-- Live Technical Packet Details (No Horizontal Overflow) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
-                    <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5 flex items-center justify-between">
-                        <span>Payload Data JSON & Log API</span>
-                        <span class="text-[10px] font-mono text-cyan-400">TLS 1.3 / Encrypted</span>
-                    </label>
-                    <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-3 font-mono text-[11px] text-slate-300 min-h-[140px] shadow-inner overflow-hidden" id="inspectorPayload">
-<pre class="text-slate-500 whitespace-pre-wrap break-words leading-tight">// Menunggu transmisi data...
-{
-  "system_mode": "simulation",
-  "audio_fx": "Synthesizer_Active",
-  "status": "ready"
-}</pre>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Penjelasan Operasional:</span>
+                    <p id="inspectorExplanation" class="text-xs text-slate-300 leading-relaxed">
+                        Pilih tombol "Mulai Alur" di atas atau klik salah satu kartu tahap di atas untuk melihat detail operasional dan alur datanya.
+                    </p>
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Contoh Data / Output:</span>
+                    <div class="bg-[#090d16] border border-slate-800 rounded-xl p-3 font-mono text-[11px] text-emerald-400 min-h-[75px] max-h-[140px] overflow-y-auto" id="inspectorOutput">
+// Menunggu interaksi alur...
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Bottom Interactive Guide -->
-            <div class="mt-4 pt-3 border-t border-slate-800/80 text-[10px] text-slate-400 space-y-1.5">
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                    <span><strong>Query RAG:</strong> G-Brain meminta verifikasi data ke Knowledge Base.</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-purple-400 shrink-0"></span>
-                    <span><strong>Data Return:</strong> Knowledge Base mengembalikan data valid ke G-Brain.</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
-                    <span><strong>Approval Gate:</strong> Eksekusi API Meta Ads & Web jika Approve.</span>
-                </div>
-            </div>
-        </aside>
-
-    </div>
+    </main>
 
     <!-- FLOATING LUXURY WATERMARK BADGE (Klik ke Portofolio) -->
     <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[94vw]">
-        <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/95 hover:bg-slate-950 border border-cyan-500/40 hover:border-cyan-400 backdrop-blur-2xl shadow-2xl shadow-cyan-500/25 transition-all duration-300 hover:scale-105 hover:shadow-cyan-400/40">
-            <!-- Shimmer Light Sweep Layer -->
+        <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/95 hover:bg-slate-950 border border-blue-500/40 hover:border-cyan-400 backdrop-blur-2xl shadow-2xl shadow-blue-500/20 transition-all duration-300 hover:scale-105">
             <span class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-                <span class="absolute -inset-[100%] bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent rotate-45 animate-shimmer"></span>
+                <span class="absolute -inset-[100%] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent rotate-45 animate-shimmer"></span>
             </span>
 
-            <!-- Glowing Icon Badge -->
-            <div class="relative w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-black shadow-md shadow-cyan-500/40 ring-2 ring-cyan-400/40 group-hover:ring-cyan-300 transition">
+            <div class="relative w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-md shadow-blue-500/30 ring-2 ring-blue-400/40 group-hover:ring-cyan-300 transition">
                 <i class="fa-solid fa-code text-[11px]"></i>
             </div>
 
-            <!-- Profile Info -->
             <div class="flex flex-col text-left">
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-extrabold text-white group-hover:text-cyan-300 transition tracking-tight">
+                    <span class="text-xs font-bold text-white group-hover:text-cyan-300 transition tracking-tight">
                         Achmad Randy Al Mugni Fauzi
                     </span>
-                    <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                    <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30">
                         Portfolio ↗
                     </span>
                 </div>
@@ -490,112 +334,68 @@
         </a>
     </div>
 
-    <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & SOLID SVG ENGINE -->
+    <!-- JAVASCRIPT CONTROLLER & WEB AUDIO SYNTHESIZER -->
     <script>
         // -------------------------------------------------------------
-        // 1. WEB AUDIO API SYNTHESIZER
+        // Web Audio Synthesizer (Pure JS, Clean Subtle UI Sound FX)
         // -------------------------------------------------------------
         let audioCtx = null;
         let soundEnabled = true;
 
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
         }
 
-        function playSciFiSound(type) {
+        function playCleanSound(type) {
             if (!soundEnabled) return;
             try {
                 initAudio();
                 const now = audioCtx.currentTime;
 
-                if (type === 'transmit') {
+                if (type === 'click') {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(650, now);
-                    osc.frequency.exponentialRampToValueAtTime(1400, now + 0.12);
-                    gain.gain.setValueAtTime(0.06, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     osc.start(now);
-                    osc.stop(now + 0.13);
-                } 
-                else if (type === 'kb_query') {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(987.77, now);
-                    osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.15);
-                    gain.gain.setValueAtTime(0.07, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.25);
-                }
-                else if (type === 'kb_return') {
-                    [880, 1174.66].forEach((f, i) => {
+                    osc.stop(now + 0.09);
+                } else if (type === 'approval') {
+                    // WhatsApp message / approve chime
+                    [523.25, 659.25, 783.99].forEach((f, i) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
                         osc.type = 'sine';
                         osc.frequency.setValueAtTime(f, now + i * 0.05);
-                        gain.gain.setValueAtTime(0.06, now + i * 0.05);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                        gain.gain.setValueAtTime(0.05, now + i * 0.05);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
                         osc.start(now + i * 0.05);
-                        osc.stop(now + 0.35);
+                        osc.stop(now + 0.45);
                     });
-                }
-                else if (type === 'ai_compute') {
-                    [440, 554, 659, 880].forEach((freq, idx) => {
+                } else if (type === 'iteration') {
+                    // Cycle loop chime
+                    [440, 554, 659, 880].forEach((f, i) => {
                         const osc = audioCtx.createOscillator();
                         const gain = audioCtx.createGain();
                         osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + idx * 0.04);
-                        gain.gain.setValueAtTime(0.04, now + idx * 0.04);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.04 + 0.08);
-                        osc.connect(gain);
-                        gain.connect(audioCtx.destination);
-                        osc.start(now + idx * 0.04);
-                        osc.stop(now + idx * 0.04 + 0.09);
-                    });
-                }
-                else if (type === 'approve') {
-                    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.type = 'sine';
-                        osc.frequency.setValueAtTime(freq, now + i * 0.06);
-                        gain.gain.setValueAtTime(0.06, now + i * 0.06);
-                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+                        osc.frequency.setValueAtTime(f, now + i * 0.06);
+                        gain.gain.setValueAtTime(0.04, now + i * 0.06);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
                         osc.connect(gain);
                         gain.connect(audioCtx.destination);
                         osc.start(now + i * 0.06);
-                        osc.stop(now + 0.95);
+                        osc.stop(now + 0.55);
                     });
-                } 
-                else if (type === 'reject') {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(280, now);
-                    osc.frequency.exponentialRampToValueAtTime(140, now + 0.28);
-                    gain.gain.setValueAtTime(0.08, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.32);
                 }
             } catch (e) {
-                console.log("Audio FX error", e);
+                console.log(e);
             }
         }
 
@@ -603,464 +403,174 @@
             soundEnabled = !soundEnabled;
             const btn = document.getElementById('btnSound');
             const icon = document.getElementById('soundIcon');
-            const wave = document.getElementById('soundWave');
-
             if (soundEnabled) {
                 icon.className = "fa-solid fa-volume-high text-xs";
-                if (wave) wave.style.display = "inline-flex";
-                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition";
-                playSciFiSound('transmit');
+                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-400 rounded-lg text-xs transition";
+                playCleanSound('click');
             } else {
                 icon.className = "fa-solid fa-volume-xmark text-xs";
-                if (wave) wave.style.display = "none";
-                btn.className = "px-2.5 md:px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-500 border border-slate-800/80 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition";
+                btn.className = "px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-500 rounded-lg text-xs transition";
             }
         }
 
         // -------------------------------------------------------------
-        // 2. AMBIENT PARTICLES
+        // 11 Workflow Steps Data Model
         // -------------------------------------------------------------
-        const canvas = document.getElementById('ambientCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        const workflowSteps = [
+            {
+                step: 1,
+                phase: "Fase 1: Riset & Perencanaan",
+                title: "1. Input Data Produk & Kampanye",
+                techTag: "REST API / Frontend Input Form",
+                explanation: "Marketer memasukkan data dasar: detail produk sensor/hama, harga, deskripsi USP, foto/video kreatif, target audiens yang dituju, dan plafon anggaran iklan harian.",
+                output: '{\n  "produk": "Pendeteksi Gempa EW-300",\n  "usp": "Sensor presisi tinggi + alarm otomatis",\n  "budget_harian": 250000,\n  "target": "Manajemen Gedung, Pabrik, Industri"\n}',
+                sound: 'click'
+            },
+            {
+                step: 2,
+                phase: "Fase 1: Riset & Perencanaan",
+                title: "2. AI Product & Market Analysis",
+                techTag: "G-Brain AI Engine (Grok / Gemini)",
+                explanation: "AI menganalisis profil psikografis pelanggan, titik masalah (pain points), sudut penawaran terbaik (angles), dan posisi kompetitif produk di pasar.",
+                output: '{\n  "pain_points": ["Kekhawatiran keselamatan aset saat gempa"],\n  "core_angle": "Ketenangan pikiran & kepatuhan regulasi keselamatan",\n  "target_persona": "Safety Officers & Facility Managers"\n}',
+                sound: 'click'
+            },
+            {
+                step: 3,
+                phase: "Fase 1: Riset & Perencanaan",
+                title: "3. AI Campaign Planner",
+                techTag: "Automated Copywriter & Creative Strategist",
+                explanation: "AI menyusun arsitektur kampanye: menentukan Objective iklan (Leads/Sales), Ad Set targeting, naskah copywriting (Primary Text, Headline), tombol CTA, dan rekomendasi struktur landing page.",
+                output: '{\n  "campaign_objective": "OUTCOME_LEADS",\n  "headline": "Amankan Gedung Anda dari Resiko Gempa dalam 3 Detik",\n  "cta": "Dapatkan Konsultasi Gratis",\n  "adset_interest": ["Industrial Safety", "Building Automation"]\n}',
+                sound: 'click'
+            },
+            {
+                step: 4,
+                phase: "Fase 2: Eksekusi & Gate",
+                title: "4. Human Approval (WhatsApp Bot Integration)",
+                techTag: "WhatsApp Cloud API / Webhook Decision Gate",
+                explanation: "Draf kampanye dikirim otomatis ke nomor WhatsApp atasan/manajemen. Atasan cukup membalas pesan WhatsApp dengan 'Approve', 'Revisi', atau 'Reject'.",
+                output: '{\n  "whatsapp_recipient": "+6281234567890 (Manajer)",\n  "status": "APPROVED",\n  "notes": "Lanjutkan, materi sudah sesuai standar perusahaan",\n  "gate_cleared": true\n}',
+                sound: 'approval'
+            },
+            {
+                step: 5,
+                phase: "Fase 2: Eksekusi & Gate",
+                title: "5. Campaign Execution (Meta Ads Publish)",
+                techTag: "Meta Graph API v19.0 Client",
+                explanation: "Setelah disetujui via WhatsApp, sistem otomatis membuat dan meluncurkan Ad Campaign, Ad Set, dan Ad Creative di Meta Ads Manager tanpa perlu login manual.",
+                output: '{\n  "meta_campaign_id": "1203300004928172",\n  "status": "ACTIVE / IN_REVIEW",\n  "adsets_created": 2,\n  "ads_published": 4,\n  "budget_assigned": "Rp 250.000 / day"\n}',
+                sound: 'click'
+            },
+            {
+                step: 6,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "6. Performance Monitoring",
+                techTag: "Automated Cron / Meta Webhook Ingestion",
+                explanation: "Sistem memantau KPI secara berkala setiap 6-12 jam, membaca performa langsung dari Meta Ads Manager untuk melacak interaksi audiens.",
+                output: '{\n  "monitoring_window": "First 24 Hours",\n  "impressions": 8420,\n  "clicks": 312,\n  "leads_generated": 14\n}',
+                sound: 'click'
+            },
+            {
+                step: 7,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "7. AI Performance Analysis",
+                techTag: "Metric Evaluator & Threshold Checker",
+                explanation: "AI menghitung efisiensi iklan: CTR (Click-Through Rate), CPC (Cost Per Click), CPM, Biaya per Lead, dan rasio konversi untuk menentukan apakah iklan ini sehat atau boncos.",
+                output: '{\n  "ctr": "3.7% (Sangat Baik / High Intent)",\n  "cpc": "Rp 1.450 (Murah)",\n  "cost_per_lead": "Rp 17.800 (Di bawah batas maksimal Rp 30.000)",\n  "health_score": "92/100 (WINNING)"\n}',
+                sound: 'click'
+            },
+            {
+                step: 8,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "8. Optimization Recommendation",
+                techTag: "Prescriptive AI Decision Engine",
+                explanation: "Berdasarkan metrik nyata, AI merumuskan saran konkret: (A) Tingkatkan budget jika performa bagus, (B) Ganti materi kreatif jika CTR turun, atau (C) Matikan ad set yang boncos.",
+                output: '{\n  "recommendation_type": "SCALE_UP",\n  "action": "Tingkatkan budget adset #1 sebesar 20%",\n  "secondary_action": "Buat variasi visual baru untuk audiens B"\n}',
+                sound: 'click'
+            },
+            {
+                step: 9,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "9. Human Feedback",
+                techTag: "User Review & Executive Confirmation",
+                explanation: "Atasan memberikan persetujuan atau arahan tambahan atas saran AI (misal: 'Setuju naikkan budget, tapi pertahankan target di pulau Jawa saja').",
+                output: '{\n  "executive_feedback": "Approved scaling, pertahankan fokus di area industri Jawa Barat",\n  "applied_timestamp": "2026-10-01T20:15:00Z"\n}',
+                sound: 'click'
+            },
+            {
+                step: 10,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "10. Knowledge Base Integration",
+                techTag: "Vector Memory & RAG Fine-tuning",
+                explanation: "Hasil performa dan feedback atasan disimpan ke memori Knowledge Base. AI mencatat bahwa headline dan sudut penawaran ini terbukti berhasil (winning pattern).",
+                output: '{\n  "memory_logged": "Angle: Ketenangan pikiran & kepatuhan regulasi terbukti WINNING",\n  "knowledge_base_updated": true,\n  "ai_learning_status": "ENRICHED"\n}',
+                sound: 'click'
+            },
+            {
+                step: 11,
+                phase: "Fase 3: Monitoring & Siklus Belajar",
+                title: "11. Campaign Iteration (Closed Loop)",
+                techTag: "Continuous Autonomous Loop",
+                explanation: "Kampanye disesuaikan, ditingkatkan, dan siklus kembali berputar ke Tahap 2 & 3 untuk menghasilkan variasi baru yang lebih tajam tanpa harus mulai dari nol lagi!",
+                output: '{\n  "loop_cycle": "Cycle #2 Initiated",\n  "continuous_mode": true,\n  "system_state": "SELF_OPTIMIZING_LOOP_ACTIVE"\n}',
+                sound: 'iteration'
+            }
+        ];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        for (let i = 0; i < 35; i++) {
-            particles.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                radius: Math.random() * 1.5 + 0.5,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                alpha: Math.random() * 0.4 + 0.15
-            });
-        }
-
-        function renderAmbient() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
-                ctx.fill();
-            });
-            requestAnimationFrame(renderAmbient);
-        }
-        renderAmbient();
-
-        // -------------------------------------------------------------
-        // 3. STEP DEFINITIONS
-        // -------------------------------------------------------------
         let currentStep = 0;
         let isPlaying = false;
         let playInterval = null;
-        let scenario = 'approve';
 
-        const stepsApprove = [
-            {
-                stepNum: 1,
-                name: "Marketer Mengirim Draf Iklan",
-                activeNode: "node-marketer",
-                activeWire: "wire1",
-                soundType: "transmit",
-                desc: "Marketer menginput naskah draf promosi. Sistem mengemasnya menjadi payload aman lalu mengirimkannya ke perantara G-Brain.",
-                statusText: "TRANSMITTING_PAYLOAD",
-                payload: {
-                    event: "DRAFT_INITIATED",
-                    channel: "REST_API_POST",
-                    source: "Marketer Workspace",
-                    draft_text: "Sistem pendeteksi gempa real-time & pest control industri...",
-                    security: "TLS_1.3_VERIFIED"
-                }
-            },
-            {
-                stepNum: 2,
-                name: "G-Brain Query ke Knowledge Base (RAG)",
-                activeNode: ["node-gbrain", "node-kb"],
-                activeWire: "wire2a",
-                soundType: "kb_query",
-                desc: "G-Brain AI mengirimkan kueri pencarian <em>(Retrieval)</em> ke database resmi sensorgempa.com & pancaprimawijaya.id.",
-                statusText: "QUERYING_KNOWLEDGE_BASE",
-                payload: {
-                    event: "KNOWLEDGE_BASE_LOOKUP",
-                    target_db: ["sensorgempa.com", "pancaprimawijaya.id"],
-                    similarity_search: "Cosine Distance < 0.15",
-                    direction: "G-Brain -> Knowledge Base"
-                }
-            },
-            {
-                stepNum: 3,
-                name: "Knowledge Base Mengembalikan Data Valid (Return Loop)",
-                activeNode: ["node-kb", "node-gbrain"],
-                activeWire: "wire2b",
-                soundType: "kb_return",
-                desc: "<strong>Jalur Balik Terverifikasi:</strong> Basis data mengembalikan spesifikasi teknis resmi dan sertifikasi alat kembali ke G-Brain.",
-                statusText: "DATA_VERIFIED_RETURNED",
-                payload: {
-                    event: "KNOWLEDGE_RETURNED",
-                    direction: "Knowledge Base -> G-Brain",
-                    verified_specs: "Sertifikasi BMKG & Standar Hama Industri",
-                    factual_accuracy: "99.2%",
-                    ai_scoring: "READY_FOR_SUPERVISOR"
-                }
-            },
-            {
-                stepNum: 4,
-                name: "Evaluasi Finansial & Approval Gate",
-                activeNode: "node-approval",
-                activeWire: "wire3",
-                soundType: "ai_compute",
-                desc: "AI selesai menghitung skor kelayakan (94/100). Materi ditahan di 'Approval Gate'. Pimpinan meninjau lalu mengklik <strong>'APPROVE'</strong>.",
-                statusText: "SUPERVISOR_APPROVAL_GRANTED",
-                payload: {
-                    event: "APPROVAL_GATE_APPROVED",
-                    feasibility_score: "94/100 (Optimal)",
-                    estimated_cost_per_lead: "Low (Efektif)",
-                    decision: "APPROVED_BY_EXECUTIVE",
-                    gate_status: "UNLOCKED"
-                }
-            },
-            {
-                stepNum: 5,
-                name: "Otomatisasi Publikasi Serentak",
-                activeNode: ["node-meta", "node-web"],
-                activeWire: ["wire4a", "wire4b"],
-                soundType: "approve",
-                desc: "<strong>Selesai!</strong> G-Brain langsung menyiarkan draf kampanye ke Meta Ads Manager dan mempublikasikan artikel di Website!",
-                statusText: "SIMULTANEOUS_AUTO_PUBLISH_SUCCESS",
-                payload: {
-                    event: "PAYLOAD_BROADCAST_SUCCESS",
-                    meta_ads: "Campaign Draft Created on Ads Manager",
-                    website_cms: "Article Published (sensorgempa.com)",
-                    execution_time: "0.84 seconds",
-                    status: "200_OK"
+        function setStep(idx) {
+            currentStep = idx;
+            const data = workflowSteps[idx - 1];
+
+            // Reset all cards
+            for (let i = 1; i <= 11; i++) {
+                const el = document.getElementById(`step-${i}`);
+                if (el) {
+                    el.classList.remove('step-active');
+                    if (i < idx) {
+                        el.classList.add('step-passed');
+                    } else {
+                        el.classList.remove('step-passed');
+                    }
                 }
             }
-        ];
 
-        const stepsReject = [
-            {
-                stepNum: 1,
-                name: "Marketer Mengirim Draf Iklan",
-                activeNode: "node-marketer",
-                activeWire: "wire1",
-                soundType: "transmit",
-                desc: "Marketer mengirim draf materi promosi untuk diverifikasi oleh sistem G-Brain.",
-                statusText: "TRANSMITTING_PAYLOAD",
-                payload: {
-                    event: "DRAFT_INITIATED",
-                    source: "Marketer Workspace"
-                }
-            },
-            {
-                stepNum: 2,
-                name: "G-Brain Query ke Knowledge Base",
-                activeNode: ["node-gbrain", "node-kb"],
-                activeWire: "wire2a",
-                soundType: "kb_query",
-                desc: "G-Brain AI mencocokkan naskah dengan database spesifikasi produk resmi.",
-                statusText: "QUERYING_KNOWLEDGE_BASE",
-                payload: {
-                    event: "KNOWLEDGE_BASE_LOOKUP",
-                    target_db: ["sensorgempa.com", "pancaprimawijaya.id"]
-                }
-            },
-            {
-                stepNum: 3,
-                name: "Knowledge Base Mendeteksi Ketidaksesuaian",
-                activeNode: ["node-kb", "node-gbrain"],
-                activeWire: "wire2b",
-                soundType: "kb_return",
-                desc: "Basis data mendeteksi bahwa klaim garansi pada naskah tidak cocok dengan data resmi produk sensor/hama.",
-                statusText: "DATA_MISMATCH_DETECTED",
-                payload: {
-                    event: "KNOWLEDGE_RETURNED",
-                    flagged: "Klaim garansi belum sesuai katalog",
-                    feasibility_score: "62/100 (Beresiko Boncos)"
-                }
-            },
-            {
-                stepNum: 4,
-                name: "Atasan Menolak Draf (Reject)",
-                activeNode: "node-approval",
-                activeWire: "wire3",
-                soundType: "reject",
-                desc: "Pimpinan melihat peringatan AI dan menekan tombol <strong>'REJECT'</strong> agar anggaran iklan tidak terbuang sia-sia.",
-                statusText: "SUPERVISOR_REJECTED",
-                payload: {
-                    event: "APPROVAL_GATE_REJECTED",
-                    decision: "REJECT_FOR_REVISION",
-                    reason: "Sesuaikan klaim garansi dengan katalog terbaru",
-                    auto_post_blocked: true
-                }
-            },
-            {
-                stepNum: 5,
-                name: "Feedback Dikembalikan ke Marketer",
-                activeNode: "node-marketer",
-                activeWire: "wireReject",
-                soundType: "reject",
-                desc: "<strong>Aman!</strong> Sistem mengembalikan naskah ke Marketer beserta catatan revisi. Iklan tidak tayang dan budget perusahaan tetap Rp 0.",
-                statusText: "RETURNED_TO_MARKETER",
-                payload: {
-                    event: "REVISION_LOOP_COMPLETED",
-                    destination: "Marketer Workspace",
-                    wasted_budget: "Rp 0 (Protected)"
-                }
-            }
-        ];
-
-        function getActiveSteps() {
-            return scenario === 'approve' ? stepsApprove : stepsReject;
-        }
-
-        // -------------------------------------------------------------
-        // 4. PRECISE MATHEMATICAL SVG WIRE ROUTING
-        // -------------------------------------------------------------
-        function updateWires() {
-            function getCenter(elId) {
-                const el = document.getElementById(elId);
-                if (!el) return { x: 0, y: 0, top: 0, bottom: 0, left: 0, right: 0 };
-                const rect = el.getBoundingClientRect();
-                const container = document.getElementById('canvasContainer').getBoundingClientRect();
-                return {
-                    x: rect.left - container.left + rect.width / 2,
-                    y: rect.top - container.top + rect.height / 2,
-                    top: rect.top - container.top,
-                    bottom: rect.bottom - container.top,
-                    left: rect.left - container.left,
-                    right: rect.right - container.left
-                };
+            // Highlight active card
+            const activeCard = document.getElementById(`step-${idx}`);
+            if (activeCard) {
+                activeCard.classList.add('step-active');
+                activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
-            const marketer = getCenter('node-marketer');
-            const gbrain = getCenter('node-gbrain');
-            const kb = getCenter('node-kb');
-            const approval = getCenter('node-approval');
-            const meta = getCenter('node-meta');
-            const web = getCenter('node-web');
+            // Update Header & Live Status
+            document.getElementById('statusTitle').innerText = data.title;
+            document.getElementById('currentPhaseBadge').innerText = data.phase;
+            document.getElementById('stepCounter').innerText = `Tahap: ${data.step} / 11`;
 
-            const isMobile = window.innerWidth < 768;
+            // Update Inspector Details
+            document.getElementById('inspectorTechTag').innerText = data.techTag;
+            document.getElementById('inspectorExplanation').innerText = data.explanation;
+            document.getElementById('inspectorOutput').innerText = data.output;
 
-            if (!isMobile) {
-                // 1. Marketer -> G-Brain (Straight Clean Line)
-                document.getElementById('wire1').setAttribute('d', 
-                    `M ${marketer.right} ${marketer.y} L ${gbrain.left} ${gbrain.y}`
-                );
-
-                // 2A. G-Brain -> KB (Upper Gentle Arc)
-                const midX_gb_kb = (gbrain.right + kb.left) / 2;
-                document.getElementById('wire2a').setAttribute('d', 
-                    `M ${gbrain.right} ${gbrain.y - 12} C ${midX_gb_kb} ${gbrain.y - 30}, ${midX_gb_kb} ${kb.y - 30}, ${kb.left} ${kb.y - 12}`
-                );
-
-                // 2B. KB -> G-Brain (Lower Gentle Return Arc)
-                document.getElementById('wire2b').setAttribute('d', 
-                    `M ${kb.left} ${kb.y + 12} C ${midX_gb_kb} ${kb.y + 30}, ${midX_gb_kb} ${gbrain.y + 30}, ${gbrain.right} ${gbrain.y + 12}`
-                );
-
-                // 3. G-Brain -> Approval Gate (Straight Vertical Down)
-                document.getElementById('wire3').setAttribute('d', 
-                    `M ${gbrain.x} ${gbrain.bottom} L ${approval.x} ${approval.top}`
-                );
-
-                // 4A. Approval -> Meta Ads (Diagonal Left Smooth Branch)
-                document.getElementById('wire4a').setAttribute('d', 
-                    `M ${approval.left} ${approval.bottom - 10} C ${approval.left - 40} ${approval.bottom + 15}, ${meta.x} ${approval.bottom + 15}, ${meta.x} ${meta.top}`
-                );
-
-                // 4B. Approval -> Web CMS (Diagonal Right Smooth Branch)
-                document.getElementById('wire4b').setAttribute('d', 
-                    `M ${approval.right} ${approval.bottom - 10} C ${approval.right + 40} ${approval.bottom + 15}, ${web.x} ${approval.bottom + 15}, ${web.x} ${web.top}`
-                );
-
-                // Reject Wire: Clean Loop from Approval left returning to Marketer bottom
-                if (scenario === 'reject' && currentStep >= 4) {
-                    document.getElementById('wireReject').style.opacity = "1";
-                    document.getElementById('wireReject').setAttribute('d', 
-                        `M ${approval.left} ${approval.y} C ${marketer.x + 30} ${approval.y + 20}, ${marketer.x} ${approval.y}, ${marketer.x} ${marketer.bottom}`
-                    );
-                } else {
-                    document.getElementById('wireReject').style.opacity = "0";
-                    document.getElementById('wireReject').setAttribute('d', "");
-                }
-
-            } else {
-                // MOBILE SCREEN (Adaptive Top-to-Bottom Flow)
-                document.getElementById('wire1').setAttribute('d', 
-                    `M ${marketer.x} ${marketer.bottom} L ${gbrain.x} ${gbrain.top}`
-                );
-                document.getElementById('wire2a').setAttribute('d', 
-                    `M ${gbrain.x - 20} ${gbrain.bottom} C ${gbrain.x - 40} ${(gbrain.bottom + kb.top)/2}, ${kb.x - 40} ${(gbrain.bottom + kb.top)/2}, ${kb.x - 20} ${kb.top}`
-                );
-                document.getElementById('wire2b').setAttribute('d', 
-                    `M ${kb.x + 20} ${kb.top} C ${kb.x + 40} ${(gbrain.bottom + kb.top)/2}, ${gbrain.x + 40} ${(gbrain.bottom + kb.top)/2}, ${gbrain.x + 20} ${gbrain.bottom}`
-                );
-                document.getElementById('wire3').setAttribute('d', 
-                    `M ${kb.x} ${kb.bottom} L ${approval.x} ${approval.top}`
-                );
-                document.getElementById('wire4a').setAttribute('d', 
-                    `M ${approval.x} ${approval.bottom} C ${approval.x} ${(approval.bottom + meta.top)/2}, ${meta.x} ${(approval.bottom + meta.top)/2}, ${meta.x} ${meta.top}`
-                );
-                document.getElementById('wire4b').setAttribute('d', 
-                    `M ${approval.x} ${approval.bottom} C ${approval.x} ${(approval.bottom + web.top)/2}, ${web.x} ${(approval.bottom + web.top)/2}, ${web.x} ${web.top}`
-                );
-            }
-        }
-
-        window.addEventListener('resize', updateWires);
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(updateWires, 100);
-        });
-
-        // -------------------------------------------------------------
-        // 5. ANIMATION & STATE ENGINE
-        // -------------------------------------------------------------
-        function renderStep(stepIdx) {
-            const steps = getActiveSteps();
-            const step = steps[stepIdx - 1];
-
-            // Reset all styles
-            document.querySelectorAll('.wire-path').forEach(w => {
-                if (w.id !== 'wireReject') {
-                    w.className.baseVal = "wire-path";
-                }
-            });
-            document.querySelectorAll('[id^="node-"]').forEach(n => {
-                n.classList.remove('node-active', 'node-kb-active', 'node-success', 'node-reject');
-                n.querySelector('.status-indicator').className = "w-2.5 h-2.5 rounded-full bg-slate-600 status-indicator";
-            });
-
-            if (!step) {
-                document.getElementById('globalState').innerText = "READY_TO_STREAM";
-                document.getElementById('stepCounter').innerText = "TAHAP: STANDBY";
-                document.getElementById('packetDot1').classList.add('opacity-0');
-                document.getElementById('packetDot2').classList.add('opacity-0');
-                updateWires();
-                return;
-            }
-
-            // Play Futuristic Sound FX
-            if (step.soundType) {
-                playSciFiSound(step.soundType);
-            }
-
-            // Update Inspector Information
-            document.getElementById('globalState').innerText = step.statusText;
-            document.getElementById('stepCounter').innerText = `TAHAP ${step.stepNum} DARI ${steps.length}`;
-            document.getElementById('inspectorDesc').innerHTML = `<strong class="text-cyan-400 font-extrabold">${step.name}:</strong><br>${step.desc}`;
-            document.getElementById('inspectorPayload').innerHTML = `<pre class="text-emerald-400 whitespace-pre-wrap break-words leading-tight">${JSON.stringify(step.payload, null, 2)}</pre>`;
-
-            // Update Wires Geometry
-            updateWires();
-
-            // Highlight wire styling
-            const isRejectStep = scenario === 'reject' && (step.stepNum === 4 || step.stepNum === 5);
-            const isSuccessStep = scenario === 'approve' && step.stepNum === 5;
-            const isReturnStep = step.activeWire === 'wire2b';
-
-            if (Array.isArray(step.activeWire)) {
-                step.activeWire.forEach(wId => {
-                    const w = document.getElementById(wId);
-                    if (w) w.className.baseVal = `wire-path ${isSuccessStep ? 'wire-success' : 'wire-active'}`;
-                });
-            } else if (step.activeWire) {
-                const w = document.getElementById(step.activeWire);
-                let wireClass = 'wire-active';
-                if (isRejectStep) wireClass = 'wire-reject';
-                else if (isSuccessStep) wireClass = 'wire-success';
-                else if (isReturnStep) wireClass = 'wire-return';
-
-                if (w) w.className.baseVal = `wire-path ${wireClass}`;
-            }
-
-            // Highlight node styling
-            if (Array.isArray(step.activeNode)) {
-                step.activeNode.forEach(nId => {
-                    const node = document.getElementById(nId);
-                    let nodeStyle = isSuccessStep ? 'node-success' : (nId === 'node-kb' ? 'node-kb-active' : 'node-active');
-                    node.classList.add(nodeStyle);
-                    const dotColor = isSuccessStep ? 'bg-emerald-400' : (nId === 'node-kb' ? 'bg-purple-400' : 'bg-cyan-400');
-                    node.querySelector('.status-indicator').className = `w-2.5 h-2.5 rounded-full ${dotColor} animate-ping status-indicator`;
-                });
-            } else if (step.activeNode) {
-                const node = document.getElementById(step.activeNode);
-                let nodeStyle = isRejectStep ? 'node-reject' : (isSuccessStep ? 'node-success' : 'node-active');
-                node.classList.add(nodeStyle);
-                const dotColor = isRejectStep ? 'bg-rose-400' : (isSuccessStep ? 'bg-emerald-400' : 'bg-cyan-400');
-                node.querySelector('.status-indicator').className = `w-2.5 h-2.5 rounded-full ${dotColor} animate-ping status-indicator`;
-            }
-
-            // Animate travelling particle photon
-            animatePacket(step.activeWire, isRejectStep, isSuccessStep, isReturnStep);
-        }
-
-        function animatePacket(wireTarget, isReject, isSuccess, isReturn) {
-            const dot1 = document.getElementById('packetDot1');
-            const dot2 = document.getElementById('packetDot2');
-            
-            let color = '#38bdf8';
-            if (isReject) color = '#fb7185';
-            else if (isSuccess) color = '#34d399';
-            else if (isReturn) color = '#c084fc';
-
-            dot1.setAttribute('fill', color);
-            dot1.classList.remove('opacity-0');
-            dot2.classList.remove('opacity-0');
-
-            const wireId = Array.isArray(wireTarget) ? wireTarget[0] : wireTarget;
-            const wire = document.getElementById(wireId);
-            if (!wire || !wire.getAttribute('d')) return;
-
-            const length = wire.getTotalLength();
-            if (length === 0) return;
-
-            let start = null;
-            const duration = 1000;
-
-            function stepAnim(timestamp) {
-                if (!start) start = timestamp;
-                const progress = (timestamp - start) / duration;
-
-                if (progress < 1) {
-                    const point = wire.getPointAtLength(progress * length);
-                    dot1.setAttribute('cx', point.x);
-                    dot1.setAttribute('cy', point.y);
-                    dot2.setAttribute('cx', point.x);
-                    dot2.setAttribute('cy', point.y);
-                    requestAnimationFrame(stepAnim);
-                } else {
-                    const endPoint = wire.getPointAtLength(length);
-                    dot1.setAttribute('cx', endPoint.x);
-                    dot1.setAttribute('cy', endPoint.y);
-                    dot2.setAttribute('cx', endPoint.x);
-                    dot2.setAttribute('cy', endPoint.y);
-                }
-            }
-            requestAnimationFrame(stepAnim);
+            // Audio FX
+            if (data.sound) playCleanSound(data.sound);
         }
 
         function nextStep() {
             initAudio();
-            const steps = getActiveSteps();
             currentStep++;
-            if (currentStep > steps.length) {
-                currentStep = 1;
-            }
-            renderStep(currentStep);
+            if (currentStep > 11) currentStep = 1;
+            setStep(currentStep);
+        }
+
+        function jumpToStep(idx) {
+            initAudio();
+            if (isPlaying) togglePlay();
+            setStep(idx);
         }
 
         function togglePlay() {
@@ -1074,24 +584,20 @@
                 isPlaying = false;
                 icon.className = "fa-solid fa-play text-[10px]";
                 text.innerText = "Lanjut Putar";
-                btn.className = "px-3 md:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-md shadow-blue-500/20";
+                btn.className = "px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition";
             } else {
                 isPlaying = true;
                 icon.className = "fa-solid fa-pause text-[10px]";
                 text.innerText = "Jeda";
-                btn.className = "px-3 md:px-4 py-1.5 bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-500 hover:to-orange-400 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-md shadow-orange-500/20";
+                btn.className = "px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 transition";
 
-                if (currentStep === 0 || currentStep >= getActiveSteps().length) {
-                    currentStep = 1;
-                }
-                renderStep(currentStep);
+                if (currentStep === 0 || currentStep >= 11) currentStep = 1;
+                setStep(currentStep);
 
                 playInterval = setInterval(() => {
                     currentStep++;
-                    if (currentStep > getActiveSteps().length) {
-                        currentStep = 1;
-                    }
-                    renderStep(currentStep);
+                    if (currentStep > 11) currentStep = 1;
+                    setStep(currentStep);
                 }, 3000);
             }
         }
@@ -1099,57 +605,16 @@
         function resetFlow() {
             if (isPlaying) togglePlay();
             currentStep = 0;
-            renderStep(0);
-            document.getElementById('inspectorDesc').innerHTML = `Sistem sedang dalam status diam <em>(Standby)</em>. Klik tombol <strong>"Mulai Alur"</strong> untuk menjalankan aliran sirkuit AI dan efek audionya.`;
-            document.getElementById('inspectorPayload').innerHTML = `<pre class="text-slate-500 whitespace-pre-wrap break-words leading-tight">// Menunggu transmisi data...\n{\n  "system_mode": "simulation",\n  "audio_fx": "Synthesizer_Active",\n  "status": "ready"\n}</pre>`;
-        }
-
-        function changeScenario(val) {
-            scenario = val;
-            resetFlow();
-        }
-
-        function selectNode(type) {
-            initAudio();
-            playSciFiSound('ai_compute');
-            const nodeSpecs = {
-                marketer: {
-                    title: "Node 01: Marketer Workspace",
-                    desc: "Titik awal di mana tim promosi memasukkan draf teks iklan atau artikel. Pengguna hanya perlu mengetik tanpa harus mengerti kode pemrograman.",
-                    tech: "REST API Endpoint POST /api/drafts, Request Payload Sanitization, Rate Limiter."
-                },
-                gbrain: {
-                    title: "Core AI Middleware: G-Brain Engine",
-                    desc: "Pusat kecerdasan buatan yang menghubungkan input marketer dengan database pengetahuan produk, melakukan evaluasi kelayakan copywriting, dan estimasi ROI.",
-                    tech: "Grok / Gemini 1.5 API Integration, Semantic Embedding Generator, Temperature: 0.2."
-                },
-                kb: {
-                    title: "RAG Database: Corporate Knowledge Base",
-                    desc: "Katalog spesifikasi resmi sensorgempa.com dan pancaprimawijaya.id. Memastikan informasi produk, standar garansi, dan teknis yang dikeluarkan selalu 100% akurat.",
-                    tech: "2-Way Verification Loop, Vector Retrieval DB, Zero-Hallucination Guardrails."
-                },
-                approval: {
-                    title: "Decision Gate: Gerbang Persetujuan Pimpinan",
-                    desc: "Filter pengendali. Tidak ada konten yang tayang ke publik sebelum atasan meninjau ringkasan skor kelayakan dari AI dan menekan tombol Approve.",
-                    tech: "Secure Manager Token, Instant Webhook Notification, One-Click Decision Gate."
-                },
-                meta: {
-                    title: "Channel 01: Meta Marketing API",
-                    desc: "Setelah disetujui, sistem otomatis membentuk draf kampanye resmi di Meta Ads Manager (Instagram & Facebook) dengan target dan materi yang sudah siap tayang.",
-                    tech: "Meta Graph API v19.0, Endpoints: /act_ID/campaigns & /adcreatives, Auto AdSet Payload."
-                },
-                web: {
-                    title: "Channel 02: Web CMS Article Publisher",
-                    desc: "Secara serentak menerbitkan artikel SEO ke website perusahaan (sensorgempa.com / pancaprimawijaya.id) lengkap dengan kategori dan metadata.",
-                    tech: "WordPress / RESTful CMS Webhook POST /wp-json/wp/v2/posts, Auto SEO Tagging."
-                }
-            };
-
-            const data = nodeSpecs[type];
-            if (data) {
-                document.getElementById('inspectorDesc').innerHTML = `<strong class="text-cyan-400">${data.title}</strong><br>${data.desc}`;
-                document.getElementById('inspectorPayload').innerHTML = `<pre class="text-cyan-300 whitespace-pre-wrap break-words leading-tight">Spesifikasi & Cara Kerja:\n${data.tech}</pre>`;
+            for (let i = 1; i <= 11; i++) {
+                const el = document.getElementById(`step-${i}`);
+                if (el) el.classList.remove('step-active', 'step-passed');
             }
+            document.getElementById('statusTitle').innerText = 'Standby (Klik "Mulai Alur" atau pilih salah satu tahap)';
+            document.getElementById('currentPhaseBadge').innerText = 'Fase: Siap';
+            document.getElementById('stepCounter').innerText = 'Tahap: 0 / 11';
+            document.getElementById('inspectorTechTag').innerText = 'Sistem Standby';
+            document.getElementById('inspectorExplanation').innerText = 'Pilih tombol "Mulai Alur" di atas atau klik salah satu kartu tahap di atas untuk melihat detail operasional dan alur datanya.';
+            document.getElementById('inspectorOutput').innerText = '// Menunggu interaksi alur...';
         }
     </script>
 </body>
