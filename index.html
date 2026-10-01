@@ -338,9 +338,9 @@
 
         </div>
 
-        <!-- Bottom Half: Clean Inspector Card (Fixed height, no layout jump) -->
-        <div class="bg-[#090e1a]/95 border-t border-slate-800/80 p-4 md:px-8 md:py-3.5 z-30 shrink-0">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <!-- Bottom Half: Clean Inspector Card (Integrated Signature Badge) -->
+        <div class="bg-[#090e1a]/95 border-t border-slate-800/80 p-3.5 md:px-8 z-30 shrink-0">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-1">
                         <span id="activeStepTag" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 uppercase">
@@ -353,41 +353,29 @@
                     </p>
                 </div>
 
-                <div class="w-full md:w-auto flex md:flex-col items-center md:items-end justify-between gap-1 text-[11px] font-mono text-slate-400 bg-[#060913] md:bg-transparent p-2 md:p-0 rounded-lg border md:border-0 border-slate-800">
-                    <span class="text-slate-500">Payload Status:</span>
-                    <span id="inspectorPayloadStatus" class="text-emerald-400 font-bold">READY_TO_STREAM</span>
+                <!-- Right Side: Developer Signature & Payload Status (Integrated neatly, zero blocking) -->
+                <div class="flex items-center gap-3 shrink-0 self-end md:self-center">
+                    <div class="text-right hidden sm:block">
+                        <div class="text-[10px] font-mono text-slate-500">PAYLOAD_STATUS</div>
+                        <div id="inspectorPayloadStatus" class="text-xs font-mono text-emerald-400 font-bold">READY_TO_STREAM</div>
+                    </div>
+
+                    <!-- Developer Portfolio Button -->
+                    <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-700/80 hover:border-cyan-400 transition shadow-sm">
+                        <div class="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-[11px] font-bold text-white group-hover:text-cyan-300 transition">Achmad Randy</span>
+                                <span class="text-[8.5px] font-mono px-1 py-0.2 rounded bg-blue-500/20 text-blue-300">Porto ↗</span>
+                            </div>
+                            <span class="text-[9px] text-slate-400">AI Integration Dev</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <!-- FLOATING LUXURY WATERMARK (Portfolio Link) -->
-    <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[94vw]">
-        <a href="https://randyfauzi.github.io/Randy-Fauzi-Portofolio/" target="_blank" rel="noopener noreferrer" class="group relative flex items-center gap-3 px-4 py-2 rounded-full bg-slate-900/95 hover:bg-slate-950 border border-blue-500/40 hover:border-cyan-400 backdrop-blur-2xl shadow-2xl shadow-blue-500/20 transition-all duration-300 hover:scale-105">
-            <span class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-                <span class="absolute -inset-[100%] bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent rotate-45 animate-shimmer"></span>
-            </span>
-
-            <div class="relative w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-md shadow-blue-500/30 ring-2 ring-blue-400/40 group-hover:ring-cyan-300 transition">
-                <i class="fa-solid fa-code text-[11px]"></i>
-            </div>
-
-            <div class="flex flex-col text-left">
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-extrabold text-white group-hover:text-cyan-300 transition tracking-tight">
-                        Achmad Randy Al Mugni Fauzi
-                    </span>
-                    <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-bold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30">
-                        Portfolio ↗
-                    </span>
-                </div>
-                <span class="text-[9.5px] text-slate-400 flex items-center gap-1">
-                    Full-Stack Web & AI Integration Developer
-                </span>
-            </div>
-        </a>
-    </div>
 
     <!-- JAVASCRIPT CONTROLLER, WEB AUDIO & SOLID SVG ENGINE -->
     <script>
